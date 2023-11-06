@@ -25,10 +25,10 @@
 </head>
 <body>
     <h1>Biodata of Student</h1>
-    <h2 class="small-text">Name: Ismail Bin Sandra</h2>
-    <h2 class="small-text">Course: Computer Science</h2>
-    <h2 class="small-text">Course Code: COMP101</h2>
-    <h2 class="small-text">Year of Study: 3rd Year</h2>
+    <h2 class="small-text">Name: <span id="fullName"></span></h2>
+    <h2 class="small-text">Course: <span id="course"></span></h2>
+    <h2 class="small-text">Course Code: <span id="courseCode"></span></h2>
+    <h2 class="small-text">Year of Study: <span id="yearOfStudy"></span></h2>
     <h3>Education Subjects</h3>
     <table>
         <tr>
@@ -38,14 +38,42 @@
             <th>Result of CGPA</th>
             <th>Result (Pass/Fail)</th>
         </tr>
-        <tr>
-            <td>SUBJ001</td>
-            <td>Subject 1</td>
-            <td>3</td>
-            <td>3.5</td>
-            <td>Pass</td>
-        </tr>
         <!-- Add more rows for additional subjects if needed -->
     </table>
+    <script>
+        async function fetchUserData(username, password, status) {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbw5E_2IqWhV34OmcwLVnm3-gEbkJ12leA-IkMsqwC2H1Bo649jx1rUkth7hJWvttZboBA/exec'; // Replace with your script URL
+            const queryParams = `?username=${username}&password=${password}&status=${status}&action=login`;
+            const response = await fetch(scriptURL + queryParams);
+            const userData = await response.json();
+
+            if (userData.error) {
+                // Handle authentication failure
+                alert("Authentication failed. Please check your credentials.");
+            } else {
+                // Display the user's biodata
+                document.getElementById('fullName').textContent = userData["full name"];
+                document.getElementById('course').textContent = userData["course"];
+                document.getElementById('courseCode').textContent = userData["course code"];
+                document.getElementById('yearOfStudy').textContent = userData.year;
+                // You can add code to populate the table with subjects and their details here
+            }
+        }
+
+        // Retrieve action and user credentials from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const action = urlParams.get('action');
+        const username = urlParams.get('username');
+        const password = urlParams.get('password');
+        const status = urlParams.get('status');
+
+        if (action === "login") {
+            // Proceed to fetch user data and display it
+            fetchUserData(username, password, status);
+        } else {
+            // Handle other actions or display an error message
+            alert("Invalid action. Please check the URL.");
+        }
+    </script>
 </body>
 </html>
