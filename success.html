@@ -2,50 +2,66 @@
 <html>
 <head>
     <style>
+        /* Add styles as needed for the biodata display page */
         table {
-            width: 100%;
             border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
         }
 
         th, td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             padding: 8px;
-            text-align: center;
+            text-align: left;
         }
 
         th {
             background-color: #f2f2f2;
         }
-
-        /* Define a CSS class for smaller font size */
-        .small-text {
-            font-size: 14px; /* You can adjust the font size as needed */
-        }
     </style>
 </head>
 <body>
-    <h1>Biodata of Student</h1>
-    <h2 class="small-text">Name: Ismail Bin Sandra</h2>
-    <h2 class="small-text">Course: Computer Science</h2>
-    <h2 class="small-text">Course Code: COMP101</h2>
-    <h2 class="small-text">Year of Study: 3rd Year</h2>
-    <h3>Education Subjects</h3>
+    <h1>User Biodata</h1>
     <table>
         <tr>
-            <th>Code Subject</th>
-            <th>Name of Subject</th>
-            <th>Credit Hour</th>
-            <th>Result of CGPA</th>
-            <th>Result (Pass/Fail)</th>
+            <th>Attribute</th>
+            <th>Value</th>
         </tr>
         <tr>
-            <td>SUBJ001</td>
-            <td>Subject 1</td>
-            <td>3</td>
-            <td>3.5</td>
-            <td>Pass</td>
+            <td>Full Name:</td>
+            <td id="fullName"></td>
         </tr>
-        <!-- Add more rows for additional subjects if needed -->
+        <tr>
+            <td>Code Course:</td>
+            <td id="codeCourse"></td>
+        </tr>
+        <tr>
+            <td>Year of Study:</td>
+            <td id="yearOfStudy"></td>
+        </tr>
+        <tr>
+            <td>EKT102 CGPA:</td>
+            <td id="EKT102"></td>
+        </tr>
+        <tr>
+            <td>EQT101 CGPA:</td>
+            <td id="EQT101"></td>
+        </tr>
     </table>
+    <script>
+        // Retrieve user biodata from query parameters and display it in the table
+        const urlParams = new URLSearchParams(window.location.search);
+        const fullName = urlParams.get('fullName');
+        const codeCourse = urlParams.get('codeCourse');
+        const yearOfStudy = urlParams.get('yearOfStudy');
+        const EKT102 = urlParams.get('EKT102');
+        const EQT101 = urlParams.get('EQT101');
+
+        document.getElementById('fullName').textContent = fullName;
+        document.getElementById('codeCourse').textContent = codeCourse;
+        document.getElementById('yearOfStudy').textContent = yearOfStudy;
+        document.getElementById('EKT102').textContent = EKT102;
+        document.getElementById('EQT101').textContent = EQT101;
+    </script>
 </body>
 </html>
