@@ -25,6 +25,30 @@
 </head>
 <body>
     <h1>Biodata of Student</h1>
+  var username = e.parameter.username;
+  var password = e.parameter.password;
+  var status = e.parameter.status;
+  var responseData = {};
+
+  // Fetch data from the Google Sheet
+  var sheet = SpreadsheetApp.openById("1QGEiuA8zNCeMfi4jHx34eX-a07XEeTX_hQf-utBnjEI").getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  var headers = data[0];
+  var jsonData = [];
+
+  // Search for the provided username, password, and status in the data
+  var found = false;
+    for (var i = 1; i < data.length; i++) {
+    var rowData = data[i];
+    if (rowData[0] === username && rowData[1] === password && rowData[2] === status) {
+      found = true;
+      var obj = {};
+      for (var j = 0; j < headers.length; j++) {
+        obj[headers[j]] = rowData[j];
+      }
+      jsonData.push(obj);
+    }
+  }
 
     <h2 class="small-text">Name: Ismail Bin Sandra</h2>
     <h2 class="small-text">Course: Computer Science</h2>
