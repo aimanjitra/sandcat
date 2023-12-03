@@ -26,7 +26,7 @@
     <h1>Biodata of Student</h1>
     <h2 class="small-text" id="fullName">Name: [Full Name]</h2>
     <h2 class="small-text" id="codeCourse">Code Course: [Code Course]</h2>
-    <h2 class="small-text" id="Year">Year: [Year]</h2>
+    <h2 class="small-text" id="year">Year: [Year]</h2>
     <h3>Education Subjects</h3>
     <table>
         <tr>
@@ -43,7 +43,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const fullName = urlParams.get('fullName') || 'N/A';
         const codeCourse = urlParams.get('codeCourse') || 'N/A';
-        const year = urlParams.get('Year') || 'N/A';
+        const year = urlParams.get('year') || 'N/A';
 
         document.getElementById('fullName').textContent = `Name: ${fullName}`;
         document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
