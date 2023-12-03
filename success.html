@@ -18,14 +18,13 @@
             height: 100vh;
             background: linear-gradient(to bottom, #001b3d 50%, white 50%);
             display: flex;
+            flex-direction: column;
             font-family: Arial, sans-serif;
-            color: white; /* Set text color to white for the white side */
+            color: white; /* Set text color to white */
         }
 
         .biodata {
-            width: 50%;
             padding: 20px;
-            color: white; /* Set text color to white for the blue neon side */
         }
 
         h1 {
@@ -46,7 +45,7 @@
         }
 
         table {
-            width: 50%;
+            width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
             color: black; /* Set text color to black for the table */
@@ -75,26 +74,24 @@
             <h2 id="semester">Semester: [Semester]</h2>
         </div>
 
-        <div>
-            <h3>Education Subjects</h3>
-            <table>
-                <tr>
-                    <th>Code Subject</th>
-                    <th>Name of Subject</th>
-                    <th>Credit Hour</th>
-                    <th>Result of CGPA</th>
-                    <th>Result (Pass/Fail)</th>
-                </tr>
+        <h3>Education Subjects</h3>
+        <table>
+            <tr>
+                <th>Code Subject</th>
+                <th>Name of Subject</th>
+                <th>Credit Hour</th>
+                <th>Result of CGPA</th>
+                <th>Result (Pass/Fail)</th>
+            </tr>
 
-                <tr>
-                    <td id="subjectCode1">[Subject Code]</td>
-                    <td id="subjectName1">[Subject Name]</td>
-                    <td id="creditHour1">[Credit Hour]</td>
-                    <td id="ekt102">[EKT102]</td>
-                    <td id="result">[Result]</td>
-                </tr>
-            </table>
-        </div>
+            <tr>
+                <td id="subjectCode1">[Subject Code]</td>
+                <td id="subjectName1">[Subject Name]</td>
+                <td id="creditHour1">[Credit Hour]</td>
+                <td id="ekt102">[EKT102]</td>
+                <td id="result">[Result]</td>
+            </tr>
+        </table>
     </div>
 
     <script>
