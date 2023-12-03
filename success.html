@@ -58,38 +58,18 @@
     </table>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const fullName = urlParams.get('fullName') || 'N/A';
-            const codeCourse = urlParams.get('codeCourse') || 'N/A';
-            const year = urlParams.get('year') || 'N/A';
+        const urlParams = new URLSearchParams(window.location.search);
+        const fullName = urlParams.get('fullName') || 'N/A';
+        const codeCourse = urlParams.get('codeCourse') || 'N/A';
+        const year = urlParams.get('year') || 'N/A';
 
-            // Update elements with URL parameter values
-            document.getElementById('fullName').textContent = `Name: ${fullName}`;
-            document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
-            document.getElementById('year').textContent = `Year: ${year}`;
+        document.getElementById('fullName').textContent = `Name: ${fullName}`;
+        document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
+        document.getElementById('year').textContent = `Year: ${year}`;
 
-            // Retrieve course code element
-            var courseCodeElement = document.getElementById('codeCourse');
-            // Retrieve course element
-            var courseElement = document.getElementById('codeCourse');
-
-            // Example mapping of course code to course
-            var courseMappings = {
-                'UR6523002': 'Computer Engineering',
-                // Add more mappings as needed
-            };
-
-            // Get the course code from the element
-            var courseCode = courseCodeElement.textContent.trim();
-
-            // Set the course based on the mapping
-            var course = courseMappings[courseCode] || 'Unknown Course';
-
-            // Update the course element
-            courseElement.textContent = `Course: ${course}`;
-        });
+        if(Course=="UR6523002"){
+            Course=="Computer Engineering";
+        }
         
     </script>
 </body>
