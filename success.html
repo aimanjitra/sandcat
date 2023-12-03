@@ -18,12 +18,13 @@
             height: 100vh;
             background: linear-gradient(to bottom, #001b3d 50%, white 50%);
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            /* Center both horizontally and vertically */
             font-family: Arial, sans-serif;
             color: white; /* Set text color to white */
+        }
+
+        .biodata {
+            width: 50%;
+            padding: 20px;
         }
 
         h1 {
@@ -44,9 +45,10 @@
         }
 
         table {
-            width: 100%;
+            width: 50%;
             border-collapse: collapse;
             margin-top: 10px;
+            color: black; /* Set text color to black for the table */
         }
 
         th, td {
@@ -63,31 +65,35 @@
 
 <body>
     <div class="container">
-        <h1>Biodata of Student</h1>
-        <h2 id="fullName">Name: [Full Name]</h2>
-        <h2 id="course">Course: [Course]</h2>
-        <h2 id="codeCourse">Code Course: [Code Course]</h2>
-        <h2 id="year">Year: [Year]</h2>
-        <h2 id="semester">Semester: [Semester]</h2>
-        <h3>Education Subjects</h3>
-        <table>
-            <tr>
-                <th>Code Subject</th>
-                <th>Name of Subject</th>
-                <th>Credit Hour</th>
-                <th>Result of CGPA</th>
-                <th>Result (Pass/Fail)</th>
-            </tr>
+        <div class="biodata">
+            <h1>Biodata of Student</h1>
+            <h2 id="fullName">Name: [Full Name]</h2>
+            <h2 id="course">Course: [Course]</h2>
+            <h2 id="codeCourse">Code Course: [Code Course]</h2>
+            <h2 id="year">Year: [Year]</h2>
+            <h2 id="semester">Semester: [Semester]</h2>
+        </div>
 
-            <tr>
-                <td id="subjectCode1">[Subject Code]</td>
-                <td id="subjectName1">[Subject Name]</td>
-                <td id="creditHour1">[Credit Hour]</td>
-                <td id="ekt102">[EKT102]</td>
-                <td id="result">[Result]</td>
-            </tr>
+        <div>
+            <h3>Education Subjects</h3>
+            <table>
+                <tr>
+                    <th>Code Subject</th>
+                    <th>Name of Subject</th>
+                    <th>Credit Hour</th>
+                    <th>Result of CGPA</th>
+                    <th>Result (Pass/Fail)</th>
+                </tr>
 
-        </table>
+                <tr>
+                    <td id="subjectCode1">[Subject Code]</td>
+                    <td id="subjectName1">[Subject Name]</td>
+                    <td id="creditHour1">[Credit Hour]</td>
+                    <td id="ekt102">[EKT102]</td>
+                    <td id="result">[Result]</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <script>
