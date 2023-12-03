@@ -56,7 +56,15 @@
             <th>Result of CGPA</th>
             <th>Result (Pass/Fail)</th>
         </tr>
-        <!-- Add more rows for additional subjects if needed -->
+        
+        <tr>
+            <td id="subjectCode1">[Subject Code]</td>
+            <td id="subjectName1">[Subject Name]</td>
+            <td id="creditHour1">[Credit Hour]</td>
+            <td id="cgpa1">[CGPA]</td>
+            <td id="ekt102">[EKT102]</td>
+        </tr>
+        
     </table>
 
     <script>
@@ -68,6 +76,8 @@
             const codeCourse = urlParams.get('codeCourse') || 'N/A';
             const year = urlParams.get('year') || 'N/A';
             const semester = urlParams.get('semester') || 'N/A';
+            const ekt102 = urlParams.get('ekt102') || 'N/A';
+            const eqt101 = urlParams.get('eqt101') || 'N/A';
 
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
@@ -75,12 +85,67 @@
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
+            document.getElementById('ekt102').textContent = `EKT102: ${ekt102}`;
+            document.getElementById('eqt101').textContent = `EQT101: ${eqt101}`;
 
-            // Set the course based on the condition
-            if (codeCourse === 'UR6523002') {
-                document.getElementById('course').textContent = 'Course: Computer Engineering';
-            }
+            // Placeholder data for Subject 1 (EKT102)
+            const subjectCode1 = 'EKT102';
+            const subjectName1 = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
+            const creditHour1 = '3';
+            const result1 = ekt102; // Change this based on your condition
+            const valueCgpa1 = calculateCgpa(result1);
+
+            // Update HTML elements for Subject 1
+            document.getElementById('subjectCode1').textContent = subjectCode1;
+            document.getElementById('subjectName1').textContent = subjectName1;
+            document.getElementById('creditHour1').textContent = creditHour1;
+            document.getElementById('cgpa1').textContent = valueCgpa1.toFixed(2);
+            document.getElementById('result1').textContent = result1 === 'Pass' ? 'Pass' : 'Fail';
+
+            // Placeholder data for Subject 2 (EQT101)
+            const subjectCode2 = 'EQT101';
+            const subjectName2 = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
+            const creditHour2 = '3';
+            const result2 = eqt101; // Change this based on your condition
+            const valueCgpa2 = calculateCgpa(result2);
+
+            // Update HTML elements for Subject 2
+            document.getElementById('subjectCode2').textContent = subjectCode2;
+            document.getElementById('subjectName2').textContent = subjectName2;
+            document.getElementById('creditHour2').textContent = creditHour2;
+            document.getElementById('cgpa2').textContent = valueCgpa2.toFixed(2);
+            document.getElementById('result2').textContent = result2 === 'Pass' ? 'Pass' : 'Fail';
         });
+
+        // Function to calculate CGPA based on result
+        function calculateCgpa(result) {
+            switch (result) {
+                case 'A':
+                    return 4.00;
+                case 'A-':
+                    return 3.75;
+                case 'B+':
+                    return 3.50;
+                case 'B':
+                    return 3.00;
+                case 'C+':
+                    return 2.50;
+                case 'C':
+                    return 2.00;
+                case 'C-':
+                    return 1.75;
+                case 'D+':
+                    return 1.50;
+                case 'D':
+                    return 1.00;
+                case 'D-':
+                    return 0.75;
+                case 'F':
+                    return 0.00;
+                default:
+                    return NaN; // Handle error case
+            }
+        }
     </script>
 </body>
 </html>
