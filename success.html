@@ -85,15 +85,15 @@
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
-            document.getElementById('ekt102').textContent = `EKT102: ${ekt102}`;
-            document.getElementById('eqt101').textContent = `EQT101: ${eqt101}`;
+            document.getElementById('ekt102').textContent = `${ekt102}`;
+            document.getElementById('eqt101').textContent = `${eqt101}`;
 
             // Placeholder data for Subject 1 (EKT102)
             const subjectCode1 = 'EKT102';
             const subjectName1 = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
             const creditHour1 = '3';
             const result1 = ekt102; // Change this based on your condition
-            const valueCgpa1 = calculateCgpa(result1);
+            const valueCgpa1 = calculateCgpa(ekt102);
 
             // Update HTML elements for Subject 1
             document.getElementById('subjectCode1').textContent = subjectCode1;
@@ -106,8 +106,8 @@
             const subjectCode2 = 'EQT101';
             const subjectName2 = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
             const creditHour2 = '3';
-            const result2 = eqt101; // Change this based on your condition
-            const valueCgpa2 = calculateCgpa(result2);
+            const result = eqt101; // Change this based on your condition
+            const valueCgpa2 = eqt101;
 
             // Update HTML elements for Subject 2
             document.getElementById('subjectCode2').textContent = subjectCode2;
@@ -118,30 +118,42 @@
         });
 
         // Function to calculate CGPA based on result
-        function calculateCgpa(result) {
+        function calculateCgpa(RESULT) {
             switch (result) {
                 case 'A':
-                    return 4.00;
+                    valcgpa=4.00;
+                    return 'PASS';
+                    
                 case 'A-':
-                    return 3.75;
+                    valcgpa=3.75;
+                    return 'PASS';
                 case 'B+':
-                    return 3.50;
+                    valcgpa=3.50;
+                    return 'PASS';
                 case 'B':
-                    return 3.00;
+                    valcgpa=3.00;
+                    return 'PASS';
                 case 'C+':
-                    return 2.50;
+                    valcgpa=2.50;
+                    return 'PASS';
                 case 'C':
-                    return 2.00;
+                    valcgpa=2.00;
+                    return 'PASS';
                 case 'C-':
-                    return 1.75;
+                    valcgpa=1.75;
+                    return 'FAIL';
                 case 'D+':
-                    return 1.50;
+                    valcgpa=1.50;
+                    return 'FAIL';
                 case 'D':
-                    return 1.00;
+                    valcgpa=1.00;
+                    return 'FAIL';
                 case 'D-':
-                    return 0.75;
+                    valcgpa=0.75;
+                    return 'FAIL';
                 case 'F':
-                    return 0.00;
+                    valcgpa=0.00;
+                    return 'FAIL';
                 default:
                     return NaN; // Handle error case
             }
