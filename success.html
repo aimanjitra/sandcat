@@ -42,7 +42,7 @@
 <body>
     <h1>Biodata of Student</h1>
     <h2 class="small-text" id="fullName">Name: [Full Name]</h2>
-    <h2 class="small-text">Course: [Course]</h2>
+    <h2 id="course">Course: [Course]</h2>
     <h2 class="small-text" id="codeCourse">Code Course: [Code Course]</h2>
     <h2 class="small-text" id="year">Year: [Year]</h2>
     <h3>Education Subjects</h3>
@@ -58,19 +58,25 @@
     </table>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const fullName = urlParams.get('fullName') || 'N/A';
-        const codeCourse = urlParams.get('codeCourse') || 'N/A';
-        const year = urlParams.get('year') || 'N/A';
+         document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const fullName = urlParams.get('fullName') || 'N/A';
+            const course = urlParams.get('course') || 'N/A';
+            const codeCourse = urlParams.get('codeCourse') || 'N/A';
+            const year = urlParams.get('year') || 'N/A';
 
-        document.getElementById('fullName').textContent = `Name: ${fullName}`;
-        document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
-        document.getElementById('year').textContent = `Year: ${year}`;
+            // Update elements with URL parameter values
+            document.getElementById('fullName').textContent = `Name: ${fullName}`;
+            document.getElementById('course').textContent = `Course: ${course}`;
+            document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
+            document.getElementById('year').textContent = `Year: ${year}`;
 
-        if(Course=="UR6523002"){
-            Course=="Computer Engineering";
-        }
-        
+            // Set the course based on the condition
+            if (codeCourse === 'UR6523002') {
+                document.getElementById('course').textContent = 'Course: Computer Engineering';
+            }
+        });
     </script>
 </body>
 </html>
