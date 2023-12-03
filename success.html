@@ -88,25 +88,22 @@
             document.getElementById('ekt102').textContent = `${ekt102}`;
             document.getElementById('eqt101').textContent = `${eqt101}`;
 
-            // Placeholder data for Subject 1 (EKT102)
-            const subjectCode1 = 'EKT102';
-            const subjectName1 = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
-            const creditHour1 = '3';
-            const result1 = ekt102; // Change this based on your condition
-            const valueCgpa1 = calculateCgpa(ekt102);
+            if (codeCourse === 'UR6523002') {
+                document.getElementById('course').textContent = 'Course: Computer Engineering';
+            }
 
             // Update HTML elements for Subject 1
-            document.getElementById('subjectCode1').textContent = subjectCode1;
-            document.getElementById('subjectName1').textContent = subjectName1;
-            document.getElementById('creditHour1').textContent = creditHour1;
-            document.getElementById('cgpa1').textContent = valueCgpa1.toFixed(2);
-            document.getElementById('result1').textContent = result1 === 'Pass' ? 'Pass' : 'Fail';
+            document.getElementById('subjectCode1').textContent = 'EKT102';
+            document.getElementById('subjectName1').textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
+            document.getElementById('creditHour1').textContent = '3';
+            document.getElementById('cgpa1').textContent = ekt102;
+            document.getElementById('result1').textContent = calculateCgpa(ekt102);
 
             // Placeholder data for Subject 2 (EQT101)
             const subjectCode2 = 'EQT101';
             const subjectName2 = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
             const creditHour2 = '3';
-            const result = eqt101; // Change this based on your condition
+            const result = calculateCgpa(eqt101); // Change this based on your condition
             const valueCgpa2 = eqt101;
 
             // Update HTML elements for Subject 2
