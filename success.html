@@ -33,7 +33,21 @@
             <th>Code Subject</th>
             <th>Name of Subject</th>
             <th>Credit Hour</th>
-            <th>Result of CG
- </table>
+            <th>Result of CGPA</th>
+            <th>Result (Pass/Fail)</th>
+        </tr>
+        <!-- Add more rows for additional subjects if needed -->
+    </table>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const fullName = urlParams.get('full_name') || 'N/A';
+        const codeCourse = urlParams.get('code_course') || 'N/A';
+        const year = urlParams.get('year') || 'N/A';
+
+        document.getElementById('full_name').textContent = `Name: ${fullName}`;
+        document.getElementById('code_course').textContent = `Code Course: ${codeCourse}`;
+        document.getElementById('year').textContent = `Year: ${year}`;
+    </script>
 </body>
 </html>
