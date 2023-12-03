@@ -41,10 +41,11 @@
 </head>
 <body>
     <h1>Biodata of Student</h1>
-    <h2 class="small-text" id="fullName">Name: [Full Name]</h2>
+    <h2 id="fullName">Name: [Full Name]</h2>
     <h2 id="course">Course: [Course]</h2>
-    <h2 class="small-text" id="codeCourse">Code Course: [Code Course]</h2>
-    <h2 class="small-text" id="year">Year: [Year]</h2>
+    <h2 id="codeCourse">Code Course: [Code Course]</h2>
+    <h2 id="year">Year: [Year]</h2>
+    <h2 id="semester">Semester: [Semester]</h2>
     <h3>Education Subjects</h3>
     <table>
         <tr>
@@ -58,19 +59,21 @@
     </table>
 
     <script>
-         document.addEventListener('DOMContentLoaded', function () {
+           document.addEventListener('DOMContentLoaded', function () {
             // Retrieve URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const fullName = urlParams.get('fullName') || 'N/A';
             const course = urlParams.get('course') || 'N/A';
             const codeCourse = urlParams.get('codeCourse') || 'N/A';
             const year = urlParams.get('year') || 'N/A';
+            const semester = urlParams.get('semester') || 'N/A';
 
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
             document.getElementById('course').textContent = `Course: ${course}`;
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
+            document.getElementById('semester').textContent = `Semester: ${semester}`;
 
             // Set the course based on the condition
             if (codeCourse === 'UR6523002') {
