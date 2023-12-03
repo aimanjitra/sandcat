@@ -98,7 +98,7 @@
                 <td id="subjectName1">[Subject Name]</td>
                 <td id="creditHour1">[Credit Hour]</td>
                 <td id="ekt102">[EKT102]</td>
-                <td id="result">[Result]</td>
+                <td id="result1">[Result]</td>
             </tr>
 
             <tr>
@@ -106,7 +106,7 @@
                 <td id="subjectName2">[Subject Name]</td>
                 <td id="creditHour2">[Credit Hour]</td>
                 <td id="eqt101">[EQT101]</td>
-                <td id="result">[Result]</td>
+                <td id="result2">[Result]</td>
             </tr>
             
         </table>
@@ -163,16 +163,16 @@
 
             // Check for the first subject
             if (passGrades.includes(creditHourGrade1)) {
-                result.textContent = 'Pass';
+                result1.textContent = 'Pass';
             } else {
-                result.textContent = 'Fail';
+                result1.textContent = 'Fail';
             }
             
             // Check for the second subject
             if (passGrades.includes(creditHourGrade2)) {
-                result.textContent = 'Pass';
+                result2.textContent = 'Pass';
             } else {
-                result.textContent = 'Fail';
+                result2.textContent = 'Fail';
             }
 
 
