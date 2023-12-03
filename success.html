@@ -96,7 +96,7 @@
                 <td id="subjectCode1">[Subject Code]</td>
                 <td id="subjectName1">[Subject Name]</td>
                 <td id="creditHour1">[Credit Hour]</td>
-                <td id="ekt102">[EKT102]</td>
+                <td id="uzw164">[UZW164]</td>
                 <td id="result1">[Result]</td>
             </tr>
 
@@ -104,8 +104,40 @@
                 <td id="subjectCode2">[Subject Code]</td>
                 <td id="subjectName2">[Subject Name]</td>
                 <td id="creditHour2">[Credit Hour]</td>
-                <td id="eqt101">[EQT101]</td>
+                <td id="uuw130">[UUW130]</td>
                 <td id="result2">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode3">[Subject Code]</td>
+                <td id="subjectName3">[Subject Name]</td>
+                <td id="creditHour3">[Credit Hour]</td>
+                <td id="ekt102">[EKT102]</td>
+                <td id="result3">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode4">[Subject Code]</td>
+                <td id="subjectName4">[Subject Name]</td>
+                <td id="creditHour4">[Credit Hour]</td>
+                <td id="eqt101">[EQT101]</td>
+                <td id="result4">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode5">[Subject Code]</td>
+                <td id="subjectName5">[Subject Name]</td>
+                <td id="creditHour5">[Credit Hour]</td>
+                <td id="ekt120">[EKT120]</td>
+                <td id="result5">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode6">[Subject Code]</td>
+                <td id="subjectName6">[Subject Name]</td>
+                <td id="creditHour6">[Credit Hour]</td>
+                <td id="ekt101">[EKT101]</td>
+                <td id="result6">[Result]</td>
             </tr>
             
         </table>
@@ -123,6 +155,10 @@
         const semester = urlParams.get('semester') || 'N/A';
         const ekt102 = urlParams.get('ekt102') || 'N/A';
         const eqt101 = urlParams.get('eqt101') || 'N/A';
+        const ekt101 = urlParams.get('ekt101') || 'N/A';
+        const ekt120 = urlParams.get('ekt120') || 'N/A';
+        const uzw164 = urlParams.get('uzw164') || 'N/A';
+        const uuw130 = urlParams.get('uuw130') || 'N/A';
 
         // Update elements with URL parameter values
         document.getElementById('fullName').textContent = `Name: ${fullName}`;
@@ -133,6 +169,10 @@
         document.getElementById('semester').textContent = `Semester: ${semester}`;
         document.getElementById('ekt102').textContent = `${ekt102}`;
         document.getElementById('eqt101').textContent = `${eqt101}`;
+        document.getElementById('ekt101').textContent = `${ekt101}`;
+        document.getElementById('ekt120').textContent = `${ekt120}`;
+        document.getElementById('uzw164').textContent = `${uzw164}`;
+        document.getElementById('uuw130').textContent = `${uuw130}`;
 
         // Education Subjects
         const subjectCode1 = document.getElementById('subjectCode1');
@@ -142,21 +182,55 @@
         const subjectCode2 = document.getElementById('subjectCode2');
         const subjectName2 = document.getElementById('subjectName2');
         const creditHour2 = document.getElementById('creditHour2');
-        
-        const result = document.getElementById('result');
+
+        const subjectCode3 = document.getElementById('subjectCode3');
+        const subjectName3 = document.getElementById('subjectName3');
+        const creditHour3 = document.getElementById('creditHour3');
+
+        const subjectCode4 = document.getElementById('subjectCode4');
+        const subjectName4 = document.getElementById('subjectName4');
+        const creditHour4 = document.getElementById('creditHour4');
+
+        const subjectCode5 = document.getElementById('subjectCode5');
+        const subjectName5 = document.getElementById('subjectName5');
+        const creditHour5 = document.getElementById('creditHour5');
+
+        const subjectCode6 = document.getElementById('subjectCode6');
+        const subjectName6 = document.getElementById('subjectName6');
+        const creditHour6 = document.getElementById('creditHour6');
 
         // Update education subjects with specific values
-        subjectCode1.textContent = 'EKT102';
-        subjectName1.textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
-        creditHour1.textContent = '3';
+        subjectCode1.textContent = 'UZW164';
+        subjectName1.textContent = 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I [THE MALAYSIAN RED CRESENT CERTIFICATION COURSE I]';
+        creditHour1.textContent = '1';
 
-        subjectCode2.textContent = 'EQT101';
-        subjectName2.textContent = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
-        creditHour2.textContent = '3';
+        subjectCode2.textContent = 'UUW130';
+        subjectName2.textContent = 'FALSAFAH DAN ISU SEMASA [PHILOSOPHY AND CURRENT ISSUES]';
+        creditHour2.textContent = '2';
+        
+        subjectCode3.textContent = 'EKT102';
+        subjectName3.textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
+        creditHour3.textContent = '3';
+
+        subjectCode4.textContent = 'EQT101';
+        subjectName4.textContent = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
+        creditHour4.textContent = '3';
+
+        subjectCode5.textContent = 'EKT120';
+        subjectName5.textContent = 'PENGATURCARAAN KOMPUTER [COMPUTER PROGRAMMING]';
+        creditHour5.textContent = '4';
+
+        subjectCode6.textContent = 'EKT101';
+        subjectName6.textContent = 'TEORI LITAR ELEKTRIK [ELECTRIC CIRCUIT THEORY]';
+        creditHour6.textContent = '4';
 
         // Determine result based on credit hour
-        const creditHourGrade1 = ekt102.toUpperCase();
-        const creditHourGrade2 = eqt101.toUpperCase();
+        const creditHourGrade1 = uzw164.toUpperCase();
+        const creditHourGrade2 = uuw130.toUpperCase();
+        const creditHourGrade3 = ekt102.toUpperCase();
+        const creditHourGrade4 = eqt101.toUpperCase();
+        const creditHourGrade5 = ekt120.toUpperCase();
+        const creditHourGrade6 = ekt101.toUpperCase();
 
         const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
 
@@ -172,6 +246,32 @@
                 result2.textContent = 'Pass';
             } else {
                 result2.textContent = 'Fail';
+            }
+        
+            if (passGrades.includes(creditHourGrade3)) {
+                result3.textContent = 'Pass';
+            } else {
+                result3.textContent = 'Fail';
+            }
+            
+            // Check for the second subject
+            if (passGrades.includes(creditHourGrade4)) {
+                result4.textContent = 'Pass';
+            } else {
+                result4.textContent = 'Fail';
+            }
+
+            if (passGrades.includes(creditHourGrade5)) {
+                result5.textContent = 'Pass';
+            } else {
+                result5.textContent = 'Fail';
+            }
+            
+            // Check for the second subject
+            if (passGrades.includes(creditHourGrade6)) {
+                result6.textContent = 'Pass';
+            } else {
+                result6.textContent = 'Fail';
             }
 
 
