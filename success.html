@@ -92,61 +92,6 @@
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
             }
 
-                // Update HTML elements for Subject 1
-                    document.getElementById('subjectCode1').textContent = 'EKT102';
-                    document.getElementById('subjectName1').textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
-                    document.getElementById('creditHour1').textContent = '3';
-                    document.getElementById('cgpa1').textContent = ekt102;
-                    document.getElementById('result').textContent = calculateCgpa(cgpa1);
-                
-                    // Update HTML elements for Subject 2
-                    document.getElementById('subjectCode2').textContent = 'EKT102';
-                    document.getElementById('subjectName2').textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
-                    document.getElementById('creditHour2').textContent = '3';
-                    document.getElementById('cgpa2').textContent = eqt101;
-                    document.getElementById('result').textContent = calculateCgpa(cgpa2);
-
-        // Function to calculate CGPA based on result
-        function calculateCgpa(result){
-            switch (result) {
-                case 'A':
-                    //valcgpa=4.00;
-                    return 'PASS';
-                case 'A-':
-                    //valcgpa=3.75;
-                    return 'PASS';
-                case 'B+':
-                    //valcgpa=3.50;
-                    return 'PASS';
-                case 'B':
-                    valcgpa=3.00;
-                    return 'PASS';
-                case 'C+':
-                    valcgpa=2.50;
-                    return 'PASS';
-                case 'C':
-                    valcgpa=2.00;
-                    return 'PASS';
-                case 'C-':
-                    valcgpa=1.75;
-                    return 'FAIL';
-                case 'D+':
-                    valcgpa=1.50;
-                    return 'FAIL';
-                case 'D':
-                    valcgpa=1.00;
-                    return 'FAIL';
-                case 'D-':
-                    valcgpa=0.75;
-                    return 'FAIL';
-                case 'F':
-                    valcgpa=0.00;
-                    return 'FAIL';
-                default:
-                    return NaN; // Handle error case
-            }
-        }
-
                });
     </script>
 </body>
