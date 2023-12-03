@@ -1,39 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Background</title>
     <style>
-        /* Reset default margin, padding, and box-sizing to ensure consistent styling */
-        * {
+        body,
+        html {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Set up the main container to take up the full viewport height (100% of the screen) */
-        body {
-            height: 100vh;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #001b3d 68%, white 50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Center both horizontally and vertically */
+            justify-content: center;
+            /* Center both horizontally and vertically */
             font-family: Arial, sans-serif;
+            color: white; /* Set text color to white */
         }
 
-        /* Style the header section with a larger font size and create spacing below */
-        .header {
-            font-size: 24px;
-            margin-bottom: 20px; /* Add some margin at the bottom */
-        }
-
-        /* Style the login container with a border and padding */
         .container {
+            height: 80vh;
             display: flex;
             flex-direction: column;
-            width: 450px; /* Increase the width to make the container wider */
+        }
+
+        .middle-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Style for the login container with a border and padding */
+        .container-login {
+            display: flex;
+            flex-direction: column;
+            width: 450px;
+            /* Increase the width to make the container wider */
             padding: 15px;
             border: 1px solid skyblue;
             border-radius: 5px;
             margin: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Set background color for the login container with some opacity */
+            z-index: 1; /* Set z-index to place it above the background */
         }
 
         /* Style for the role selection dropdown */
@@ -59,8 +73,10 @@
 
         /* Style for the login button */
         button {
-            height: 45px; /* Increase the height of the button */
-            width: 100%; /* Make the button the same width as the container */
+            height: 45px;
+            /* Increase the height of the button */
+            width: 100%;
+            /* Make the button the same width as the container */
             background-color: skyblue;
             border: none;
             border-radius: 5px;
@@ -77,7 +93,9 @@
         /* Style for the registration and forgot password links */
         .links {
             text-align: center;
-            margin-top: 20px; /* Add margin to separate from the login box */
+            margin-top: 20px;
+            /* Add margin to separate from the login box */
+            color: black; /* Set text color to black */
         }
     </style>
 </head>
@@ -88,7 +106,7 @@
         <h1>System Log In</h1>
     </div>
     <!-- Login form -->
-    <div class="container">
+    <div class="container-login">
         <form id="loginForm">
             <!-- Role selection dropdown at the top -->
             <select id="status" required>
@@ -112,7 +130,7 @@
     </div>
     <script>
         async function fetchData(username, password, status) {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzBt7AtIxOPUgqOAIYUM_tXUSXwv1ZzAd-GIacqe2neg3gR3tM1zk7L3wOZkJiPXmXS/exec';
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzi7YMi0IPTKDBoh5PC6TddFIsgpDYfptNFqM_voCTRja9VAhRsES5StEDVXk1xwW-NKA/exec';
             const queryParams = `?username=${username}&password=${password}&status=${status}&action=login`;
             const response = await fetch(scriptURL + queryParams);
             const data = await response.json();
@@ -120,8 +138,26 @@
             dataDiv.textContent = JSON.stringify(data, null, 2);
 
             if (data.success) {
-                window.location.href = 'https://aimanjitra.github.io/github.io/success.html';
+                if (data.data && data.data.length > 0) {
+                    // Extract relevant information from jsonData
+                    const fullName = data.data[0]?.full_name;
+                    const codeCourse = data.data[0]?.code_course;
+                    const year = data.data[0]?.tahun;
+                    const semester = data.data[0]?.sem;
+                    const ekt102 = data.data[0]?.EKT102;
+                    const eqt101 = data.data[0]?.EQT101;
+
+                    // Redirect to success.html with additional parameters
+                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}`;
+                } else {
+                    // Handle the case where data.data is undefined or empty
+                    console.error('No data found for the given credentials.');
+                }
+            } else {
+                // Handle the case where authentication failed
+                console.error('Authentication failed:', data.error);
             }
+
         }
 
         document.getElementById('loginForm').addEventListener('submit', (e) => {
@@ -133,4 +169,5 @@
         });
     </script>
 </body>
+
 </html>
