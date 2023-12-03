@@ -76,6 +76,7 @@
         <div class="biodata">
             <h1>Biodata of Student</h1>
             <h2 id="fullName">Name: [Full Name]</h2>
+            <h2 id="matric">No Matric: [No Matric]</h2>
             <h2 id="course">Course: [Course]</h2>
             <h2 id="codeCourse">Code Course: [Code Course]</h2>
             <h2 id="year">Year: [Year]</h2>
@@ -107,6 +108,7 @@
         // Retrieve URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const fullName = urlParams.get('fullName') || 'N/A';
+        const matric = urlParams.get('matric') || 'N/A';
         const course = urlParams.get('course') || 'N/A';
         const codeCourse = urlParams.get('codeCourse') || 'N/A';
         const year = urlParams.get('year') || 'N/A';
@@ -115,6 +117,7 @@
 
         // Update elements with URL parameter values
         document.getElementById('fullName').textContent = `Name: ${fullName}`;
+        document.getElementById('matric').textContent = `No Matric: ${matric}`;
         document.getElementById('course').textContent = `Course: ${course}`;
         document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
         document.getElementById('year').textContent = `Year: ${year}`;
