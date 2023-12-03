@@ -56,6 +56,14 @@
             <th>Result of CGPA</th>
             <th>Result (Pass/Fail)</th>
         </tr>
+
+        <tr>
+            <td id="subjectCode1">[Subject Code]</td>
+            <td id="subjectName1">[Subject Name]</td>
+            <td id="creditHour1">[Credit Hour]</td>
+            <td id="ekt102">[EKT102]</td>
+            <td id="result">[Result]</td>
+        </tr>
         
     </table>
 
@@ -68,6 +76,8 @@
             const codeCourse = urlParams.get('codeCourse') || 'N/A';
             const year = urlParams.get('year') || 'N/A';
             const semester = urlParams.get('semester') || 'N/A';
+            const ekt102 = urlParams.get('ekt102') || 'N/A';
+            const eqt101 = urlParams.get('eqt101') || 'N/A';
 
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
@@ -75,12 +85,25 @@
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
+            document.getElementById('ekt102').textContent = `${ekt102}`;
+            document.getElementById('eqt101').textContent = `${eqt101}`;
 
                if (codeCourse === 'UR6523002') {
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
             }
 
+               // Update HTML elements for Subject 1
+                    document.getElementById('subjectCode1').textContent = 'EKT102';
+                    document.getElementById('subjectName1').textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
+                    document.getElementById('creditHour1').textContent = '3';
+
+               if(result === 'A' || 'A+' || 'B+' || 'B' || 'B-' || 'C+' || 'C'){
+                    document.getElementById('result').textContent = 'PASS';
+               }
+               else{
+                   document.getElementById('result').textContent = 'FAIL';
+               }
                });
-    </script>
+    </script> 
 </body>
 </html>
