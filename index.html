@@ -15,13 +15,15 @@
             background: linear-gradient(to bottom, #001b3d 68%, white 50%);
             display: flex;
             flex-direction: column;
-            align-items: stretch; /* Adjust alignment for smaller screens */
+            align-items: center;
+            justify-content: center;
+            /* Center both horizontally and vertically */
             font-family: Arial, sans-serif;
             color: white; /* Set text color to white */
         }
 
         .container {
-            height: auto; /* Adjust height for smaller screens */
+            height: 80vh;
             display: flex;
             flex-direction: column;
         }
@@ -31,32 +33,50 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: static; /* Adjust position for smaller screens */
+            position: relative;
         }
 
+        /* Style for the login container with a border and padding */
         .container-login {
             display: flex;
             flex-direction: column;
-            width: 80%; /* Adjust width for smaller screens */
+            width: 450px;
+            /* Increase the width to make the container wider */
             padding: 15px;
             border: 1px solid skyblue;
             border-radius: 5px;
             margin: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.8); /* Set background color for the login container with some opacity */
+            z-index: 1; /* Set z-index to place it above the background */
         }
 
-        select,
+        /* Style for the role selection dropdown */
+        select {
+            margin: 10px 0;
+            height: 35px;
+            width: 100%;
+            padding: 7px;
+        }
+
+        /* Style for input fields (username and password) */
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
         input {
-            width: 100%; /* Make the dropdown and input fields take the full width */
+            flex: 1;
             margin: 10px 0;
             height: 35px;
             padding: 7px;
         }
 
+        /* Style for the login button */
         button {
             height: 45px;
+            /* Increase the height of the button */
             width: 100%;
+            /* Make the button the same width as the container */
             background-color: skyblue;
             border: none;
             border-radius: 5px;
@@ -64,22 +84,18 @@
             cursor: pointer;
         }
 
+        /* Style for the button on hover (when the mouse pointer is over it) */
         button:hover {
             background-color: #333;
             color: skyblue;
         }
 
+        /* Style for the registration and forgot password links */
         .links {
             text-align: center;
             margin-top: 20px;
-            color: black;
-        }
-
-        /* Responsive design for smaller screens */
-        @media only screen and (max-width: 600px) {
-            .container-login {
-                width: 90%; /* Adjust width for smaller screens */
-            }
+            /* Add margin to separate from the login box */
+            color: black; /* Set text color to black */
         }
     </style>
 </head>
@@ -141,6 +157,7 @@
                 // Handle the case where authentication failed
                 console.error('Authentication failed:', data.error);
             }
+
         }
 
         document.getElementById('loginForm').addEventListener('submit', (e) => {
