@@ -100,6 +100,15 @@
                 <td id="ekt102">[EKT102]</td>
                 <td id="result">[Result]</td>
             </tr>
+
+            <tr>
+                <td id="subjectCode2">[Subject Code]</td>
+                <td id="subjectName2">[Subject Name]</td>
+                <td id="creditHour2">[Credit Hour]</td>
+                <td id="eqt101">[EQT101]</td>
+                <td id="result">[Result]</td>
+            </tr>
+            
         </table>
     </div>
 
@@ -114,6 +123,7 @@
         const year = urlParams.get('year') || 'N/A';
         const semester = urlParams.get('semester') || 'N/A';
         const ekt102 = urlParams.get('ekt102') || 'N/A';
+        const eqt101 = urlParams.get('eqt101') || 'N/A';
 
         // Update elements with URL parameter values
         document.getElementById('fullName').textContent = `Name: ${fullName}`;
@@ -123,11 +133,17 @@
         document.getElementById('year').textContent = `Year: ${year}`;
         document.getElementById('semester').textContent = `Semester: ${semester}`;
         document.getElementById('ekt102').textContent = `${ekt102}`;
+        document.getElementById('eqt101').textContent = `${eqt101}`;
 
         // Education Subjects
         const subjectCode1 = document.getElementById('subjectCode1');
         const subjectName1 = document.getElementById('subjectName1');
         const creditHour1 = document.getElementById('creditHour1');
+
+        const subjectCode2 = document.getElementById('subjectCode2');
+        const subjectName2 = document.getElementById('subjectName2');
+        const creditHour2 = document.getElementById('creditHour2');
+        
         const result = document.getElementById('result');
 
         // Update education subjects with specific values
@@ -135,13 +151,18 @@
         subjectName1.textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
         creditHour1.textContent = '3';
 
-        // Determine result based on credit hour
-        const creditHourGrade = ekt102.toUpperCase();
+        subjectCode1.textContent = 'EQT101';
+        subjectName1.textContent = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
+        creditHour1.textContent = '3';
 
-        if (['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'].includes(creditHourGrade)) {
-            result.textContent = 'PASS';
-        } else if (['C-', 'D+', 'D', 'D-', 'F'].includes(creditHourGrade)) {
-            result.textContent = 'FAIL';
+        // Determine result based on credit hour
+        const creditHourGrade1 = ekt102.toUpperCase();
+        const creditHourGrade2 = eqt101.toUpperCase();
+
+        if (['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'].includes(creditHourGrade1,creditHourGrade2)) {
+            result.textContent = 'Pass';
+        } else if (['C-', 'D+', 'D', 'D-', 'F'].includes(creditHourGrade1,creditHourGrade2)) {
+            result.textContent = 'Fail';
         } else {
             result.textContent = ''; // Set to null for other cases
         }
