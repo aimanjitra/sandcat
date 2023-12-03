@@ -151,21 +151,30 @@
         subjectName1.textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
         creditHour1.textContent = '3';
 
-        subjectCode1.textContent = 'EQT101';
-        subjectName1.textContent = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
-        creditHour1.textContent = '3';
+        subjectCode2.textContent = 'EQT101';
+        subjectName2.textContent = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
+        creditHour2.textContent = '3';
 
         // Determine result based on credit hour
         const creditHourGrade1 = ekt102.toUpperCase();
         const creditHourGrade2 = eqt101.toUpperCase();
 
-        if (['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'].includes(creditHourGrade1,creditHourGrade2)) {
-            result.textContent = 'Pass';
-        } else if (['C-', 'D+', 'D', 'D-', 'F'].includes(creditHourGrade1,creditHourGrade2)) {
-            result.textContent = 'Fail';
-        } else {
-            result.textContent = ''; // Set to null for other cases
-        }
+        const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
+
+            // Check for the first subject
+            if (passGrades.includes(creditHourGrade1)) {
+                resultSubject1.textContent = 'Pass';
+            } else {
+                resultSubject1.textContent = 'Fail';
+            }
+            
+            // Check for the second subject
+            if (passGrades.includes(creditHourGrade2)) {
+                resultSubject2.textContent = 'Pass';
+            } else {
+                resultSubject2.textContent = 'Fail';
+            }
+
 
         // Additional check for course code
         if (codeCourse === 'UR6523002') {
