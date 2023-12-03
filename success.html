@@ -42,6 +42,7 @@
 <body>
     <h1>Biodata of Student</h1>
     <h2 class="small-text" id="fullName">Name: [Full Name]</h2>
+    <h2 class="small-text">Code Course: [Code Course]</h2>
     <h2 class="small-text" id="codeCourse">Code Course: [Code Course]</h2>
     <h2 class="small-text" id="year">Year: [Year]</h2>
     <h3>Education Subjects</h3>
@@ -57,14 +58,39 @@
     </table>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const fullName = urlParams.get('fullName') || 'N/A';
-        const codeCourse = urlParams.get('codeCourse') || 'N/A';
-        const year = urlParams.get('year') || 'N/A';
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const fullName = urlParams.get('fullName') || 'N/A';
+            const codeCourse = urlParams.get('codeCourse') || 'N/A';
+            const year = urlParams.get('year') || 'N/A';
 
-        document.getElementById('fullName').textContent = `Name: ${fullName}`;
-        document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
-        document.getElementById('year').textContent = `Year: ${year}`;
+            // Update elements with URL parameter values
+            document.getElementById('fullName').textContent = `Name: ${fullName}`;
+            document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
+            document.getElementById('year').textContent = `Year: ${year}`;
+
+            // Retrieve course code element
+            var courseCodeElement = document.getElementById('codeCourse');
+            // Retrieve course element
+            var courseElement = document.getElementById('codeCourse');
+
+            // Example mapping of course code to course
+            var courseMappings = {
+                'UR6523002': 'Computer Engineering',
+                // Add more mappings as needed
+            };
+
+            // Get the course code from the element
+            var courseCode = courseCodeElement.textContent.trim();
+
+            // Set the course based on the mapping
+            var course = courseMappings[courseCode] || 'Unknown Course';
+
+            // Update the course element
+            courseElement.textContent = `Code Course: ${course}`;
+        });
+        
     </script>
 </body>
 </html>
