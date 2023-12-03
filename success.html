@@ -224,55 +224,48 @@
         subjectName6.textContent = 'TEORI LITAR ELEKTRIK [ELECTRIC CIRCUIT THEORY]';
         creditHour6.textContent = '4';
 
-        // Determine result based on credit hour
-        const creditHourGrade1 = uzw164.toUpperCase();
-        const creditHourGrade2 = uuw130.toUpperCase();
-        const creditHourGrade3 = ekt102.toUpperCase();
-        const creditHourGrade4 = eqt101.toUpperCase();
-        const creditHourGrade5 = ekt120.toUpperCase();
-        const creditHourGrade6 = ekt101.toUpperCase();
-
-        const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
-
-            // Check for the first subject
-            if (passGrades.includes(creditHourGrade1)) {
-                result1.textContent = 'Pass';
-            } else {
-                result1.textContent = 'Fail';
-            }
-            
-            // Check for the second subject
-            if (passGrades.includes(creditHourGrade2)) {
-                result2.textContent = 'Pass';
-            } else {
-                result2.textContent = 'Fail';
-            }
-        
-            if (passGrades.includes(creditHourGrade3)) {
-                result3.textContent = 'Pass';
-            } else {
-                result3.textContent = 'Fail';
-            }
-            
-            // Check for the second subject
-            if (passGrades.includes(creditHourGrade4)) {
-                result4.textContent = 'Pass';
-            } else {
-                result4.textContent = 'Fail';
-            }
-
-            if (passGrades.includes(creditHourGrade5)) {
-                result5.textContent = 'Pass';
-            } else {
-                result5.textContent = 'Fail';
-            }
-            
-            // Check for the second subject
-            if (passGrades.includes(creditHourGrade6)) {
-                result6.textContent = 'Pass';
-            } else {
-                result6.textContent = 'Fail';
-            }
+                // Determine result based on credit hour
+                const creditHourGrade1 = validateGrade(uzw164);
+                const creditHourGrade2 = validateGrade(uuw130);
+                const creditHourGrade3 = validateGrade(ekt102);
+                const creditHourGrade4 = validateGrade(eqt101);
+                const creditHourGrade5 = validateGrade(ekt120);
+                const creditHourGrade6 = validateGrade(ekt101);
+                
+                const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
+                
+                // Check for the first subject
+                result1.textContent = determineResult(creditHourGrade1, passGrades);
+                
+                // Check for the second subject
+                result2.textContent = determineResult(creditHourGrade2, passGrades);
+                
+                // Check for the third subject
+                result3.textContent = determineResult(creditHourGrade3, passGrades);
+                
+                // Check for the fourth subject
+                result4.textContent = determineResult(creditHourGrade4, passGrades);
+                
+                // Check for the fifth subject
+                result5.textContent = determineResult(creditHourGrade5, passGrades);
+                
+                // Check for the sixth subject
+                result6.textContent = determineResult(creditHourGrade6, passGrades);
+                
+                // Additional check for course code
+                if (codeCourse === 'UR6523002') {
+                    document.getElementById('course').textContent = 'Course: Computer Engineering';
+                }
+                
+                // Function to validate and normalize grades
+                function validateGrade(grade) {
+                    return (grade && typeof grade === 'string') ? grade.toUpperCase() : '';
+                }
+                
+                // Function to determine pass/fail result
+                function determineResult(grade, passGrades) {
+                    return passGrades.includes(grade) ? 'Pass' : 'Fail';
+                }
 
 
         // Additional check for course code
