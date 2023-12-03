@@ -103,29 +103,53 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const fullName = urlParams.get('fullName') || 'N/A';
-            const course = urlParams.get('course') || 'N/A';
-            const codeCourse = urlParams.get('codeCourse') || 'N/A';
-            const year = urlParams.get('year') || 'N/A';
-            const semester = urlParams.get('semester') || 'N/A';
-            const ekt102 = urlParams.get('ekt102') || 'N/A';
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const fullName = urlParams.get('fullName') || 'N/A';
+        const course = urlParams.get('course') || 'N/A';
+        const codeCourse = urlParams.get('codeCourse') || 'N/A';
+        const year = urlParams.get('year') || 'N/A';
+        const semester = urlParams.get('semester') || 'N/A';
+        const ekt102 = urlParams.get('ekt102') || 'N/A';
 
-            // Update elements with URL parameter values
-            document.getElementById('fullName').textContent = `Name: ${fullName}`;
-            document.getElementById('course').textContent = `Course: ${course}`;
-            document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
-            document.getElementById('year').textContent = `Year: ${year}`;
-            document.getElementById('semester').textContent = `Semester: ${semester}`;
-            document.getElementById('ekt102').textContent = `${ekt102}`;
+        // Update elements with URL parameter values
+        document.getElementById('fullName').textContent = `Name: ${fullName}`;
+        document.getElementById('course').textContent = `Course: ${course}`;
+        document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
+        document.getElementById('year').textContent = `Year: ${year}`;
+        document.getElementById('semester').textContent = `Semester: ${semester}`;
+        document.getElementById('ekt102').textContent = `${ekt102}`;
 
-            if (codeCourse === 'UR6523002') {
-                document.getElementById('course').textContent = 'Course: Computer Engineering';
-            }
-        });
-    </script>
+        // Education Subjects
+        const subjectCode1 = document.getElementById('subjectCode1');
+        const subjectName1 = document.getElementById('subjectName1');
+        const creditHour1 = document.getElementById('creditHour1');
+        const result = document.getElementById('result');
+
+        // Update education subjects with specific values
+        subjectCode1.textContent = 'EC3';
+        subjectName1.textContent = 'Pendidikan Jasmani';
+        creditHour1.textContent = '3';
+
+        // Determine result based on credit hour
+        const creditHourGrade = ekt102.toUpperCase();
+
+        if (['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'].includes(creditHourGrade)) {
+            result.textContent = 'PASS';
+        } else if (['C-', 'D+', 'D', 'D-', 'F'].includes(creditHourGrade)) {
+            result.textContent = 'FAIL';
+        } else {
+            result.textContent = ''; // Set to null for other cases
+        }
+
+        // Additional check for course code
+        if (codeCourse === 'UR6523002') {
+            document.getElementById('course').textContent = 'Course: Computer Engineering';
+        }
+    });
+</script>
+
 </body>
 
 </html>
