@@ -88,31 +88,25 @@
             document.getElementById('ekt102').textContent = `${ekt102}`;
             document.getElementById('eqt101').textContent = `${eqt101}`;
 
-            // Update HTML elements for Subject 1
-            document.getElementById('subjectCode1').textContent = 'EKT102';
-            document.getElementById('subjectName1').textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
-            document.getElementById('creditHour1').textContent = '3';
-            document.getElementById('cgpa1').textContent = ekt102;
-            document.getElementById('result1').textContent = calculateCgpa(ekt102);
+                // Update HTML elements for Subject 1
+                    document.getElementById('subjectCode1').textContent = 'EKT102';
+                    document.getElementById('subjectName1').textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
+                    document.getElementById('creditHour1').textContent = '3';
+                    document.getElementById('cgpa1').textContent = ekt102;
+                    document.getElementById('result1').textContent = calculateCgpa(ekt102);
+                
+                    // Update HTML elements for Subject 2
+                    document.getElementById('subjectCode2').textContent = 'EKT102';
+                    document.getElementById('subjectName2').textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
+                    document.getElementById('creditHour2').textContent = '3';
+                    document.getElementById('cgpa2').textContent = eqt101;
+                    document.getElementById('result2').textContent = calculateCgpa(ekt102);
 
-            // Placeholder data for Subject 2 (EQT101)
-            const subjectCode2 = 'EQT101';
-            const subjectName2 = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
-            const creditHour2 = '3';
-            const result = calculateCgpa(eqt101); // Change this based on your condition
-            const valueCgpa2 = eqt101;
-
-            // Update HTML elements for Subject 2
-            document.getElementById('subjectCode2').textContent = subjectCode2;
-            document.getElementById('subjectName2').textContent = subjectName2;
-            document.getElementById('creditHour2').textContent = creditHour2;
-            document.getElementById('cgpa2').textContent = valueCgpa2.toFixed(2);
-            document.getElementById('result2').textContent = result2 === 'Pass' ? 'Pass' : 'Fail';
         });
 
         // Function to calculate CGPA based on result
-        function calculateCgpa(RESULT) {
-            switch (result) {
+        function calculateCgpa(*) {
+            switch (*) {
                 case 'A':
                     //valcgpa=4.00;
                     return 'PASS';
