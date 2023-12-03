@@ -41,12 +41,12 @@
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const fullName = urlParams.get('full_name') || 'N/A';
-        const codeCourse = urlParams.get('code_course') || 'N/A';
-        const year = urlParams.get('year') || 'N/A';
+        const fullName = urlParams.get('fullName') || 'N/A';
+        const codeCourse = urlParams.get('codeCourse') || 'N/A';
+        const year = urlParams.get('Year') || 'N/A';
 
-        document.getElementById('full_name').textContent = `Name: ${fullName}`;
-        document.getElementById('code_course').textContent = `Code Course: ${codeCourse}`;
+        document.getElementById('fullName').textContent = `Name: ${fullName}`;
+        document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
         document.getElementById('year').textContent = `Year: ${year}`;
     </script>
 </body>
