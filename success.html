@@ -225,12 +225,13 @@
         creditHour6.textContent = '4';
 
                 // Determine result based on credit hour
-                const creditHourGrade1 = validateGrade(uzw164);
-                const creditHourGrade2 = validateGrade(uuw130);
-                const creditHourGrade3 = validateGrade(ekt102);
-                const creditHourGrade4 = validateGrade(eqt101);
-                const creditHourGrade5 = validateGrade(ekt120);
-                const creditHourGrade6 = validateGrade(ekt101);
+                const creditHourGrade1 = uzw164.toUpperCase();
+                const creditHourGrade2 = uuw130.toUpperCase();
+                const creditHourGrade3 = ekt102.toUpperCase();
+                const creditHourGrade4 = eqt101.toUpperCase();
+                const creditHourGrade5 = ekt120.toUpperCase();
+                const creditHourGrade6 = ekt101.toUpperCase();
+
                 
                 const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
                 
