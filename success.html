@@ -160,113 +160,58 @@
         const ekt102 = urlParams.get('ekt102') || 'N/A';
         const eqt101 = urlParams.get('eqt101') || 'N/A';
 
-        // Update elements with URL parameter values
-        document.getElementById('fullName').textContent = `Name: ${fullName}`;
-        document.getElementById('matric').textContent = `No Matric: ${matric}`;
-        document.getElementById('course').textContent = `Course: ${course}`;
-        document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
-        document.getElementById('year').textContent = `Year: ${year}`;
-        document.getElementById('semester').textContent = `Semester: ${semester}`;
-        document.getElementById('ekt102').textContent = `${ekt102}`;
-        document.getElementById('eqt101').textContent = `${eqt101}`;
-        document.getElementById('ekt101').textContent = `${ekt101}`;
-        document.getElementById('ekt120').textContent = `${ekt120}`;
-        document.getElementById('uzw164').textContent = `${uzw164}`;
-        document.getElementById('uuw130').textContent = `${uuw130}`;
+        // Retrieve URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const fullName = urlParams.get('fullName') || 'N/A';
+            const matric = urlParams.get('matric') || 'N/A';
+            const course = urlParams.get('course') || 'N/A';
+            const codeCourse = urlParams.get('codeCourse') || 'N/A';
+            const year = urlParams.get('year') || 'N/A';
+            const semester = urlParams.get('semester') || 'N/A';
 
-        // Education Subjects
-        const subjectCode1 = document.getElementById('subjectCode1');
-        const subjectName1 = document.getElementById('subjectName1');
-        const creditHour1 = document.getElementById('creditHour1');
+            // Update elements with URL parameter values
+            document.getElementById('fullName').textContent = `Name: ${fullName}`;
+            document.getElementById('matric').textContent = `No Matric: ${matric}`;
+            document.getElementById('course').textContent = `Course: ${course}`;
+            document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
+            document.getElementById('year').textContent = `Year: ${year}`;
+            document.getElementById('semester').textContent = `Semester: ${semester}`;
 
-        const subjectCode2 = document.getElementById('subjectCode2');
-        const subjectName2 = document.getElementById('subjectName2');
-        const creditHour2 = document.getElementById('creditHour2');
+            // Education Subjects
+            const subjects = [
+                { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
+                { code: 'UUW130', name: 'FALSAFAH DAN ISU SEMASA', creditHour: 2 },
+                { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
+                { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
+                { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
+                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 }
+            ];
 
-        const subjectCode3 = document.getElementById('subjectCode3');
-        const subjectName3 = document.getElementById('subjectName3');
-        const creditHour3 = document.getElementById('creditHour3');
+            subjects.forEach((subject, index) => {
+                const subjectCode = document.getElementById(`subjectCode${index + 1}`);
+                const subjectName = document.getElementById(`subjectName${index + 1}`);
+                const creditHour = document.getElementById(`creditHour${index + 1}`);
+                const result = document.getElementById(`result${index + 1}`);
 
-        const subjectCode4 = document.getElementById('subjectCode4');
-        const subjectName4 = document.getElementById('subjectName4');
-        const creditHour4 = document.getElementById('creditHour4');
-
-        const subjectCode5 = document.getElementById('subjectCode5');
-        const subjectName5 = document.getElementById('subjectName5');
-        const creditHour5 = document.getElementById('creditHour5');
-
-        const subjectCode6 = document.getElementById('subjectCode6');
-        const subjectName6 = document.getElementById('subjectName6');
-        const creditHour6 = document.getElementById('creditHour6');
-
-        // Update education subjects with specific values
-        subjectCode1.textContent = 'UZW164';
-        subjectName1.textContent = 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I [THE MALAYSIAN RED CRESENT CERTIFICATION COURSE I]';
-        creditHour1.textContent = '1';
-
-        subjectCode2.textContent = 'UUW130';
-        subjectName2.textContent = 'FALSAFAH DAN ISU SEMASA [PHILOSOPHY AND CURRENT ISSUES]';
-        creditHour2.textContent = '2';
-        
-        subjectCode3.textContent = 'EKT102';
-        subjectName3.textContent = 'ASAS KEJURUTERAAN ELEKTRONIK [BASIC ELECTRONIC ENGINEERING]';
-        creditHour3.textContent = '3';
-
-        subjectCode4.textContent = 'EQT101';
-        subjectName4.textContent = 'MATEMATIK KEJURUTERAAN I [ENGINEERING MATHEMATICS I]';
-        creditHour4.textContent = '3';
-
-        subjectCode5.textContent = 'EKT120';
-        subjectName5.textContent = 'PENGATURCARAAN KOMPUTER [COMPUTER PROGRAMMING]';
-        creditHour5.textContent = '4';
-
-        subjectCode6.textContent = 'EKT101';
-        subjectName6.textContent = 'TEORI LITAR ELEKTRIK [ELECTRIC CIRCUIT THEORY]';
-        creditHour6.textContent = '4';
+                subjectCode.textContent = subject.code;
+                subjectName.textContent = subject.name;
+                creditHour.textContent = subject.creditHour;
 
                 // Determine result based on credit hour
-                const creditHourGrade1 = uzw164.toUpperCase();
-                const creditHourGrade2 = uuw130.toUpperCase();
-                const creditHourGrade3 = ekt102.toUpperCase();
-                const creditHourGrade4 = eqt101.toUpperCase();
-                const creditHourGrade5 = ekt120.toUpperCase();
-                const creditHourGrade6 = ekt101.toUpperCase();
-
+                const creditHourGrade = urlParams.get(subject.code) || 'N/A';
                 const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
-                
-                // Check for the first subject
-                result1.textContent = determineResult(creditHourGrade1, passGrades);
-                
-                // Check for the second subject
-                result2.textContent = determineResult(creditHourGrade2, passGrades);
-                
-                // Check for the third subject
-                result3.textContent = determineResult(creditHourGrade3, passGrades);
-                
-                // Check for the fourth subject
-                result4.textContent = determineResult(creditHourGrade4, passGrades);
-                
-                // Check for the fifth subject
-                result5.textContent = determineResult(creditHourGrade5, passGrades);
-                
-                // Check for the sixth subject
-                result6.textContent = determineResult(creditHourGrade6, passGrades);
-                
-                // Additional check for course code
-                if (codeCourse === 'UR6523002') {
-                    document.getElementById('course').textContent = 'Course: Computer Engineering';
-                }
-                
-                // Function to determine pass/fail result
-                function determineResult(grade, passGrades) {
-                    return passGrades.includes(grade) ? 'Pass' : 'Fail';
-                }
+                result.textContent = determineResult(creditHourGrade.toUpperCase(), passGrades);
+            });
 
+            // Additional check for course code
+            if (codeCourse === 'UR6523002') {
+                document.getElementById('course').textContent = 'Course: Computer Engineering';
+            }
 
-        // Additional check for course code
-        if (codeCourse === 'UR6523002') {
-            document.getElementById('course').textContent = 'Course: Computer Engineering';
-        }
+            // Function to determine pass/fail result
+            function determineResult(grade, passGrades) {
+                return passGrades.includes(grade) ? 'Pass' : 'Fail';
+            }
     });
 </script>
 
