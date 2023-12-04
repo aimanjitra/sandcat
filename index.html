@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Background</title>
+    <title>Sistem Log in UniMAP</title>
     <style>
         body,
         html {
@@ -141,14 +141,19 @@
                 if (data.data && data.data.length > 0) {
                     // Extract relevant information from jsonData
                     const fullName = data.data[0]?.full_name;
+                    const matric = data.data[0]?.matrik;
                     const codeCourse = data.data[0]?.code_course;
                     const year = data.data[0]?.tahun;
                     const semester = data.data[0]?.sem;
                     const ekt102 = data.data[0]?.EKT102;
                     const eqt101 = data.data[0]?.EQT101;
+                    const uuw130 = data.data[0]?.UUW130;
+                    const uzw164 = data.data[0]?.UZW164;
+                    const ekt120 = data.data[0]?.EKT120;
+                    const ekt101 = data.data[0]?.EKT101;
 
                     // Redirect to success.html with additional parameters
-                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}`;
+                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}`;
                 } else {
                     // Handle the case where data.data is undefined or empty
                     console.error('No data found for the given credentials.');
