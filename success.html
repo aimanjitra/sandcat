@@ -258,11 +258,6 @@
                     document.getElementById('course').textContent = 'Course: Computer Engineering';
                 }
                 
-                // Function to validate and normalize grades
-                function validateGrade(grade) {
-                    return (grade && typeof grade === 'string') ? grade.toUpperCase() : '';
-                }
-                
                 // Function to determine pass/fail result
                 function determineResult(grade, passGrades) {
                     return passGrades.includes(grade) ? 'Pass' : 'Fail';
