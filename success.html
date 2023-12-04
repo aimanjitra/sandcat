@@ -189,18 +189,35 @@
             subjects.forEach((subject, index) => {
                 const subjectCode = document.getElementById(`subjectCode${index + 1}`);
                 const subjectName = document.getElementById(`subjectName${index + 1}`);
-                const creditHour = document.getElementById(`creditHour${index + 1}`);
-                const result = document.getElementById(`result${index + 1}`);
 
                 subjectCode.textContent = subject.code;
                 subjectName.textContent = subject.name;
-                creditHour.textContent = subject.creditHour;
-
-                // Determine result based on credit hour
-                const creditHourGrade = urlParams.get(subject.code) || 'N/A';
-                const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
-                result.textContent = determineResult(creditHourGrade.toUpperCase(), passGrades);
             });
+
+            const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
+                
+                // Check for the first subject
+                result1.textContent = determineResult(uzw164, passGrades);
+                
+                // Check for the second subject
+                result2.textContent = determineResult(uuw130, passGrades);
+                
+                // Check for the third subject
+                result3.textContent = determineResult(ekt102, passGrades);
+                
+                // Check for the fourth subject
+                result4.textContent = determineResult(eqt101, passGrades);
+                
+                // Check for the fifth subject
+                result5.textContent = determineResult(ekt120, passGrades);
+                
+                // Check for the sixth subject
+                result6.textContent = determineResult(ekt101, passGrades);
+                
+                // Function to determine pass/fail result
+                function determineResult(grade, passGrades) {
+                    return passGrades.includes(grade) ? 'Pass' : 'Fail';
+                }
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
