@@ -139,6 +139,14 @@
                 <td id="ekt101">[EKT101]</td>
                 <td id="result6">[Result]</td>
             </tr>
+
+            <tr>
+                    <td </td>
+                    <td </td>
+                    <td id="total">[Total Hour]</td>
+                    <td </td>
+                    <td </td>
+            </tr>
             
         </table>
     </div>
@@ -176,6 +184,8 @@
             document.getElementById('uzw164').textContent = getLetterGrade(uzw164);
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 
+            let totalCreditHours = 0;
+
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
@@ -199,7 +209,13 @@
                 subjectCode.textContent = subject.code;
                 subjectName.textContent = subject.name;
                 creditHour.textContent = subject.creditHour;
+
+                // Add credit hours to the total
+                totalCreditHours += subject.creditHour;
             });
+
+            // Display the total credit hours
+             document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
 
             // Function to convert numerical grade to letter grade
                 function getLetterGrade(grade) {
