@@ -189,9 +189,11 @@
             subjects.forEach((subject, index) => {
                 const subjectCode = document.getElementById(`subjectCode${index + 1}`);
                 const subjectName = document.getElementById(`subjectName${index + 1}`);
+                const creditHour = document.getElementById(`creditHour${index + 1}`);
 
                 subjectCode.textContent = subject.code;
                 subjectName.textContent = subject.name;
+                creditHour.textContent = subject.creditHour;
             });
 
             // Determine result based on credit hour
