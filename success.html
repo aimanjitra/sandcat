@@ -176,7 +176,11 @@
             document.getElementById('uzw164').textContent = uzw164.includes('+') ? `${uzw164}+` : uzw164;
             document.getElementById('uuw130').textContent = uuw130.includes('+') ? `${uuw130}+` : uuw130;
 
-
+            // Additional check for course code
+            if (codeCourse === 'UR6523002') {
+                document.getElementById('course').textContent = 'Course: Computer Engineering';
+            }
+        
             // Education Subjects
             const subjects = [
                 { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
@@ -229,12 +233,7 @@
                                 function determineResult(grade, passGrades) {
                                     return passGrades.includes(grade) ? 'Pass' : 'Fail';
                                 }
-
-            // Additional check for course code
-            if (codeCourse === 'UR6523002') {
-                document.getElementById('course').textContent = 'Course: Computer Engineering';
-            }
-        
+      
     });
 </script>
 
