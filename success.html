@@ -204,8 +204,6 @@
             const creditHourGrade5 = ekt120.toUpperCase();
             const creditHourGrade6 = ekt101.toUpperCase();
             
-            const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C'];
-            
             // Check for the first subject, explicitly handling "B+"
             result1.textContent = determineResult(creditHourGrade1, passGrades);
             
@@ -223,11 +221,21 @@
             
             // Check for the sixth subject, explicitly handling "B+"
             result6.textContent = determineResult(creditHourGrade6, passGrades);
-                
-                function determineResult(grade, passGrades) {
-                const hasPlusSign = grade.includes('+');
-                return passGrades.includes(grade) ? `Pass${hasPlusSign ? '+' : ''}` : 'Fail';
-            }
+
+                                const passGradesWithoutPlus = ['A', 'A-', 'B', 'B-', 'C', 'C-']; // Grades without the "+"
+                                const passGradesWithPlus = ['B+', 'C+']; // Grades with the "+"
+        
+                                // Function to determine pass/fail result
+                                function determineResult(grade, passGradesWithoutPlus, passGradesWithPlus) {
+                                    const hasPlusSign = grade.includes('+');
+                                    const gradeWithoutPlus = grade.replace('+', '');
+                            
+                                    if (passGradesWithoutPlus.includes(gradeWithoutPlus) || (hasPlusSign && passGradesWithPlus.includes(gradeWithoutPlus))) {
+                                        return 'Pass';
+                                    } else {
+                                        return 'Fail';
+                                    }
+                                }
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
