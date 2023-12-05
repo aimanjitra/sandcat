@@ -224,10 +224,10 @@
             // Check for the sixth subject, explicitly handling "B+"
             result6.textContent = determineResult(creditHourGrade6, passGrades);
                 
-                // Function to determine pass/fail result
                 function determineResult(grade, passGrades) {
-                    return passGrades.includes(grade) ? 'Pass' : 'Fail';
-                }
+                const hasPlusSign = grade.includes('+');
+                return passGrades.includes(grade) ? `Pass${hasPlusSign ? '+' : ''}` : 'Fail';
+            }
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
