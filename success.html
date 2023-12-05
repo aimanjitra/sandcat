@@ -169,12 +169,13 @@
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
 
-            document.getElementById('ekt102').textContent = ekt102.includes('+') ? `${ekt102}+` : ekt102;
-            document.getElementById('eqt101').textContent = eqt101.includes('+') ? `${eqt101}+` : eqt101;
-            document.getElementById('ekt101').textContent = ekt101.includes('+') ? `${ekt101}+` : ekt101;
-            document.getElementById('ekt120').textContent = ekt120.includes('+') ? `${ekt120}+` : ekt120;
-            document.getElementById('uzw164').textContent = uzw164.includes('+') ? `${uzw164}+` : uzw164;
+            document.getElementById('ekt102').textContent = `${ekt102}`;
+            document.getElementById('eqt101').textContent = `${eqt101}`;
+            document.getElementById('ekt101').textContent = `${ekt101}`;
+            document.getElementById('ekt120').textContent = `${ekt120}`;
+            document.getElementById('uzw164').textContent = `${uzw164}`;
             document.getElementById('uuw130').textContent = uuw130.includes('+') ? `${uuw130}+` : uuw130;
+
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
