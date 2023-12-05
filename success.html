@@ -233,8 +233,8 @@
             result6.textContent = determineResult(creditHourGrade6, passGrades); 
 
                                 // Function to determine pass/fail result
-                                function determineResult(grade, passGrades) {
-                                    return passGrades.includes(grade) ? 'Pass' : 'Fail';
+                                function determineResult(getLetterGrade(grade), passGrades) {
+                                    return passGrades.includes(getLetterGrade(grade)) ? 'Pass' : 'Fail';
                                 }
       
     });
