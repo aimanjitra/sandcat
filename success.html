@@ -169,12 +169,13 @@
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
 
-            document.getElementById('ekt102').textContent = `${ekt102}`;
-            document.getElementById('eqt101').textContent = `${eqt101}`;
-            document.getElementById('ekt101').textContent = `${ekt101}`;
-            document.getElementById('ekt120').textContent = `${ekt120}`;
-            document.getElementById('uzw164').textContent = `${uzw164}`;
-            document.getElementById('uuw130').textContent = `${uuw130}`;
+            document.getElementById('ekt102').textContent = ekt102.includes('+') ? `${ekt102}+` : ekt102;
+            document.getElementById('eqt101').textContent = eqt101.includes('+') ? `${eqt101}+` : eqt101;
+            document.getElementById('ekt101').textContent = ekt101.includes('+') ? `${ekt101}+` : ekt101;
+            document.getElementById('ekt120').textContent = ekt120.includes('+') ? `${ekt120}+` : ekt120;
+            document.getElementById('uzw164').textContent = uzw164.includes('+') ? `${uzw164}+` : uzw164;
+            document.getElementById('uuw130').textContent = uuw130.includes('+') ? `${uuw130}+` : uuw130;
+
 
             // Education Subjects
             const subjects = [
@@ -222,19 +223,11 @@
             // Check for the sixth subject, explicitly handling "B+"
             result6.textContent = determineResult(creditHourGrade6, passGrades);
 
-                                const passGradesWithoutPlus = ['A', 'A-', 'B', 'B-', 'C', 'C-']; // Grades without the "+"
-                                const passGradesWithPlus = ['B+', 'C+']; // Grades with the "+"
-        
+                                const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-']; 
+
                                 // Function to determine pass/fail result
-                                function determineResult(grade, passGradesWithoutPlus, passGradesWithPlus) {
-                                    const hasPlusSign = grade.includes('+');
-                                    const gradeWithoutPlus = grade.replace('+', '');
-                            
-                                    if (passGradesWithoutPlus.includes(gradeWithoutPlus) || (hasPlusSign && passGradesWithPlus.includes(gradeWithoutPlus))) {
-                                        return 'Pass';
-                                    } else {
-                                        return 'Fail';
-                                    }
+                                function determineResult(grade, passGrades) {
+                                    return passGrades.includes(grade) ? 'Pass' : 'Fail';
                                 }
 
             // Additional check for course code
