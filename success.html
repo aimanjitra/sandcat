@@ -149,6 +149,12 @@
             </tr>
             
         </table>
+
+        <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000;">
+            <h3>Reminder</h3>
+            <ul id="failSubjects"></ul>
+        </div>
+        
     </div>
 
     <script>
@@ -185,6 +191,7 @@
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 
             let totalCreditHours = 0;
+            let failSubjects = []; // Array to store failed subjects
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
@@ -246,6 +253,48 @@
                 result4.textContent = determineResult(eqt101);
                 result5.textContent = determineResult(ekt120);
                 result6.textContent = determineResult(ekt101);
+
+                // Check for the first subjects
+                    if (determineResult(uzw164) === 'Fail') {
+                        failSubjects.push('KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I');
+                    }
+                    if (determineResult(uuw130) === 'Fail') {
+                        failSubjects.push('FALSAFAH DAN ISU SEMASA');
+                    }
+                    if (determineResult(ekt102) === 'Fail') {
+                        failSubjects.push('ASAS KEJURUTERAAN ELEKTRONIK');
+                    }
+                    if (determineResult(eqt101) === 'Fail') {
+                        failSubjects.push('MATEMATIK KEJURUTERAAN I');
+                    }
+                    if (determineResult(ekt120) === 'Fail') {
+                        failSubjects.push('PENGATURCARAAN KOMPUTER');
+                    }
+                    if (determineResult(ekt101) === 'Fail') {
+                        failSubjects.push('TEORI LITAR ELEKTRIK');
+                    }
+                
+                    // Display the fail subjects and reminder
+                    const failSubjectsList = document.getElementById('failSubjects');
+                    const reminderDiv = document.getElementById('reminder');
+                
+                    if (failSubjects.length > 0) {
+                        // Display the fail subjects
+                        failSubjectsList.innerHTML = failSubjects.map(subject => `<li>${subject}</li>`).join('');
+                
+                        // Display the reminder message
+                        const reminderMessage = `You should retake the ${failSubjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${failSubjects.join(', ')}`;
+                        const reminderParagraph = document.createElement('p');
+                        reminderParagraph.textContent = reminderMessage;
+                
+                        // Append the reminder message to the reminderDiv
+                        reminderDiv.appendChild(reminderParagraph);
+                
+                        // Show the reminder
+                        reminderDiv.style.display = 'block';
+                    } else {
+                        reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
+                    }
       
     });
         
