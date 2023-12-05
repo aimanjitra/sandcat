@@ -201,14 +201,6 @@
                 creditHour.textContent = subject.creditHour;
             });
 
-            // Determine result based on credit hour
-            const creditHourGrade1 = getLetterGrade(uzw164);
-            const creditHourGrade2 = getLetterGrade(uuw130);
-            const creditHourGrade3 = getLetterGrade(ekt102);
-            const creditHourGrade4 = getLetterGrade(eqt101);
-            const creditHourGrade5 = getLetterGrade(ekt120);
-            const creditHourGrade6 = getLetterGrade(ekt101);
-
             // Function to convert numerical grade to letter grade
                 function getLetterGrade(grade) {
                     if (grade >= 3.75) return 'A-';
@@ -232,12 +224,12 @@
 
             
                 // Check for the first subjects
-                result1.textContent = determineResult(creditHourGrade1);
-                result2.textContent = determineResult(creditHourGrade2);
-                result3.textContent = determineResult(creditHourGrade3);
-                result4.textContent = determineResult(creditHourGrade4);
-                result5.textContent = determineResult(creditHourGrade5);
-                result6.textContent = determineResult(creditHourGrade6);
+                result1.textContent = determineResult(ekt102);
+                result2.textContent = determineResult(eqt101);
+                result3.textContent = determineResult(ekt101);
+                result4.textContent = determineResult(ekt120);
+                result5.textContent = determineResult(uzw164);
+                result6.textContent = determineResult(uuw130);
       
     });
         
