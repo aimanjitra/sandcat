@@ -169,14 +169,13 @@
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
 
-            document.getElementById('ekt102').textContent = `${ekt102}`;
-            document.getElementById('eqt101').textContent = `${eqt101}`;
-            document.getElementById('ekt101').textContent = `${ekt101}`;
-            document.getElementById('ekt120').textContent = `${ekt120}`;
-            document.getElementById('uzw164').textContent = `${uzw164}`;
-            document.getElementById('uuw130').textContent = uuw130.includes('+') ? `${uuw130}+` : uuw130;
+            document.getElementById('ekt102').textContent = getLetterGrade(ekt102);
+            document.getElementById('eqt101').textContent = getLetterGrade(eqt101);
+            document.getElementById('ekt101').textContent = getLetterGrade(ekt101);
+            document.getElementById('ekt120').textContent = getLetterGrade(ekt120);
+            document.getElementById('uzw164').textContent = getLetterGrade(uzw164);
+            document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 
-            const passGrades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-'];
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
@@ -203,29 +202,34 @@
             });
 
             // Determine result based on credit hour
-            const creditHourGrade1 = uzw164.toUpperCase();
-            const creditHourGrade2 = uuw130.toUpperCase();
-            const creditHourGrade3 = ekt102.toUpperCase();
-            const creditHourGrade4 = eqt101.toUpperCase();
-            const creditHourGrade5 = ekt120.toUpperCase();
-            const creditHourGrade6 = ekt101.toUpperCase();
+            const creditHourGrade1 = getLetterGrade(uzw164);
+            const creditHourGrade2 = getLetterGrade(uuw130);
+            const creditHourGrade3 = getLetterGrade(ekt102);
+            const creditHourGrade4 = getLetterGrade(eqt101);
+            const creditHourGrade5 = getLetterGrade(ekt120);
+            const creditHourGrade6 = getLetterGrade(ekt101);
+
+            // Function to convert numerical grade to letter grade
+                function getLetterGrade(grade) {
+                    if (grade >= 3.75) return 'A-';
+                    else if (grade >= 3.5) return 'B+';
+                    else if (grade >= 3) return 'B';
+                    else if (grade >= 2.75) return 'B-';
+                    else if (grade >= 2.5) return 'C+';
+                    else if (grade >= 2) return 'C';
+                    else if (grade >= 1.75) return 'C-';
+                    else if (grade >= 1.5) return 'D+';
+                    else if (grade >= 1) return 'D';
+                    else if (grade >= 0.75) return 'D-';
+                    else return 'F';
+                }
             
-            // Check for the first subject, explicitly handling "B+"
+            // Check for the first subjects
             result1.textContent = determineResult(creditHourGrade1, passGrades);
-            
-            // Check for the second subject, explicitly handling "B+"
             result2.textContent = determineResult(creditHourGrade2, passGrades);
-            
-            // Check for the third subject, explicitly handling "B+"
             result3.textContent = determineResult(creditHourGrade3, passGrades);
-            
-            // Check for the fourth subject, explicitly handling "B+"
             result4.textContent = determineResult(creditHourGrade4, passGrades);
-            
-            // Check for the fifth subject, explicitly handling "B+"
             result5.textContent = determineResult(creditHourGrade5, passGrades);
-            
-            // Check for the sixth subject, explicitly handling "B+"
             result6.textContent = determineResult(creditHourGrade6, passGrades); 
 
                                 // Function to determine pass/fail result
@@ -234,6 +238,7 @@
                                 }
       
     });
+        
 </script>
 
 </body>
