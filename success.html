@@ -193,6 +193,7 @@
 
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
+            let totalSubjects = subjects.length;
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
@@ -220,7 +221,6 @@
 
                 // Add credit hours to the total
                 totalCreditHours += subject.creditHour;
-                const totalSubjects = subjects.length;
             });
         
             // Display the total credit hours
