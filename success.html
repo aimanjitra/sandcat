@@ -151,7 +151,7 @@
             
         </table>
 
-        <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000;">
+        <div id="reminder" style="margin-top: 10px; padding: 10px; background-color: #ffcccc; color: #ff0000;">
             <h3>Reminder</h3>
             <ul id="failSubjects"></ul>
         </div>
@@ -192,7 +192,6 @@
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 
             let totalCreditHours = 0;
-            let totalSubjects = 0;
             let failSubjects = []; // Array to store failed subjects
 
             // Additional check for course code
@@ -221,7 +220,7 @@
 
                 // Add credit hours to the total
                 totalCreditHours += subject.creditHour;
-                totalSubjects = index + 1;
+                totalSubjects += 1;
             });
         
             // Display the total credit hours
@@ -243,7 +242,7 @@
                 }
 
                 // Calculate CGPA
-                const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101);
+                const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101)/totalSubjects;
 
                 // Display CGPA
                 document.getElementById('average').textContent = `CGPA: ${totalCGPA.toFixed(2)}`;
