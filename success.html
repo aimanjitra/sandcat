@@ -193,7 +193,6 @@
 
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
-            let totalSubjects = subjects.length;
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
@@ -242,7 +241,7 @@
                 }
 
                 // Calculate CGPA
-                const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101)/totalSubjects;
+                const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101)/6;
 
                 // Display CGPA
                 document.getElementById('average').textContent = `CGPA: ${totalCGPA.toFixed(2)}`;
