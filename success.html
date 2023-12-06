@@ -145,7 +145,7 @@
                     <td </td>
                     <td </td>
                     <td id="total">[Total Hour]</td>
-                    <td </td>
+                    <td id="average">[Average]</td>
                     <td </td>
             </tr>
             
@@ -192,6 +192,7 @@
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 
             let totalCreditHours = 0;
+            let totalSubjects = 0;
             let failSubjects = []; // Array to store failed subjects
 
             // Additional check for course code
@@ -220,8 +221,15 @@
 
                 // Add credit hours to the total
                 totalCreditHours += subject.creditHour;
+                totalSubjects += 1;
             });
 
+            // Calculate CGPA
+            const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101) / totalSubjects;
+
+            // Display CGPA
+            document.getElementById('average').textContent = `CGPA: ${totalCGPA.toFixed(2)}`;
+        
             // Display the total credit hours
              document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
 
