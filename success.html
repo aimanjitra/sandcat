@@ -145,7 +145,7 @@
                     <td </td>
                     <td </td>
                     <td id="total">[Total Hour]</td>
-                    <td id="average">[Average]</td>
+                    <td id="CGPA">[Average CGPA]</td>
                     <td </td>
             </tr>
             
@@ -169,6 +169,7 @@
             const codeCourse = urlParams.get('codeCourse') || 'N/A';
             const year = urlParams.get('year') || 'N/A';
             const semester = urlParams.get('semester') || 'N/A';
+            const CGPA = urlParams.get('CGPA') || 'N/A';
             const ekt101 = urlParams.get('ekt101') || 'N/A';
             const ekt120 = urlParams.get('ekt120') || 'N/A';
             const uzw164 = urlParams.get('uzw164') || 'N/A';
@@ -185,6 +186,7 @@
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
+            document.getElementById('CGPA').textContent = `CGPA: ${CGPA}`;
 
             document.getElementById('ekt102').textContent = getLetterGrade(ekt102);
             document.getElementById('eqt101').textContent = getLetterGrade(eqt101);
@@ -242,12 +244,6 @@
                     else if (grade >= 0.75) return 'D-';
                     else return 'F';
                     }
-
-                // Calculate CGPA
-                const CGPA = totalCGPA/6;
-
-                // Display CGPA
-                document.getElementById('average').textContent = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101) / 6;
 
                // Function to determine pass/fail result
                 function determineResult(grade) {
