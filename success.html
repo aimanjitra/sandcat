@@ -223,12 +223,6 @@
                 totalCreditHours += subject.creditHour;
                 totalSubjects += 1;
             });
-
-            // Calculate CGPA
-            const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101) / totalSubjects;
-
-            // Display CGPA
-            document.getElementById('average').textContent = `CGPA: ${totalCGPA.toFixed(2)}`;
         
             // Display the total credit hours
              document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
@@ -247,6 +241,12 @@
                     else if (grade >= 0.75) return 'D-';
                     else return 'F';
                 }
+
+                // Calculate CGPA
+                const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101) / totalSubjects;
+
+                // Display CGPA
+                document.getElementById('average').textContent = `CGPA: ${totalCGPA.toFixed(2)}`;
 
                // Function to determine pass/fail result
                 function determineResult(grade) {
