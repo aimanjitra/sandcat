@@ -185,7 +185,7 @@
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
-            document.getElementById('CGPA').textContent = `CGPA: ${CGPA}`;
+            document.getElementById('CGPA').textContent = `CGPA: ${parseFloat(CGPA).toFixed(2)}`;
 
             document.getElementById('ekt102').textContent = getLetterGrade(ekt102);
             document.getElementById('eqt101').textContent = getLetterGrade(eqt101);
