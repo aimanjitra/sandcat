@@ -225,27 +225,54 @@
             // Display the total credit hours
              document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
 
-            // Function to convert numerical grade to letter grade
-                function getLetterGrade(grade) {
-                    if (grade >= 4.00) return 'A';
-                    else if (grade >= 3.75) return 'A-';
-                    else if (grade >= 3.5) return 'B+';
-                    else if (grade >= 3) return 'B';
-                    else if (grade >= 2.75) return 'B-';
-                    else if (grade >= 2.5) return 'C+';
-                    else if (grade >= 2) return 'C';
-                    else if (grade >= 1.75) return 'C-';
-                    else if (grade >= 1.5) return 'D+';
-                    else if (grade >= 1) return 'D';
-                    else if (grade >= 0.75) return 'D-';
-                    else return 'F';
-                }
+                   // Initialize TotalCGPA
+                    let totalCGPA = 0;
+                    
+                    // Function to convert numerical grade to letter grade
+                    function getLetterGrade(grade) {
+                        if (grade >= 4.00) {
+                            totalCGPA += 4;
+                            return 'A';
+                        } else if (grade >= 3.75) {
+                            totalCGPA += 3.75;
+                            return 'A-';
+                        } else if (grade >= 3.5) {
+                            totalCGPA += 3.5;
+                            return 'B+';
+                        } else if (grade >= 3) {
+                            totalCGPA += 3;
+                            return 'B';
+                        } else if (grade >= 2.75) {
+                            totalCGPA += 2.75;
+                            return 'B-';
+                        } else if (grade >= 2.5) {
+                            totalCGPA += 2.5;
+                            return 'C+';
+                        } else if (grade >= 2) {
+                            totalCGPA += 2;
+                            return 'C';
+                        } else if (grade >= 1.75) {
+                            totalCGPA += 1.75;
+                            return 'C-';
+                        } else if (grade >= 1.5) {
+                            totalCGPA += 1.5;
+                            return 'D+';
+                        } else if (grade >= 1) {
+                            totalCGPA += 1;
+                            return 'D';
+                        } else if (grade >= 0.75) {
+                            totalCGPA += 0.75;
+                            return 'D-';
+                        } else {
+                            return 'F';
+                        }
+                    }
 
                 // Calculate CGPA
-                const totalCGPA = (uzw164 + uuw130 + ekt102 + eqt101 + ekt120 + ekt101)/6;
+                const CGPA = totalCGPA/6;
 
                 // Display CGPA
-                document.getElementById('average').textContent = `CGPA: ${totalCGPA.toFixed(2)}`;
+                document.getElementById('average').textContent = `CGPA: ${CGPA.toFixed(2)}`;
 
                // Function to determine pass/fail result
                 function determineResult(grade) {
