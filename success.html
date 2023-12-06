@@ -227,7 +227,8 @@
 
             // Function to convert numerical grade to letter grade
                 function getLetterGrade(grade) {
-                    if (grade >= 3.75) return 'A-';
+                    if (grade >= 4.00) return 'A';
+                    else if (grade >= 3.75) return 'A-';
                     else if (grade >= 3.5) return 'B+';
                     else if (grade >= 3) return 'B';
                     else if (grade >= 2.75) return 'B-';
