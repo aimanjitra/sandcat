@@ -15,14 +15,14 @@
         }
 
         .container {
-            height: 100vh;
-            background: linear-gradient(to bottom, #001b3d 50%, white 50%);
-            display: flex;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-            color: white;
-            overflow-y: auto;
-        }
+                height: 100vh;
+                background: linear-gradient(to bottom, #001b3d 50%, white 50%);
+                display: flex;
+                flex-direction: column;
+                font-family: Arial, sans-serif;
+                color: white;
+                overflow-y: auto; /* Enable vertical scrolling */
+           }
 
         .biodata {
             padding: 20px;
@@ -44,9 +44,9 @@
             margin-top: 0px;
             margin-left: 10;
             margin-right: auto;
-            background-color: rgb(220, 212, 212);
-            color: black;
-            padding: 10px;
+            background-color: rgb(220, 212, 212); /* Set background color to black */
+            color: black; /* Set text color to white */
+            padding: 10px; /* Add padding for better visibility */
         }
 
         table {
@@ -57,21 +57,20 @@
             margin-right: auto;
         }
 
-        th,
-        td {
-            border: 1px solid black;
+        th, td {
+            border: 1px solid black; /* Set border color to black */
             padding: 8px;
             text-align: left;
         }
 
         th {
-            background-color: white;
-            color: black;
+            background-color: white; /* Set background color to dark blue */
+            color: black; /* Set text color to white for headers */
         }
 
         td {
-            background-color: white;
-            color: black;
+            background-color: white; /* Set background color to white for cells */
+            color: black; /* Set text color to black for cells */
         }
     </style>
 </head>
@@ -87,19 +86,10 @@
             <h2 id="year">Year: [Year]</h2>
             <h2 id="semester">Semester: [Semester]</h2>
         </div>
-
-        <!-- Add Semester Dropdown -->
-        <div style="margin-top: 20px;">
-            <label for="semesterDropdown">Select Semester:</label>
-            <select id="semesterDropdown" onchange="changeSemester()">
-                <option value="1" selected>Semester 1</option>
-                <option value="2">Semester 2</option>
-                <option value="3">Semester 3</option>
-                <!-- Add more semesters as needed -->
-            </select>
-        </div>
-
-        <table id="semesterTable">
+        
+        <h3>Semester 1</h3>
+        
+        <table>
             <tr>
                 <th>Code Subject</th>
                 <th>Name of Subject</th>
@@ -108,7 +98,6 @@
                 <th>Result (Pass/Fail)</th>
             </tr>
 
-            <!-- Semester 1 Subject Rows -->
             <tr>
                 <td id="subjectCode1">[Subject Code]</td>
                 <td id="subjectName1">[Subject Name]</td>
@@ -117,15 +106,54 @@
                 <td id="result1">[Result]</td>
             </tr>
 
-            <!-- Add more rows for Semester 1 as needed -->
+            <tr>
+                <td id="subjectCode2">[Subject Code]</td>
+                <td id="subjectName2">[Subject Name]</td>
+                <td id="creditHour2">[Credit Hour]</td>
+                <td id="uuw130">[UUW130]</td>
+                <td id="result2">[Result]</td>
+            </tr>
 
             <tr>
-                <td></td>
-                <td></td>
-                <td id="total">[Total Hour]</td>
-                <td id="GPA">[Average GPA]</td>
-                <td></td>
+                <td id="subjectCode3">[Subject Code]</td>
+                <td id="subjectName3">[Subject Name]</td>
+                <td id="creditHour3">[Credit Hour]</td>
+                <td id="ekt102">[EKT102]</td>
+                <td id="result3">[Result]</td>
             </tr>
+
+            <tr>
+                <td id="subjectCode4">[Subject Code]</td>
+                <td id="subjectName4">[Subject Name]</td>
+                <td id="creditHour4">[Credit Hour]</td>
+                <td id="eqt101">[EQT101]</td>
+                <td id="result4">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode5">[Subject Code]</td>
+                <td id="subjectName5">[Subject Name]</td>
+                <td id="creditHour5">[Credit Hour]</td>
+                <td id="ekt120">[EKT120]</td>
+                <td id="result5">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode6">[Subject Code]</td>
+                <td id="subjectName6">[Subject Name]</td>
+                <td id="creditHour6">[Credit Hour]</td>
+                <td id="ekt101">[EKT101]</td>
+                <td id="result6">[Result]</td>
+            </tr>
+
+            <tr>
+                    <td </td>
+                    <td </td>
+                    <td id="total">[Total Hour]</td>
+                    <td id="GPA">[Average GPA]</td>
+                    <td </td>
+            </tr>
+            
         </table>
 
         <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000;">
@@ -135,79 +163,151 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            function changeSemester() {
-                const semesterDropdown = document.getElementById('semesterDropdown');
-                const semesterTitle = document.getElementById('semesterTitle');
-                const semesterTable = document.getElementById('semesterTable');
-                const selectedSemester = semesterDropdown.value;
+    document.addEventListener('DOMContentLoaded', function () {
 
-                semesterTitle.textContent = `Semester ${selectedSemester}`;
+        // Retrieve URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const fullName = urlParams.get('fullName') || 'N/A';
+            const matric = urlParams.get('matric') || 'N/A';
+            const course = urlParams.get('course') || 'N/A';
+            const codeCourse = urlParams.get('codeCourse') || 'N/A';
+            const year = urlParams.get('year') || 'N/A';
+            const semester = urlParams.get('semester') || 'N/A';
+            const GPA = urlParams.get('GPA') || 'N/A';
+        
+            const ekt101 = urlParams.get('ekt101') || 'N/A';
+            const ekt120 = urlParams.get('ekt120') || 'N/A';
+            const uzw164 = urlParams.get('uzw164') || 'N/A';
+            const uuw130 = urlParams.get('uuw130') || 'N/A';
+            const ekt102 = urlParams.get('ekt102') || 'N/A';
+            const eqt101 = urlParams.get('eqt101') || 'N/A';
 
-                const subjects = getSubjectsForSemester(selectedSemester);
-                updateTableContent(semesterTable, subjects);
+            // Update elements with URL parameter values
+            document.getElementById('fullName').textContent = `Name: ${fullName}`;
+            document.getElementById('matric').textContent = `No Matric: ${matric}`;
+            document.getElementById('course').textContent = `Course: ${course}`;
+            document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
+            document.getElementById('year').textContent = `Year: ${year}`;
+            document.getElementById('semester').textContent = `Semester: ${semester}`;
+            document.getElementById('GPA').textContent = `GPA: ${parseFloat(GPA).toFixed(2)}`;
+
+            document.getElementById('ekt102').textContent = getLetterGrade(ekt102);
+            document.getElementById('eqt101').textContent = getLetterGrade(eqt101);
+            document.getElementById('ekt101').textContent = getLetterGrade(ekt101);
+            document.getElementById('ekt120').textContent = getLetterGrade(ekt120);
+            document.getElementById('uzw164').textContent = getLetterGrade(uzw164);
+            document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
+
+            let totalCreditHours = 0;
+            let failSubjects = []; // Array to store failed subjects
+            
+            // Additional check for course code
+            if (codeCourse === 'UR6523002') {
+                document.getElementById('course').textContent = 'Course: Computer Engineering';
             }
+        
+            // Education Subjects
+            const subjects = [
+                { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
+                { code: 'UUW130', name: 'FALSAFAH DAN ISU SEMASA', creditHour: 2 },
+                { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
+                { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
+                { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
+                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 }
+            ];
 
-            function getSubjectsForSemester(semester) {
-                const semestersSubjects = {
-                    1: [
-                        { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
-                        { code: 'UUW130', name: 'FALSAFAH DAN ISU SEMASA', creditHour: 2 },
-                        { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
-                        { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
-                        { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
-                        { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 }
-                    ],
-                    2: [
-                        { code: 'NewSubjectCode1', name: 'New Subject Name 1', creditHour: 2 },
-                        { code: 'NewSubjectCode2', name: 'New Subject Name 2', creditHour: 3 },
-                        // Add more subjects for Semester 2 as needed
-                    ],
-                    3: [
-                        { code: 'NewSubjectCode3', name: 'New Subject Name 3', creditHour: 4 },
-                        { code: 'NewSubjectCode4', name: 'New Subject Name 4', creditHour: 3 },
-                        // Add more subjects for Semester 3 as needed
-                    ],
-                    // Add subjects for other semesters as needed
-                };
+            subjects.forEach((subject, index) => {
+                const subjectCode = document.getElementById(`subjectCode${index + 1}`);
+                const subjectName = document.getElementById(`subjectName${index + 1}`);
+                const creditHour = document.getElementById(`creditHour${index + 1}`);
 
-                return semestersSubjects[semester] || [];
-            }
+                subjectCode.textContent = subject.code;
+                subjectName.textContent = subject.name;
+                creditHour.textContent = subject.creditHour;
 
-            function updateTableContent(table, subjects) {
-                while (table.rows.length > 1) {
-                    table.deleteRow(1);
+                // Add credit hours to the total
+                totalCreditHours += subject.creditHour;
+            });
+
+            // Display the total credit hours
+             document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
+
+            // Function to convert numerical grade to letter grade
+                function getLetterGrade(grade) {
+                    if (grade >= 4.00) return 'A';
+                    else if (grade >= 3.75) return 'A-';
+                    else if (grade >= 3.5) return 'B+';
+                    else if (grade >= 3) return 'B';
+                    else if (grade >= 2.75) return 'B-';
+                    else if (grade >= 2.5) return 'C+';
+                    else if (grade >= 2) return 'C';
+                    else if (grade >= 1.75) return 'C-';
+                    else if (grade >= 1.5) return 'D+';
+                    else if (grade >= 1) return 'D';
+                    else if (grade >= 0.75) return 'D-';
+                    else return 'F';
                 }
 
-                let totalCreditHours = 0;
+               // Function to determine pass/fail result
+                function determineResult(grade) {
+                    // Check if the numeric grade is greater than or equal to 2
+                    return (grade >= 2) ? 'Pass' : 'Fail';
+                }
+            
+                // Check for the first subjects
+                result1.textContent = determineResult(uzw164);
+                result2.textContent = determineResult(uuw130);
+                result3.textContent = determineResult(ekt102);
+                result4.textContent = determineResult(eqt101);
+                result5.textContent = determineResult(ekt120);
+                result6.textContent = determineResult(ekt101);
 
-                subjects.forEach((subject, index) => {
-                    const row = table.insertRow(index + 1);
-                    const subjectCode = row.insertCell(0);
-                    const subjectName = row.insertCell(1);
-                    const creditHour = row.insertCell(2);
+                // Check for the first subjects
+                    if (determineResult(uzw164) === 'Fail') {
+                        failSubjects.push('KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I');
+                    }
+                    if (determineResult(uuw130) === 'Fail') {
+                        failSubjects.push('FALSAFAH DAN ISU SEMASA');
+                    }
+                    if (determineResult(ekt102) === 'Fail') {
+                        failSubjects.push('ASAS KEJURUTERAAN ELEKTRONIK');
+                    }
+                    if (determineResult(eqt101) === 'Fail') {
+                        failSubjects.push('MATEMATIK KEJURUTERAAN I');
+                    }
+                    if (determineResult(ekt120) === 'Fail') {
+                        failSubjects.push('PENGATURCARAAN KOMPUTER');
+                    }
+                    if (determineResult(ekt101) === 'Fail') {
+                        failSubjects.push('TEORI LITAR ELEKTRIK');
+                    }
+                
+                    // Display the fail subjects and reminder
+                    const failSubjectsList = document.getElementById('failSubjects');
+                    const reminderDiv = document.getElementById('reminder');
+                
+                    if (failSubjects.length > 0) {
+                        // Display the fail subjects
+                        failSubjectsList.innerHTML = failSubjects.map(subject => `<li>${subject}</li>`).join('');
+                
+                        // Display the reminder message
+                        const reminderMessage = `You should retake the ${failSubjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${failSubjects.join(', ')}`;
+                        const reminderParagraph = document.createElement('p');
+                        reminderParagraph.textContent = reminderMessage;
+                
+                        // Append the reminder message to the reminderDiv
+                        reminderDiv.appendChild(reminderParagraph);
+                
+                        // Show the reminder
+                        reminderDiv.style.display = 'block';
+                    } else {
+                        reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
+                    }
+      
+    });
+        
+</script>
 
-                    subjectCode.textContent = subject.code;
-                    subjectName.textContent = subject.name;
-                    creditHour.textContent = subject.creditHour;
-
-                    totalCreditHours += subject.creditHour;
-                });
-
-                const totalRow = table.insertRow(subjects.length + 1);
-                const totalLabel = totalRow.insertCell(0);
-                const totalCreditCell = totalRow.insertCell(1);
-
-                totalLabel.textContent = 'Total Hour:';
-                totalCreditCell.textContent = totalCreditHours;
-
-                document.getElementById('reminder').style.display = 'none';
-            }
-
-            // Initial setup for Semester 1
-            changeSemester();
-        });
-    </script>
 </body>
 
 </html>
