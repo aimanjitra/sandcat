@@ -145,7 +145,7 @@
                     const codeCourse = data.data[0]?.code_course;
                     const year = data.data[0]?.tahun;
                     const semester = data.data[0]?.sem;
-                    const CGPA = data.data[0]?.cgpa;
+                    const GPA = data.data[0]?.gpa;
                     const ekt102 = data.data[0]?.EKT102;
                     const eqt101 = data.data[0]?.EQT101;
                     const uuw130 = data.data[0]?.UUW130;
@@ -154,7 +154,7 @@
                     const ekt101 = data.data[0]?.EKT101;
 
                     // Redirect to success.html with additional parameters
-                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&CGPA=${CGPA}`;
+                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&GPA=${GPA}`;
                 } else {
                     // Handle the case where data.data is undefined or empty
                     console.error('No data found for the given credentials.');
