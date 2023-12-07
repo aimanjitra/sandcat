@@ -85,7 +85,13 @@
             <h2 id="semester">Semester: [Semester]</h2>
         </div>
 
-        <h3>Semester 1</h3>
+        <label for="semesterSelect">Select Semester:</label>
+        <select id="semesterSelect" onchange="changeSemester()">
+            <!-- Options will be added dynamically using JavaScript -->
+        </select>
+
+        <h3 id="semesterTitle">Semester 1</h3>
+        
         <table>
             <tr>
                 <th>Code Subject</th>
@@ -198,6 +204,14 @@
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
 
+            const semesterSelect = document.getElementById('semesterSelect');
+            for (let i = 2; i <= 8; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Semester ${i}`;
+                semesterSelect.appendChild(option);
+            }
+            
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
@@ -225,6 +239,13 @@
                 // Add credit hours to the total
                 totalCreditHours += subject.creditHour;
             });
+
+            function changeSemester() {
+            const semesterSelect = document.getElementById('semesterSelect');
+            const selectedSemester = semesterSelect.value;
+
+            // Update the semester title
+            document.getElementById('semesterTitle').textContent = `Semester ${selectedSemester}`;
 
             // Display the total credit hours
              document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
