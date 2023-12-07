@@ -89,7 +89,7 @@
                 <th>Code Subject</th>
                 <th>Name of Subject</th>
                 <th>Credit Hour</th>
-                <th>Result of CGPA</th>
+                <th>Result of GPA</th>
                 <th>Result (Pass/Fail)</th>
             </tr>
 
@@ -145,7 +145,7 @@
                     <td </td>
                     <td </td>
                     <td id="total">[Total Hour]</td>
-                    <td id="CGPA">[Average CGPA]</td>
+                    <td id="GPA">[Average GPA]</td>
                     <td </td>
             </tr>
             
@@ -169,7 +169,7 @@
             const codeCourse = urlParams.get('codeCourse') || 'N/A';
             const year = urlParams.get('year') || 'N/A';
             const semester = urlParams.get('semester') || 'N/A';
-            const CGPA = urlParams.get('CGPA') || 'N/A';
+            const GPA = urlParams.get('GPA') || 'N/A';
         
             const ekt101 = urlParams.get('ekt101') || 'N/A';
             const ekt120 = urlParams.get('ekt120') || 'N/A';
@@ -185,7 +185,7 @@
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
-            document.getElementById('CGPA').textContent = `CGPA: ${parseFloat(CGPA).toFixed(2)}`;
+            document.getElementById('GPA').textContent = `GPA: ${parseFloat(GPA).toFixed(2)}`;
 
             document.getElementById('ekt102').textContent = getLetterGrade(ekt102);
             document.getElementById('eqt101').textContent = getLetterGrade(eqt101);
