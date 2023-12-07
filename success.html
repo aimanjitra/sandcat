@@ -15,14 +15,14 @@
         }
 
         .container {
-                height: 100vh;
-                background: linear-gradient(to bottom, #001b3d 50%, white 50%);
-                display: flex;
-                flex-direction: column;
-                font-family: Arial, sans-serif;
-                color: white;
-                overflow-y: auto; /* Enable vertical scrolling */
-           }
+            height: 100vh;
+            background: linear-gradient(to bottom, #001b3d 50%, white 50%);
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
 
         .biodata {
             padding: 20px;
@@ -42,31 +42,31 @@
         h3 {
             font-size: 18px;
             margin-top: 0px;
-            background-color: rgb(220, 212, 212); /* Set background color to black */
-            color: black; /* Set text color to white */
-            padding: 10px; /* Add padding for better visibility */
+            background-color: rgb(220, 212, 212);
+            color: black;
+            padding: 10px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 0px;
+            margin-top: 10px; /* Add some margin to the top of the table */
         }
 
         th, td {
-            border: 1px solid black; /* Set border color to black */
+            border: 1px solid black;
             padding: 8px;
             text-align: left;
         }
 
         th {
-            background-color: white; /* Set background color to dark blue */
-            color: black; /* Set text color to white for headers */
+            background-color: #f2f2f2; /* Light gray background for headers */
+            color: black;
         }
 
         td {
-            background-color: white; /* Set background color to white for cells */
-            color: black; /* Set text color to black for cells */
+            background-color: #f9f9f9; /* Slightly darker background for cells */
+            color: black;
         }
     </style>
 </head>
@@ -93,69 +93,21 @@
                 <th>Result (Pass/Fail)</th>
             </tr>
 
-            <tr>
-                <td id="subjectCode1">[Subject Code]</td>
-                <td id="subjectName1">[Subject Name]</td>
-                <td id="creditHour1">[Credit Hour]</td>
-                <td id="uzw164">[UZW164]</td>
-                <td id="result1">[Result]</td>
-            </tr>
+            <!-- Your table rows go here -->
 
             <tr>
-                <td id="subjectCode2">[Subject Code]</td>
-                <td id="subjectName2">[Subject Name]</td>
-                <td id="creditHour2">[Credit Hour]</td>
-                <td id="uuw130">[UUW130]</td>
-                <td id="result2">[Result]</td>
+                <td></td>
+                <td></td>
+                <td id="total">[Total Hour]</td>
+                <td id="GPA">[Average GPA]</td>
+                <td></td>
             </tr>
-
-            <tr>
-                <td id="subjectCode3">[Subject Code]</td>
-                <td id="subjectName3">[Subject Name]</td>
-                <td id="creditHour3">[Credit Hour]</td>
-                <td id="ekt102">[EKT102]</td>
-                <td id="result3">[Result]</td>
-            </tr>
-
-            <tr>
-                <td id="subjectCode4">[Subject Code]</td>
-                <td id="subjectName4">[Subject Name]</td>
-                <td id="creditHour4">[Credit Hour]</td>
-                <td id="eqt101">[EQT101]</td>
-                <td id="result4">[Result]</td>
-            </tr>
-
-            <tr>
-                <td id="subjectCode5">[Subject Code]</td>
-                <td id="subjectName5">[Subject Name]</td>
-                <td id="creditHour5">[Credit Hour]</td>
-                <td id="ekt120">[EKT120]</td>
-                <td id="result5">[Result]</td>
-            </tr>
-
-            <tr>
-                <td id="subjectCode6">[Subject Code]</td>
-                <td id="subjectName6">[Subject Name]</td>
-                <td id="creditHour6">[Credit Hour]</td>
-                <td id="ekt101">[EKT101]</td>
-                <td id="result6">[Result]</td>
-            </tr>
-
-            <tr>
-                    <td </td>
-                    <td </td>
-                    <td id="total">[Total Hour]</td>
-                    <td id="GPA">[Average GPA]</td>
-                    <td </td>
-            </tr>
-            
         </table>
 
         <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000;">
             <h3>Reminder</h3>
             <ul id="failSubjects"></ul>
         </div>
-        
     </div>
 
     <script>
