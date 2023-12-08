@@ -73,13 +73,6 @@
             color: black;
         }
 
-        #semesterSelector {
-            width: 150px; /* Set your desired width */
-            font-size: 18px; /* Set your desired font size */
-            margin: 10px auto; /* Center the dropdown and add space around it */
-            display: block; /* Ensure it's a block-level element for margin to work */
-        }
-
     </style>
 </head>
 
@@ -95,109 +88,74 @@
             <h2 id="semester">Semester: [Semester]</h2>
         </div>
         
-        <div>
-            <select id="semesterSelector" onchange="changeSemester()">
-                <option value="1">Semester 1</option>
-                <option value="2">Semester 2</option>
-                <!-- Add options for Semester 3 to 8 as needed -->
-            </select>
-        </div>
+        <h3>Semester 1</h3>
+        
+        <table>
+            <tr>
+                <th>Code Subject</th>
+                <th>Name of Subject</th>
+                <th>Credit Hour</th>
+                <th>Result of CGPA</th>
+                <th>Result (Pass/Fail)</th>
+            </tr>
 
-        <div id="semester1" class="semesterContent">
-            <table>
-                                <tr>
-                            <th>Code Subject</th>
-                            <th>Name of Subject</th>
-                            <th>Credit Hour</th>
-                            <th>Result of CGPA</th>
-                            <th>Result (Pass/Fail)</th>
-                        </tr>
-                
-                        <!-- Subject 1 -->
-                        <tr>
-                            <td id="subjectCode1">[Subject Code]</td>
-                            <td id="subjectName1">[Subject Name]</td>
-                            <td id="creditHour1">[Credit Hour]</td>
-                            <td id="uzw164">[UZW164]</td>
-                            <td id="result1">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 2 -->
-                        <tr>
-                            <td id="subjectCode2">[Subject Code]</td>
-                            <td id="subjectName2">[Subject Name]</td>
-                            <td id="creditHour2">[Credit Hour]</td>
-                            <td id="uuw130">[UUW130]</td>
-                            <td id="result2">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 3 -->
-                        <tr>
-                            <td id="subjectCode3">[Subject Code]</td>
-                            <td id="subjectName3">[Subject Name]</td>
-                            <td id="creditHour3">[Credit Hour]</td>
-                            <td id="ekt102">[EKT102]</td>
-                            <td id="result3">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 4 -->
-                        <tr>
-                            <td id="subjectCode4">[Subject Code]</td>
-                            <td id="subjectName4">[Subject Name]</td>
-                            <td id="creditHour4">[Credit Hour]</td>
-                            <td id="eqt101">[EQT101]</td>
-                            <td id="result4">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 5 -->
-                        <tr>
-                            <td id="subjectCode5">[Subject Code]</td>
-                            <td id="subjectName5">[Subject Name]</td>
-                            <td id="creditHour5">[Credit Hour]</td>
-                            <td id="ekt120">[EKT120]</td>
-                            <td id="result5">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 6 -->
-                        <tr>
-                            <td id="subjectCode6">[Subject Code]</td>
-                            <td id="subjectName6">[Subject Name]</td>
-                            <td id="creditHour6">[Credit Hour]</td>
-                            <td id="ekt101">[EKT101]</td>
-                            <td id="result6">[Result]</td>
-                        </tr>
-                
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td id="total">[Total Hour]</td>
-                            <td id="GPA">[Average GPA]</td>
-                            <td></td>
-                        </tr>
-            </table>
-        </div>
+            <tr>
+                <td id="subjectCode1">[Subject Code]</td>
+                <td id="subjectName1">[Subject Name]</td>
+                <td id="creditHour1">[Credit Hour]</td>
+                <td id="uzw164">[UZW164]</td>
+                <td id="result1">[Result]</td>
+            </tr>
 
-        <div id="semester2" class="semesterContent" style="display: none;">
-            <table>
-                <tr>
-                    <th>Code Subject</th>
-                    <th>Name of Subject</th>
-                    <th>Credit Hour</th>
-                    <th>Result of CGPA</th>
-                    <th>Result (Pass/Fail)</th>
-                </tr>
+            <tr>
+                <td id="subjectCode2">[Subject Code]</td>
+                <td id="subjectName2">[Subject Name]</td>
+                <td id="creditHour2">[Credit Hour]</td>
+                <td id="uuw130">[UUW130]</td>
+                <td id="result2">[Result]</td>
+            </tr>
 
-                <tr>
-                    <td>ABC</td>
-                    <td>Subject ABC</td>
-                    <td>3</td>
-                    <td>4.00</td>
-                    <td>Pass</td>
-                </tr>
+            <tr>
+                <td id="subjectCode3">[Subject Code]</td>
+                <td id="subjectName3">[Subject Name]</td>
+                <td id="creditHour3">[Credit Hour]</td>
+                <td id="ekt102">[EKT102]</td>
+                <td id="result3">[Result]</td>
+            </tr>
 
-                <!-- Add more rows as needed for Semester 2 -->
-            </table>
-        </div>
+            <tr>
+                <td id="subjectCode4">[Subject Code]</td>
+                <td id="subjectName4">[Subject Name]</td>
+                <td id="creditHour4">[Credit Hour]</td>
+                <td id="eqt101">[EQT101]</td>
+                <td id="result4">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode5">[Subject Code]</td>
+                <td id="subjectName5">[Subject Name]</td>
+                <td id="creditHour5">[Credit Hour]</td>
+                <td id="ekt120">[EKT120]</td>
+                <td id="result5">[Result]</td>
+            </tr>
+
+            <tr>
+                <td id="subjectCode6">[Subject Code]</td>
+                <td id="subjectName6">[Subject Name]</td>
+                <td id="creditHour6">[Credit Hour]</td>
+                <td id="ekt101">[EKT101]</td>
+                <td id="result6">[Result]</td>
+            </tr>
+
+            <tr>
+                    <td </td>
+                    <td </td>
+                    <td id="total">[Total Hour]</td>
+                    <td id="GPA">[Average GPA]</td>
+                    <td </td>
+            </tr>
+            
+        </table>
 
         <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000;">
             <h3>Reminder</h3>
@@ -206,36 +164,18 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Your existing code for retrieving URL parameters and setting initial values
+    document.addEventListener('DOMContentLoaded', function () {
 
-            // Function to change the displayed semester content
-            window.changeSemester = function () {
-                const semesterSelector = document.getElementById('semesterSelector');
-                const selectedSemester = semesterSelector.value;
-
-                // Hide all semester content
-                document.querySelectorAll('.semesterContent').forEach(function (content) {
-                    content.style.display = 'none';
-                });
-
-                // Show the selected semester content
-                const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
-                if (selectedSemesterContent) {
-                    selectedSemesterContent.style.display = 'block';
-                }
-            };
-
-            // Retrieve URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const fullName = urlParams.get('fullName') || 'N/A';
-    const matric = urlParams.get('matric') || 'N/A';
-    const course = urlParams.get('course') || 'N/A';
-    const codeCourse = urlParams.get('codeCourse') || 'N/A';
-    const year = urlParams.get('year') || 'N/A';
-    const semester = urlParams.get('semester') || 'N/A';
-    const GPA = urlParams.get('GPA') || 'N/A';
-
+        // Retrieve URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const fullName = urlParams.get('fullName') || 'N/A';
+            const matric = urlParams.get('matric') || 'N/A';
+            const course = urlParams.get('course') || 'N/A';
+            const codeCourse = urlParams.get('codeCourse') || 'N/A';
+            const year = urlParams.get('year') || 'N/A';
+            const semester = urlParams.get('semester') || 'N/A';
+            const GPA = urlParams.get('GPA') || 'N/A';
+        
             const ekt101 = urlParams.get('ekt101') || 'N/A';
             const ekt120 = urlParams.get('ekt120') || 'N/A';
             const uzw164 = urlParams.get('uzw164') || 'N/A';
@@ -243,14 +183,14 @@
             const ekt102 = urlParams.get('ekt102') || 'N/A';
             const eqt101 = urlParams.get('eqt101') || 'N/A';
 
-    // Your existing code for updating elements based on URL parameters
-    document.getElementById('fullName').textContent = `Name: ${fullName}`;
-    document.getElementById('matric').textContent = `No Matric: ${matric}`;
-    document.getElementById('course').textContent = `Course: ${course}`;
-    document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
-    document.getElementById('year').textContent = `Year: ${year}`;
-    document.getElementById('semester').textContent = `Semester: ${semester}`;
-    document.getElementById('GPA').textContent = `GPA: ${parseFloat(GPA).toFixed(2)}`;
+            // Update elements with URL parameter values
+            document.getElementById('fullName').textContent = `Name: ${fullName}`;
+            document.getElementById('matric').textContent = `No Matric: ${matric}`;
+            document.getElementById('course').textContent = `Course: ${course}`;
+            document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
+            document.getElementById('year').textContent = `Year: ${year}`;
+            document.getElementById('semester').textContent = `Semester: ${semester}`;
+            document.getElementById('GPA').textContent = `GPA: ${parseFloat(GPA).toFixed(2)}`;
 
             document.getElementById('ekt102').textContent = getLetterGrade(ekt102);
             document.getElementById('eqt101').textContent = getLetterGrade(eqt101);
@@ -259,7 +199,7 @@
             document.getElementById('uzw164').textContent = getLetterGrade(uzw164);
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 
-        let totalCreditHours = 0;
+            let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
             
             // Additional check for course code
@@ -364,10 +304,10 @@
                     } else {
                         reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
                     }
-            
-
-        });
-    </script>
+      
+    });
+        
+</script>
 
 </body>
 
