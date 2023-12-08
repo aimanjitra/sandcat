@@ -311,6 +311,36 @@
    		   // Update the detect element based on the presence of failed subjects
     			const detectElement = document.getElementById('Detect');
    			 detectElement.textContent = hasFailedSubjects ? 'P1' : 'Active';
+
+	    // Additional subjects for the next semester
+    const nextSemesterSubjects = [
+        { code: 'EKT143', name: 'Pendidikan' },
+        { code: 'SJS32', name: 'Sukan' }
+    ];
+
+    // Display the additional subjects for the next semester
+    const additionalSubjectsList = document.createElement('ul');
+    additionalSubjectsList.innerHTML = nextSemesterSubjects.map(subject => `<li>${subject.code} - ${subject.name}</li>`).join('');
+
+    // Create a white background box with black text
+    const additionalSubjectsBox = document.createElement('div');
+    additionalSubjectsBox.style.backgroundColor = 'white';
+    additionalSubjectsBox.style.color = 'black';
+    additionalSubjectsBox.style.padding = '10px';
+    additionalSubjectsBox.style.marginTop = '20px';
+
+    // Add a heading for the additional subjects
+    const additionalSubjectsHeading = document.createElement('h3');
+    additionalSubjectsHeading.textContent = 'For next semester, you need to take the following subjects:';
+
+    // Append the heading and subjects list to the white background box
+    additionalSubjectsBox.appendChild(additionalSubjectsHeading);
+    additionalSubjectsBox.appendChild(additionalSubjectsList);
+
+    // Append the white background box to the reminderDiv
+    const reminderDiv = document.getElementById('reminder');
+    reminderDiv.appendChild(additionalSubjectsBox);
+
 	
     });
         
