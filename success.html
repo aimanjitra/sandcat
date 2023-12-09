@@ -196,6 +196,12 @@
 	                    <td id="Detect">[Active/P1]</td>
                         </tr>
             </table>
+
+			   <div id="reminderSemester1" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
+			        <h3>Reminder for Semester 1</h3>
+			        <ul id="failSubjectsListSemester1"></ul>
+			    </div>
+		
         </div>
 
         <div id="semester2" class="semesterContent" style="display: none;">
@@ -218,6 +224,12 @@
 
                 <!-- Add more rows as needed for Semester 2 -->
             </table>
+
+		   <div id="reminderSemester2" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
+		        <h3>Reminder for Semester 2</h3>
+		        <ul id="failSubjectsListSemester2"></ul>
+		    </div>
+		
         </div>
 
 
@@ -377,10 +389,8 @@
 			
 								// Function to create reminder message for a semester
 								function createReminderMessage(semester, subjects) {
-								    const reminderDiv = document.getElementById('reminder');
-								    reminderDiv.style.width = '90%';
-								    reminderDiv.style.marginLeft = 'auto';
-								    reminderDiv.style.marginRight = 'auto';
+								    const failSubjectsList = document.getElementById(`failSubjectsListSemester${semester}`);
+								    failSubjectsList.innerHTML = ''; // Clear the previous failed subjects list
 								
 								    // Filter out subjects with failing grades
 								    const failedSubjects = subjects.filter(subject => {
@@ -390,17 +400,23 @@
 								
 								    if (failedSubjects.length > 0) {
 								        const reminderMessage = `
-								            <h3>Reminder for Semester ${semester}</h3>
 								            <p>You should retake the ${
-								                failedSubjects.length > 1 ? 'subjects' : 'subject'
-								            } for the next semester: ${failedSubjects.join(', ')}</p>
+								                failedSubjects.length > 1 ? 'following subjects' : 'subject'
+								            } for the next semester:</p>
 								        `;
 								
+								        // Create a list of failed subjects and append to the ul element
+								        failedSubjects.forEach(failedSubject => {
+								            const li = document.createElement('li');
+								            li.textContent = failedSubject;
+								            failSubjectsList.appendChild(li);
+								        });
+								
 								        // Display the reminder message
-								        reminderDiv.innerHTML = reminderMessage;
-								        reminderDiv.style.display = 'block';
+								        document.getElementById(`reminderSemester${semester}`).innerHTML += reminderMessage;
+								        document.getElementById(`reminderSemester${semester}`).style.display = 'block';
 								    } else {
-								        reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
+								        document.getElementById(`reminderSemester${semester}`).style.display = 'none'; // Hide the reminder if no fail subjects
 								    }
 								}
 				
