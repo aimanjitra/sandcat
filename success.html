@@ -94,6 +94,13 @@
 	   background-color: black;
 	}
 
+	#semesterSelector {
+            width: 150px; /* Set your desired width */
+            font-size: 18px; /* Set your desired font size */
+            margin: 10px auto; /* Center the dropdown and add space around it */
+            display: block; /* Ensure it's a block-level element for margin to work */
+        }
+
     </style>
 </head>
 
@@ -109,74 +116,110 @@
             <h2 id="semester">Semester: [Semester]</h2>
         </div>
         
-        <h3>Semester 1</h3>
-        
-        <table>
-            <tr>
-                <th>Code Subject</th>
-                <th>Name of Subject</th>
-                <th>Credit Hour</th>
-                <th>Result of CGPA</th>
-                <th>Result (Pass/Fail)</th>
-            </tr>
+        <div>
+            <select id="semesterSelector" onchange="changeSemester()">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <!-- Add options for Semester 3 to 8 as needed -->
+            </select>
+        </div>
 
-            <tr>
-                <td id="subjectCode1">[Subject Code]</td>
-                <td id="subjectName1">[Subject Name]</td>
-                <td id="creditHour1">[Credit Hour]</td>
-                <td id="uzw164">[UZW164]</td>
-                <td id="result1">[Result]</td>
-            </tr>
+        <div id="semester1" class="semesterContent">
+            <table>
+                                <tr>
+                            <th>Code Subject</th>
+                            <th>Name of Subject</th>
+                            <th>Credit Hour</th>
+                            <th>Result of CGPA</th>
+                            <th>Result (Pass/Fail)</th>
+                        </tr>
+                
+                        <!-- Subject 1 -->
+                        <tr>
+                            <td id="subjectCode1">[Subject Code]</td>
+                            <td id="subjectName1">[Subject Name]</td>
+                            <td id="creditHour1">[Credit Hour]</td>
+                            <td id="uzw164">[UZW164]</td>
+                            <td id="result1">[Result]</td>
+                        </tr>
+                
+                        <!-- Subject 2 -->
+                        <tr>
+                            <td id="subjectCode2">[Subject Code]</td>
+                            <td id="subjectName2">[Subject Name]</td>
+                            <td id="creditHour2">[Credit Hour]</td>
+                            <td id="uuw130">[UUW130]</td>
+                            <td id="result2">[Result]</td>
+                        </tr>
+                
+                        <!-- Subject 3 -->
+                        <tr>
+                            <td id="subjectCode3">[Subject Code]</td>
+                            <td id="subjectName3">[Subject Name]</td>
+                            <td id="creditHour3">[Credit Hour]</td>
+                            <td id="ekt102">[EKT102]</td>
+                            <td id="result3">[Result]</td>
+                        </tr>
+                
+                        <!-- Subject 4 -->
+                        <tr>
+                            <td id="subjectCode4">[Subject Code]</td>
+                            <td id="subjectName4">[Subject Name]</td>
+                            <td id="creditHour4">[Credit Hour]</td>
+                            <td id="eqt101">[EQT101]</td>
+                            <td id="result4">[Result]</td>
+                        </tr>
+                
+                        <!-- Subject 5 -->
+                        <tr>
+                            <td id="subjectCode5">[Subject Code]</td>
+                            <td id="subjectName5">[Subject Name]</td>
+                            <td id="creditHour5">[Credit Hour]</td>
+                            <td id="ekt120">[EKT120]</td>
+                            <td id="result5">[Result]</td>
+                        </tr>
+                
+                        <!-- Subject 6 -->
+                        <tr>
+                            <td id="subjectCode6">[Subject Code]</td>
+                            <td id="subjectName6">[Subject Name]</td>
+                            <td id="creditHour6">[Credit Hour]</td>
+                            <td id="ekt101">[EKT101]</td>
+                            <td id="result6">[Result]</td>
+                        </tr>
+                
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td id="total">[Total Hour]</td>
+                            <td id="GPA">[Average GPA]</td>
+                            <td></td>
+                        </tr>
+            </table>
+        </div>
 
-            <tr>
-                <td id="subjectCode2">[Subject Code]</td>
-                <td id="subjectName2">[Subject Name]</td>
-                <td id="creditHour2">[Credit Hour]</td>
-                <td id="uuw130">[UUW130]</td>
-                <td id="result2">[Result]</td>
-            </tr>
+        <div id="semester2" class="semesterContent" style="display: none;">
+            <table>
+                <tr>
+                    <th>Code Subject</th>
+                    <th>Name of Subject</th>
+                    <th>Credit Hour</th>
+                    <th>Result of CGPA</th>
+                    <th>Result (Pass/Fail)</th>
+                </tr>
 
-            <tr>
-                <td id="subjectCode3">[Subject Code]</td>
-                <td id="subjectName3">[Subject Name]</td>
-                <td id="creditHour3">[Credit Hour]</td>
-                <td id="ekt102">[EKT102]</td>
-                <td id="result3">[Result]</td>
-            </tr>
+                <tr>
+                    <td>ABC</td>
+                    <td>Subject ABC</td>
+                    <td>3</td>
+                    <td>4.00</td>
+                    <td>Pass</td>
+                </tr>
 
-            <tr>
-                <td id="subjectCode4">[Subject Code]</td>
-                <td id="subjectName4">[Subject Name]</td>
-                <td id="creditHour4">[Credit Hour]</td>
-                <td id="eqt101">[EQT101]</td>
-                <td id="result4">[Result]</td>
-            </tr>
+                <!-- Add more rows as needed for Semester 2 -->
+            </table>
+        </div>
 
-            <tr>
-                <td id="subjectCode5">[Subject Code]</td>
-                <td id="subjectName5">[Subject Name]</td>
-                <td id="creditHour5">[Credit Hour]</td>
-                <td id="ekt120">[EKT120]</td>
-                <td id="result5">[Result]</td>
-            </tr>
-
-            <tr>
-                <td id="subjectCode6">[Subject Code]</td>
-                <td id="subjectName6">[Subject Name]</td>
-                <td id="creditHour6">[Credit Hour]</td>
-                <td id="ekt101">[EKT101]</td>
-                <td id="result6">[Result]</td>
-            </tr>
-
-            <tr>
-                    <td id="blankCell"></td>
-                    <td id="CGPA">[Total CGPA]</td>
-                    <td id="total">[Total Hour]</td>
-                    <td id="GPA">[Average GPA]</td>
-                    <td id="Detect">[Active/P1]</td>
-            </tr>
-            
-        </table>
 
         <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
 	    <h3>Reminder</h3>
@@ -187,8 +230,12 @@
 	    <h3>New Schedule</h3>
 	    <p>For next semester, you need to take the following subjects:</p>
 	    <ul>
-		        <li>EKT 143 - Pendidikan</li>
-		        <li>SJS32 - Sukan</li>
+		        <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
+		            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
+	      		    <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
+	     		    <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
+	    		    <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
+	   		    <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
 		    </ul>
 		</div>
 	    
@@ -196,6 +243,23 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+	// Function to change the displayed semester content
+            window.changeSemester = function () {
+                const semesterSelector = document.getElementById('semesterSelector');
+                const selectedSemester = semesterSelector.value;
+
+                // Hide all semester content
+                document.querySelectorAll('.semesterContent').forEach(function (content) {
+                    content.style.display = 'none';
+                });
+
+                // Show the selected semester content
+                const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
+                if (selectedSemesterContent) {
+                    selectedSemesterContent.style.display = 'block';
+                }
+            };
 
         // Retrieve URL parameters
             const urlParams = new URLSearchParams(window.location.search);
