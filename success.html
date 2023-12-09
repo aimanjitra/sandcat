@@ -385,7 +385,7 @@
 						        // Filter out subjects with passing grades
 						        const failedSubjects = subjects.filter(subject => {
 						            const result = determineResult(urlParams.get(subject));
-						            return result === 'Fail';
+						            return result.toLowerCase() === 'Fail';
 						        });
 						
 						        if (failedSubjects.length > 0) {
