@@ -312,18 +312,28 @@
                 { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 }
             ];
 
-            subjects.forEach((subject, index) => {
-                const subjectCode = document.getElementById(`subjectCode${index + 1}`);
-                const subjectName = document.getElementById(`subjectName${index + 1}`);
-                const creditHour = document.getElementById(`creditHour${index + 1}`);
+		    // Define new schedule for Semester 1
+		    const newScheduleSemester1 = [
+		        'UZW195 - RADIO KAMPUS [CAMPUS RADIO]',
+		        'EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]',
+		        'EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]',
+		        'EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]',
+		        'EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]',
+		        'EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]'
+		    ];
 
-                subjectCode.textContent = subject.code;
-                subjectName.textContent = subject.name;
-                creditHour.textContent = subject.creditHour;
-
-                // Add credit hours to the total
-                totalCreditHours += subject.creditHour;
-            });
+            subjectsSemester1.forEach((subject, index) => {
+	        const subjectCode = document.getElementById(`subjectCode${index + 1}`);
+	        const subjectName = document.getElementById(`subjectName${index + 1}`);
+	        const creditHour = document.getElementById(`creditHour${index + 1}`);
+	
+	        subjectCode.textContent = subject.code;
+	        subjectName.textContent = subject.name;
+	        creditHour.textContent = subject.creditHour;
+	
+	        // Add credit hours to the total
+	        totalCreditHours += subject.creditHour;
+	    });
 
             // Display the total credit hours
              document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
@@ -412,18 +422,13 @@
     			const detectElement = document.getElementById('Detect');
    			 detectElement.textContent = hasFailedSubjects ? 'P1' : 'Active';
 
-		// New Schedule information
+		// Update new schedule for Semester 1
 		    const newScheduleDiv = document.getElementById('newSchedule');
 		    const newScheduleMessage = `
 		        <h3>New Schedule</h3>
 		        <p>For next semester, you need to take the following subjects:</p>
 		        <ul>
-		            <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
-		            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
-	      		    <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
-	     		    <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
-	    		    <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
-	   		    <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
+		            ${newScheduleSemester1.map(subject => `<li>${subject}</li>`).join('')}
 		        </ul>
 		    `;
 		    newScheduleDiv.innerHTML = newScheduleMessage;
