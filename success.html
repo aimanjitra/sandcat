@@ -392,7 +392,7 @@
 								        const reminderMessage = `
 								            <h3>Reminder for Semester ${semester}</h3>
 								            <p>You should retake the ${
-								                failedSubjects.length > 1 ? 'following subjects' : 'subject'
+								                failedSubjects.length > 1 ? 'subjects' : 'subject'
 								            } for the next semester: ${failedSubjects.join(', ')}</p>
 								        `;
 								
@@ -442,7 +442,7 @@
     semesterSelector.addEventListener('change', displayReminders);
 
 		    // Check if there are any failed subjects
-  			  const hasFailedSubjects = failedSubjects.length > 0;
+  			  const hasFailedSubjects = failSubjectsSemester1.length > 0;
 
    		   // Update the detect element based on the presence of failed subjects
     			const detectElement = document.getElementById('Detect');
