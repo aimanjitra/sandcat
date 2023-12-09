@@ -165,7 +165,7 @@
             </tr>
 
             <tr>
-                    <td </td>
+                    <td id="blankCell"></td>
                     <td id="CGPA">[Total CGPA]</td>
                     <td id="total">[Total Hour]</td>
                     <td id="GPA">[Average GPA]</td>
@@ -363,6 +363,10 @@
 	    	// Display CGPA on the right side
 		    const cgpaElement = document.getElementById('CGPA');
 		    cgpaElement.textContent = `CGPA: ${currentCGPA.toFixed(2)}`;
+
+	    	#blankCell {
+		    background-color: black;
+		}
 
     });
         
