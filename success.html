@@ -384,7 +384,7 @@
 								
 								    // Filter out subjects with failing grades
 								    const failedSubjects = subjects.filter(subject => {
-								        const result = determineResult(urlParams.get(subject));
+								        const result = determineResult(grade);
 								        return result.toLowerCase() === 'fail';
 								    });
 								
@@ -406,14 +406,14 @@
 				
 				    // Check for failed subjects in Semester 1
 				    const failSubjectsSemester1 = semester1Subjects.filter(subject => {
-				        const result = determineResult(urlParams.get(subject));
+				        const result = determineResult(grade);
 				        return result === 'Fail';
 				    });
 				
 				    // Check for failed subjects in Semester 2
 				    const failSubjectsSemester2 = semester2Subjects.filter(subject => {
 				        // Replace 'Subject ABC' and 'Another Subject XYZ' with actual subject codes from URL parameters
-				        const result = determineResult(urlParams.get(subject));
+				        const result = determineResult(grade);
 				        return result === 'Fail';
 				    });
 				
