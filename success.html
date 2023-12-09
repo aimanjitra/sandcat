@@ -73,6 +73,10 @@
             color: black;
         }
 
+	#CGPA {
+        text-align: right;  /* Align the content to the right */
+   	 }
+
     </style>
 </head>
 
@@ -341,6 +345,8 @@
 
 	    	// Calculate CGPA based on current GPA
     		const currentGPA = parseFloat(GPA);
+	    	// Calculate CGPA as half of the GPA
+		const currentCGPA = currentGPA / 2;
 	    	// Display CGPA on the right side
 		    const cgpaElement = document.getElementById('CGPA');
 		    cgpaElement.textContent = `CGPA: ${currentCGPA.toFixed(2)}`;
