@@ -358,88 +358,61 @@
                 result5.textContent = determineResult(ekt120);
                 result6.textContent = determineResult(ekt101);
                 
-			     // Define subjects for Semester 1
-			    const semester1Subjects = [
-			        'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I',
-			        'FALSAFAH DAN ISU SEMASA',
-			        'ASAS KEJURUTERAAN ELEKTRONIK',
-			        'MATEMATIK KEJURUTERAAN I',
-			        'PENGATURCARAAN KOMPUTER',
-			        'TEORI LITAR ELEKTRIK'
-			    ];
-			
-			    // Define subjects for Semester 2
-			    const semester2Subjects = [
-			        'Subject ABC',
-			        'Another Subject XYZ',
-			        // Add more subjects for Semester 2 as needed
-			    ];
-			
-								// Function to create reminder message for a semester
-								function createReminderMessage(semester, subjects) {
-								    const reminderDiv = document.getElementById('reminder');
-								    reminderDiv.style.width = '90%';
-								    reminderDiv.style.marginLeft = 'auto';
-								    reminderDiv.style.marginRight = 'auto';
-								
-								    // Filter out subjects with failing grades
-								    const failedSubjects = subjects.filter(subject => {
-								        const result = determineResult(grade);
-								        return result.toLowerCase() === 'fail';
-								    });
-								
-								    if (failedSubjects.length > 0) {
-								        const reminderMessage = `
-								            <h3>Reminder for Semester ${semester}</h3>
-								            <p>You should retake the ${
-								                failedSubjects.length > 1 ? 'following subjects' : 'subject'
-								            } for the next semester: ${failedSubjects.join(', ')}</p>
-								        `;
-								
-								        // Display the reminder message
-								        reminderDiv.innerHTML = reminderMessage;
-								        reminderDiv.style.display = 'block';
-								    } else {
-								        reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
-								    }
-								}
-				
-				    // Check for failed subjects in Semester 1
-				    const failSubjectsSemester1 = semester1Subjects.filter(subject => {
-				        const result = determineResult(grade);
-				        return result === 'Fail';
-				    });
-				
-				    // Check for failed subjects in Semester 2
-				    const failSubjectsSemester2 = semester2Subjects.filter(subject => {
-				        // Replace 'Subject ABC' and 'Another Subject XYZ' with actual subject codes from URL parameters
-				        const result = determineResult(grade);
-				        return result === 'Fail';
-				    });
-				
-				    // Display reminders based on user-selected semester
-				    function displayReminders() {
-				        const selectedSemester = document.getElementById('semesterSelector').value;
-				
-				        // Hide both reminders initially
-				        const reminderDiv = document.getElementById('reminder');
-				        reminderDiv.style.display = 'none';
-				
-				        if (selectedSemester === '1') {
-				            // Display reminders for Semester 1
-				            createReminderMessage(1, failSubjectsSemester1);
-				        } else if (selectedSemester === '2') {
-				            // Display reminders for Semester 2
-				            createReminderMessage(2, failSubjectsSemester2);
-				        }
-				    }
+// Function to create reminder message for a semester
+function createReminderMessage(semester, subjects) {
+    const reminderDiv = document.getElementById('reminder');
+    reminderDiv.style.width = '90%';
+    reminderDiv.style.marginLeft = 'auto';
+    reminderDiv.style.marginRight = 'auto';
 
-    // Call displayReminders initially to handle the default semester selection
-    displayReminders();
+    // Filter out subjects with failing grades for the selected semester
+    const failedSubjects = subjects.filter(subject => {
+        const result = determineResult(urlParams.get(subject));
+        return result.toLowerCase() === 'fail';
+    });
 
-    // Add onchange event listener to the semester selector
-    const semesterSelector = document.getElementById('semesterSelector');
-    semesterSelector.addEventListener('change', displayReminders);
+    if (failedSubjects.length > 0) {
+        const reminderMessage = `
+            <h3>Reminder for Semester ${semester}</h3>
+            <p>You should retake the ${
+                failedSubjects.length > 1 ? 'following subjects' : 'subject'
+            } for the next semester: ${failedSubjects.join(', ')}</p>
+        `;
+
+        // Display the reminder message
+        reminderDiv.innerHTML = reminderMessage;
+        reminderDiv.style.display = 'block';
+    } else {
+        reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
+    }
+}
+
+// Check for failed subjects in Semester 1
+const failSubjectsSemester1 = ['UZW164', 'UUW130', 'EKT102', 'EQT101', 'EKT120', 'EKT101'];
+				
+/ Display reminders based on user-selected semester
+function displayReminders() {
+    const selectedSemester = document.getElementById('semesterSelector').value;
+
+    // Hide both reminders initially
+    const reminderDiv = document.getElementById('reminder');
+    reminderDiv.style.display = 'none';
+
+    if (selectedSemester === '1') {
+        // Display reminders for Semester 1
+        createReminderMessage(1, failSubjectsSemester1);
+    } else if (selectedSemester === '2') {
+        // Hide reminder for Semester 2
+        reminderDiv.style.display = 'none';
+    }
+}
+
+// Call displayReminders initially to handle the default semester selection
+displayReminders();
+
+// Add onchange event listener to the semester selector
+const semesterSelector = document.getElementById('semesterSelector');
+semesterSelector.addEventListener('change', displayReminders);
 
 		    // Check if there are any failed subjects
   			  const hasFailedSubjects = failSubjectsSemester1.length > 0;
