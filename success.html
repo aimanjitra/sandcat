@@ -196,8 +196,6 @@
 	                    <td id="Detect">[Active/P1]</td>
                         </tr>
             </table>
-
-
         </div>
 
         <div id="semester2" class="semesterContent" style="display: none;">
@@ -222,6 +220,25 @@
             </table>
 
         </div>
+
+
+        <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
+	    <h3>Reminder</h3>
+	    <ul id="failSubjects"></ul>
+	</div>
+
+	    <div id="newSchedule" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
+	    <h3>New Schedule</h3>
+	    <p>For next semester, you need to take the following subjects:</p>
+	    <ul>
+		        <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
+		            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
+	      		    <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
+	     		    <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
+	    		    <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
+	   		    <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
+		    </ul>
+		</div>
 	    
     </div>
 
@@ -242,8 +259,19 @@
                 const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
                 if (selectedSemesterContent) {
                     selectedSemesterContent.style.display = 'block';
-		    updateReminderAndSchedule(selectedSemester) = 'block';
-                }
+		    updateReminderAndSchedule(selectedSemester);  // Call the function
+
+    // Now you can set the style based on the result of the function
+    const reminderDiv = document.getElementById('reminder');
+    const newScheduleDiv = document.getElementById('newSchedule');
+
+    if (/* Condition based on the result of updateReminderAndSchedule */) {
+        reminderDiv.style.display = 'block';
+        newScheduleDiv.style.display = 'block';
+    } else {
+        reminderDiv.style.display = 'none';
+        newScheduleDiv.style.display = 'none';
+    }
             };
 
         // Retrieve URL parameters
