@@ -386,15 +386,9 @@
 
 		// Function to update reminder and new schedule based on semester
             function updateReminderAndSchedule(semester) {
-		console.log(`Updating for Semester ${semester}`);
                 const failSubjectsList = document.getElementById('failSubjects');
                 const reminderDiv = document.getElementById('reminder');
                 const newScheduleDiv = document.getElementById('newSchedule');
-
-                // Reset reminder and new schedule content
-                failSubjectsList.innerHTML = '';
-                reminderDiv.innerHTML = '';
-                newScheduleDiv.innerHTML = '';
 
                 // Define subjects and schedules based on semester
                 let subjects = [];
@@ -402,6 +396,11 @@
 
                 switch (semester) {
 		    case '1':
+			// Reset reminder and new schedule content
+                failSubjectsList.innerHTML = '';
+                reminderDiv.innerHTML = '';
+                newScheduleDiv.innerHTML = '';
+			
                         subjects = [
                             'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I',
                             'FALSAFAH DAN ISU SEMASA',
@@ -421,6 +420,11 @@
                         break;
 
                     case '2':
+			     // Reset reminder and new schedule content
+                failSubjectsList.innerHTML = '';
+                reminderDiv.innerHTML = '';
+                newScheduleDiv.innerHTML = '';
+
                         // Define subjects and schedules for Semester 2
                         subjects = [
                             'ABC - Subject ABC',
