@@ -152,9 +152,10 @@
                     const uzw164 = data.data[0]?.UZW164;
                     const ekt120 = data.data[0]?.EKT120;
                     const ekt101 = data.data[0]?.EKT101;
+                    const ekt124 = data.data[0]?.EKT124;
 
                     // Redirect to success.html with additional parameters
-                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&GPA=${GPA}`;
+                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&GPA=${GPA}&ekt124=${ekt124}`;
                 } else {
                     // Handle the case where data.data is undefined or empty
                     console.error('No data found for the given credentials.');
