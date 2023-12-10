@@ -403,6 +403,24 @@
                 let schedule = '';
 
                 switch (semester) {
+		    case '0':
+                        subjects = [
+                            'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I',
+                            'FALSAFAH DAN ISU SEMASA',
+                            'ASAS KEJURUTERAAN ELEKTRONIK',
+                            'MATEMATIK KEJURUTERAAN I',
+                            'PENGATURCARAAN KOMPUTER',
+                            'TEORI LITAR ELEKTRIK'
+                        ];
+                        schedule = `
+                            <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
+                            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
+                            <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
+                            <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
+                            <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
+                            <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
+                        `;
+                        break;
                     case '1':
                         subjects = [
                             'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I',
