@@ -199,7 +199,7 @@
 
 		<div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
 	    <h3>Reminder</h3>
-	    <ul id="failSubjects"></ul>
+	    <ul id="failSubjectsSemester1"></ul>
 	</div>
 
 		<div id="newSchedule1" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
@@ -217,20 +217,29 @@
                     <th>Result (Pass/Fail)</th>
                 </tr>
 
-                <tr>
-                    <td>ABC</td>
-                    <td>Subject ABC</td>
-                    <td>3</td>
-                    <td>4.00</td>
-                    <td>Pass</td>
-                </tr>
+                <!-- Subject 6 -->
+                        <tr>
+                            <td id="subjectCode7">[Subject Code]</td>
+                            <td id="subjectName7">[Subject Name]</td>
+                            <td id="creditHour7">[Credit Hour]</td>
+                            <td id="ekt124">[EKT101]</td>
+                            <td id="result7">[Result]</td>
+                        </tr>
+                
+                        <tr>
+                            <td id="blankCell"></td>
+	                    <td id="CGPA">[Total CGPA]</td>
+	                    <td id="total">[Total Hour]</td>
+	                    <td id="GPA">[Average GPA]</td>
+	                    <td id="Detect">[Active/P1]</td>
+                        </tr>
 
                 <!-- Add more rows as needed for Semester 2 -->
             </table>
 
 		        <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
 	    <h3>Reminder</h3>
-	    <ul id="failSubjects"></ul>
+	    <ul id="failSubjectsSemester2"></ul>
 	</div>
 
 		<div id="newSchedule2" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
@@ -280,6 +289,8 @@
             const ekt102 = urlParams.get('ekt102') || 'N/A';
             const eqt101 = urlParams.get('eqt101') || 'N/A';
 
+	    const eqt124 = urlParams.get('eqt124') || 'N/A';
+
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
             document.getElementById('matric').textContent = `No Matric: ${matric}`;
@@ -295,6 +306,8 @@
             document.getElementById('ekt120').textContent = getLetterGrade(ekt120);
             document.getElementById('uzw164').textContent = getLetterGrade(uzw164);
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
+		
+	    document.getElementById('ekt124').textContent = getLetterGrade(ekt124);
 
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
@@ -311,7 +324,8 @@
                 { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
                 { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
                 { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
-                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 }
+                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 },
+		{ code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 }
             ];
 
             subjects.forEach((subject, index) => {
@@ -346,7 +360,7 @@
                     else return 'F';
                 }
 
-		// Check for the first subjects
+		// Check for the Semester 1
                 result1.textContent = determineResult(uzw164);
                 result2.textContent = determineResult(uuw130);
                 result3.textContent = determineResult(ekt102);
@@ -354,120 +368,108 @@
                 result5.textContent = determineResult(ekt120);
                 result6.textContent = determineResult(ekt101);
 
-		// Check for the first subjects
-                    if (determineResult(uzw164) === 'Fail') {
-                        failSubjects.push('KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I');
-                    }
-                    if (determineResult(uuw130) === 'Fail') {
-                        failSubjects.push('FALSAFAH DAN ISU SEMASA');
+		// Check for Semester 2 subjects
+                result7.textContent = determineResult(ekt120);
+
+		// Function to determine pass/fail result
+function determineResult(grade) {
+    // Check if the numeric grade is greater than or equal to 2
+    return (grade >= 2) ? 'Pass' : 'Fail';
+}
+
+		    // Check for failed subjects in Semester 1
+			const failSubjectsSemester1 = [];
+
+		    if (determineResult(uzw164_semester1) === 'Fail') {
+                        failSubjectsSemester1.push('KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I');
+		    }if (determineResult(uuw130) === 'Fail') {
+                        failSubjectsSemester1.push('FALSAFAH DAN ISU SEMASA');
                     }
                     if (determineResult(ekt102) === 'Fail') {
-                        failSubjects.push('ASAS KEJURUTERAAN ELEKTRONIK');
+                        failSubjectsSemester1.push('ASAS KEJURUTERAAN ELEKTRONIK');
                     }
                     if (determineResult(eqt101) === 'Fail') {
-                        failSubjects.push('MATEMATIK KEJURUTERAAN I');
+                        failSubjectsSemester1.push('MATEMATIK KEJURUTERAAN I');
                     }
                     if (determineResult(ekt120) === 'Fail') {
-                        failSubjects.push('PENGATURCARAAN KOMPUTER');
+                        failSubjectsSemester1.push('PENGATURCARAAN KOMPUTER');
                     }
                     if (determineResult(ekt101) === 'Fail') {
-                        failSubjects.push('TEORI LITAR ELEKTRIK');
+                        failSubjectsSemester1.push('TEORI LITAR ELEKTRIK');
                     }
 
-               // Function to determine pass/fail result
-                function determineResult(grade) {
-                    // Check if the numeric grade is greater than or equal to 2
-                    return (grade >= 2) ? 'Pass' : 'Fail';
-                }
 
-		// Function to update reminder and new schedule based on semester
-            function updateReminderAndSchedule(semester) {
-                // Reset reminder and new schedule content
-                failSubjectsList.innerHTML = '';
-                reminderDiv.innerHTML = '';
-                newScheduleDiv.innerHTML = '';
+// Check for failed subjects in Semester 2
+const failSubjectsSemester2 = [];
 
-                // Define subjects and schedules based on semester
-                let subjects = [];
+		  if (determineResult(ekt124) === 'Fail') {
+    		       failSubjectsSemester2.push('ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]');
+		  }
 
-                switch (semester) {
-                    case '1':
-                        subjects = [
-                            'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I',
-                            'FALSAFAH DAN ISU SEMASA',
-                            'ASAS KEJURUTERAAN ELEKTRONIK',
-                            'MATEMATIK KEJURUTERAAN I',
-                            'PENGATURCARAAN KOMPUTER',
-                            'TEORI LITAR ELEKTRIK'
-                        ];
-                        break;
 
-                    case '2':
-                        // Define subjects and schedules for Semester 2
-                        subjects = [
-                            'ABC - Subject ABC',
-                            // Add more subjects as needed
-                        ];
-                        break;
+// Display the fail subjects and reminder for Semester 1
+const failSubjectsListSemester1 = document.getElementById('failSubjectsSemester1');
+const reminderDivSemester1 = document.getElementById('reminderSemester1');
 
-                    // Add cases for Semester 3 to 8 as needed
+// Display the fail subjects and reminder for Semester 2
+const failSubjectsListSemester2 = document.getElementById('failSubjectsSemester2');
+const reminderDivSemester2 = document.getElementById('reminderSemester2');
 
-                    default:
-                        break;
-                }
 
-                // Display the fail subjects and reminder
-                if (subjects.length > 0) {
-                    // Display the fail subjects
-                    failSubjectsList.innerHTML = subjects.map(subject => `<li>${subject}</li>`).join('');
+// Display logic for Semester 1
+if (failSubjectsSemester1.length > 0) {
+    // Display the fail subjects
+    failSubjectsListSemester1.innerHTML = failSubjectsSemester1.map(subject => `<li>${subject}</li>`).join('');
 
-                    // Display the reminder message
-                    const reminderMessage = `You should retake the ${subjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjects.join(', ')}`;
-                    const reminderParagraph = document.createElement('p');
-                    reminderParagraph.textContent = reminderMessage;
+    // Display the reminder message
+    const reminderMessageSemester1 = `You should retake the ${failSubjectsSemester1.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${failSubjectsSemester1.join(', ')}`;
+    const reminderParagraphSemester1 = document.createElement('p');
+    reminderParagraphSemester1.textContent = reminderMessageSemester1;
 
-                    // Append the reminder message to the reminderDiv
-                    reminderDiv.appendChild(reminderParagraph);
+    // Append the reminder message to the reminderDiv
+    reminderDivSemester1.appendChild(reminderParagraphSemester1);
 
-                    // Show the reminder
-                    reminderDiv.style.display = 'block';
-                } else {
-                    reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
-                }
-            }
-                
-                    // Display the fail subjects and reminder
-                    const failSubjectsList = document.getElementById('failSubjects');
-                
-                    if (failSubjects.length > 0) {
-                        // Display the fail subjects
-                        failSubjectsList.innerHTML = failSubjects.map(subject => `<li>${subject}</li>`).join('');
+    // Show the reminder
+    reminderDivSemester1.style.display = 'block';
+} else {
+    reminderDivSemester1.style.display = 'none'; // Hide the reminder if no fail subjects
+}
 
-			    const reminderDiv = document.getElementById('reminder');
-			    reminderDiv.style.width = '90%';
-			    reminderDiv.style.marginLeft = 'auto';
-			    reminderDiv.style.marginRight = 'auto';
-                
-                        // Display the reminder message
-                        const reminderMessage = `You should retake the ${failSubjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${failSubjects.join(', ')}`;
-                        const reminderParagraph = document.createElement('p');
-                        reminderParagraph.textContent = reminderMessage;
-                
-                        // Append the reminder message to the reminderDiv
-                        reminderDiv.appendChild(reminderParagraph);
-                
-                        // Show the reminder
-                        reminderDiv.style.display = 'block';
-                    } else {
-                        reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
-                    }
 
-		    // Check if there are any failed subjects
-  			  const hasFailedSubjects = failSubjects.length > 0;
 
-   		   // Update the detect element based on the presence of failed subjects
-    			const detectElement = document.getElementById('Detect');
-   			 detectElement.textContent = hasFailedSubjects ? 'P1' : 'Active';
+// Display logic for Semester 2
+if (failSubjectsSemester2.length > 0) {
+    // Display the fail subjects
+    failSubjectsListSemester2.innerHTML = failSubjectsSemester2.map(subject => `<li>${subject}</li>`).join('');
+
+    // Display the reminder message
+    const reminderMessageSemester2 = `You should retake the ${failSubjectsSemester2.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${failSubjectsSemester2.join(', ')}`;
+    const reminderParagraphSemester2 = document.createElement('p');
+    reminderParagraphSemester2.textContent = reminderMessageSemester2;
+
+    // Append the reminder message to the reminderDiv
+    reminderDivSemester2.appendChild(reminderParagraphSemester2);
+
+    // Show the reminder
+    reminderDivSemester2.style.display = 'block';
+} else {
+    reminderDivSemester2.style.display = 'none'; // Hide the reminder if no fail subjects
+}
+
+
+// Check if there are any failed subjects in either Semester
+const hasFailedSubjectsSemester1 = failSubjectsSemester1.length > 0;
+const hasFailedSubjectsSemester2 = failSubjectsSemester2.length > 0;
+
+// Update the detect element based on the presence of failed subjects for both Semesters
+const detectElementSemester1 = document.getElementById('DetectSemester1');
+const detectElementSemester2 = document.getElementById('DetectSemester2');
+
+detectElementSemester1.textContent = hasFailedSubjectsSemester1 ? 'P1' : 'Active';
+detectElementSemester2.textContent = hasFailedSubjectsSemester2 ? 'P1' : 'Active';
+
+
+
 
 		// Version 1 of new schedule information
 const newScheduleDiv1 = document.getElementById('newSchedule1');
