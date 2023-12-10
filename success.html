@@ -196,16 +196,7 @@
 	                    <td id="Detect">[Active/P1]</td>
                         </tr>
             </table>
-
-			<div id="reminder">
-            <h3>Reminder</h3>
-            <ul id="failSubjects"></ul>
-        </div>
-
-        <div id="newSchedule">
-            <h3>New Schedule</h3>
-            <p id="newSchedule"></p>
-        </div>
+     </div>
 
         <div id="semester2" class="semesterContent" style="display: none;">
             <table>
@@ -228,16 +219,6 @@
                 <!-- Add more rows as needed for Semester 2 -->
             </table>
 
-		<div id="reminder">
-            <h3>Reminder</h3>
-            <ul id="failSubjects"></ul>
-        </div>
-
-        <div id="newSchedule">
-            <h3>New Schedule</h3>
-	    <p id="newSchedule"></p>
-        </div>
-
         </div>
 
     <script>
@@ -257,9 +238,8 @@
                 const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
                 if (selectedSemesterContent) {
                     selectedSemesterContent.style.display = 'block';
+		    updateReminderAndSchedule($'selectedSemester');    
                 }
-
-		updateReminderAndSchedule(selectedSemester);
             };
 
         // Retrieve URL parameters
