@@ -265,10 +265,6 @@
         updateReminderAndSchedule(selectedSemester);
     };
 
-	// Initialize the semester content based on the default selected semester
-    const defaultSemester = document.getElementById('semesterSelector').value;
-    changeSemester(defaultSemester);
-
         // Retrieve URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const fullName = urlParams.get('fullName') || 'N/A';
