@@ -347,11 +347,11 @@
                     else return 'F';
                 }
 
-               // Function to determine pass/fail result
-                function determineResult(grade) {
-                    // Check if the numeric grade is greater than or equal to 2
-                    return (grade >= 2) ? 'Pass' : 'Fail';
-                }
+		              function determineResult(grade) {
+		    console.log('Grade:', grade);
+		    return (grade >= 2) ? 'Pass' : 'Fail';
+		}
+
 
 		// Function to update reminder and new schedule based on semester
             function updateReminderAndSchedule(semester) {
