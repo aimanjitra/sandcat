@@ -347,11 +347,19 @@
                     else return 'F';
                 }
 
-		              function determineResult(grade) {
-		    console.log('Grade:', grade);
-		    return (grade >= 2) ? 'Pass' : 'Fail';
-		}
+		// Check for the first subjects
+                result1.textContent = determineResult(uzw164);
+                result2.textContent = determineResult(uuw130);
+                result3.textContent = determineResult(ekt102);
+                result4.textContent = determineResult(eqt101);
+                result5.textContent = determineResult(ekt120);
+                result6.textContent = determineResult(ekt101);
 
+               // Function to determine pass/fail result
+                function determineResult(grade) {
+                    // Check if the numeric grade is greater than or equal to 2
+                    return (grade >= 2) ? 'Pass' : 'Fail';
+                }
 
 		// Function to update reminder and new schedule based on semester
             function updateReminderAndSchedule(semester) {
