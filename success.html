@@ -259,9 +259,8 @@
                 const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
                 if (selectedSemesterContent) {
                     selectedSemesterContent.style.display = 'block';
+		    updateReminderAndSchedule(selectedSemester);
                 }
-
-		updateReminderAndSchedule(selectedSemester);
             };
 
         // Retrieve URL parameters
