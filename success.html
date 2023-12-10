@@ -202,9 +202,7 @@
 	    <ul id="failSubjects"></ul>
 	</div>
 
-		<div id="newSchedule" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
-	    <h3>New Schedule</h3>
-	    <p>For next semester, you need to take the following subjects:</p>
+		<div id="newSchedule1" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
 		</div>
 
         </div>
@@ -224,24 +222,24 @@
                     <td>Subject ABC</td>
                     <td>3</td>
                     <td>4.00</td>
-                    <td>Fail</td>
+                    <td>Pass</td>
                 </tr>
 
                 <!-- Add more rows as needed for Semester 2 -->
             </table>
 
-		<div class="reminder semester2" style="display: none; margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
-    <h3>Reminder</h3>
-    <ul class="failSubjects"></ul>
-</div>
+		        <div id="reminder" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
+	    <h3>Reminder</h3>
+	    <ul id="failSubjects"></ul>
+	</div>
 
-<div class="newSchedule semester2" style="display: none; margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
-    <h3>New Schedule</h3>
-    <ul class="schedule"></ul>
-</div>
-
+		<div id="newSchedule2" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
+		</div>
+	    
     </div>
 
+
+        </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -391,7 +389,6 @@
 
                 // Define subjects and schedules based on semester
                 let subjects = [];
-                let schedule = '';
 
                 switch (semester) {
                     case '1':
@@ -403,14 +400,6 @@
                             'PENGATURCARAAN KOMPUTER',
                             'TEORI LITAR ELEKTRIK'
                         ];
-                        schedule = `
-                            <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
-                            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
-                            <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
-                            <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
-                            <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
-                            <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
-                        `;
                         break;
 
                     case '2':
@@ -419,12 +408,6 @@
                             'ABC - Subject ABC',
                             // Add more subjects as needed
                         ];
-                        schedule = `
-                            <li>Subject 1</li>
-                            <li>Subject 2</li>
-                            <!-- Add more subjects as needed -->
-                        `;
-			schedule = subjects.map(subject => `<li>${subject}</li>`).join('');
                         break;
 
                     // Add cases for Semester 3 to 8 as needed
@@ -433,59 +416,24 @@
                         break;
                 }
 
-			// Function to display fail subjects and reminder
-function displayFailSubjectsAndReminder(subjects, reminderDivSelector) {
-    const failSubjectsList = document.querySelector(`${reminderDivSelector} .failSubjects`);
-    failSubjectsList.innerHTML = subjects.map(subject => `<li>${subject}</li>`).join('');
-
-    const reminderMessage = `You should retake the ${subjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjects.join(', ')}`;
-    const reminderParagraph = document.createElement('p');
-    reminderParagraph.textContent = reminderMessage;
-
-    const reminderDiv = document.querySelector(reminderDivSelector);
-    reminderDiv.appendChild(reminderParagraph);
-}
-
-
                 // Display the fail subjects and reminder
                 if (subjects.length > 0) {
                     // Display the fail subjects
                     failSubjectsList.innerHTML = subjects.map(subject => `<li>${subject}</li>`).join('');
 
-                    // Display the fail subjects and reminder
-    if (subjects.length > 0) {
-        if (semester === '1') {
-            // Display for Semester 1
-            displayFailSubjectsAndReminder(subjects, '.reminder');
-        } else if (semester === '2') {
-            // Display for Semester 2
-            displayFailSubjectsAndReminder(subjects, '.reminder.semester2');
-        }
+                    // Display the reminder message
+                    const reminderMessage = `You should retake the ${subjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjects.join(', ')}`;
+                    const reminderParagraph = document.createElement('p');
+                    reminderParagraph.textContent = reminderMessage;
 
-        // ... (your existing code) ...
-    } else {
-        // Hide the reminder if no fail subjects
-        const reminderDiv = document.querySelector('.reminder');
-        reminderDiv.style.display = 'none';
+                    // Append the reminder message to the reminderDiv
+                    reminderDiv.appendChild(reminderParagraph);
 
-        // Hide the reminder for Semester 2
-        const reminderDivSemester2 = document.querySelector('.reminder.semester2');
-        reminderDivSemester2.style.display = 'none';
-
-                // Display new schedule information
-                if (schedule) {
-                    newScheduleDiv.innerHTML = `
-                        <h3>New Schedule</h3>
-                        <p>For next semester, you need to take the following subjects:</p>
-                        <ul>${schedule}</ul>
-                    `;
+                    // Show the reminder
+                    reminderDiv.style.display = 'block';
+                } else {
+                    reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
                 }
-
-                if (schedule) {
-                 const newScheduleList = document.querySelector('.newSchedule.semester2 .schedule');
-                 newScheduleList.innerHTML = schedule;
-                }
-
             }
                 
                     // Display the fail subjects and reminder
@@ -521,21 +469,36 @@ function displayFailSubjectsAndReminder(subjects, reminderDivSelector) {
     			const detectElement = document.getElementById('Detect');
    			 detectElement.textContent = hasFailedSubjects ? 'P1' : 'Active';
 
-		// New Schedule information
-		    const newScheduleDiv = document.getElementById('newSchedule');
-		    const newScheduleMessage = `
-		        <h3>New Schedule</h3>
-		        <p>For next semester, you need to take the following subjects:</p>
-		        <ul>
-		            <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
-		            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
-	      		    <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
-	     		    <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
-	    		    <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
-	   		    <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
-		        </ul>
-		    `;
-		    newScheduleDiv.innerHTML = newScheduleMessage;
+		// Version 1 of new schedule information
+const newScheduleDiv1 = document.getElementById('newSchedule1');
+const newScheduleMessage1 = `
+    <h3>New Schedule - Version 1</h3>
+    <p>For next semester, you need to take the following subjects:</p>
+    <ul>
+        <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
+        <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
+        <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
+        <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
+        <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
+        <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
+    </ul>
+`;
+newScheduleDiv1.innerHTML = newScheduleMessage1;
+
+// Version 2 of new schedule information
+const newScheduleDiv2 = document.getElementById('newSchedule2');
+const newScheduleMessage2 = `
+    <h3>New Schedule - Version 2</h3>
+    <p>For next semester, you need to take the following subjects:</p>
+    <ul>
+        <li>ABC123 - EXAMPLE SUBJECT 1</li>
+        <li>DEF456 - EXAMPLE SUBJECT 2</li>
+        <li>GHI789 - EXAMPLE SUBJECT 3</li>
+        <!-- Add more subjects as needed -->
+    </ul>
+`;
+newScheduleDiv2.innerHTML = newScheduleMessage2;
+
 
 	    	// Calculate CGPA based on current GPA
     		const currentGPA = parseFloat(GPA);
