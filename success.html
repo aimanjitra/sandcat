@@ -247,23 +247,27 @@
 
 	// Function to change the displayed semester content
             window.changeSemester = function () {
-    const semesterSelector = document.getElementById('semesterSelector');
-    const selectedSemester = semesterSelector.value;
+        const semesterSelector = document.getElementById('semesterSelector');
+        const selectedSemester = semesterSelector.value;
 
-    // Hide all semester content
-    document.querySelectorAll('.semesterContent').forEach(function (content) {
-        content.style.display = 'none';
-    });
+        // Hide all semester content
+        document.querySelectorAll('.semesterContent').forEach(function (content) {
+            content.style.display = 'none';
+        });
 
-    // Show the selected semester content
-    const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
-    if (selectedSemesterContent) {
-        selectedSemesterContent.style.display = 'block';
-    }
+        // Show the selected semester content
+        const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
+        if (selectedSemesterContent) {
+            selectedSemesterContent.style.display = 'block';
+        }
 
-    // Update reminder and schedule for the selected semester
-    updateReminderAndSchedule(selectedSemester);
-};
+        // Update reminder and schedule for the selected semester
+        updateReminderAndSchedule(selectedSemester);
+    };
+
+    // Ensure the initial update when the page loads
+    const initialSemester = document.getElementById('semesterSelector').value;
+    updateReminderAndSchedule(initialSemester);
 
 
         // Retrieve URL parameters
