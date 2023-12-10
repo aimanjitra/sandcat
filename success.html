@@ -265,11 +265,6 @@
         updateReminderAndSchedule(selectedSemester);
     };
 
-    // Ensure the initial update when the page loads
-    const initialSemester = document.getElementById('semesterSelector').value;
-    updateReminderAndSchedule(initialSemester);
-
-
         // Retrieve URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const fullName = urlParams.get('fullName') || 'N/A';
