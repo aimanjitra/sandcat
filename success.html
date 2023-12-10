@@ -411,7 +411,7 @@
 
                 // Define subjects and schedules based on semester
                 let subjects = [];
-                let schedule = '';
+                let newScheduleMessage = '';
 
 		// Clear existing content in the reminder
    		failSubjectsList.innerHTML = '';
@@ -428,13 +428,17 @@
                             'PENGATURCARAAN KOMPUTER',
                             'TEORI LITAR ELEKTRIK'
                         ];
-                        schedule = `
+                        newScheduleMessage = `
+                            <h3>New Schedule</h3>
+                	    <p>For next semester, you need to take the following subjects:</p>
+                            <ul>
                             <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
                             <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
                             <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
                             <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
                             <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
                             <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
+                            </ul>
                         `;
                         break;
 
@@ -444,10 +448,13 @@
                             'EKT124 - ELEKTRONIK DIGIT I',
                             // Add more subjects as needed
                         ];
-                        schedule = `
-                            <li>Subject 1</li>
-                            <li>Subject 2</li>
-                            <!-- Add more subjects as needed -->
+                        newScheduleMessage = `
+                            <h3>New Schedule</h3>
+                	    <p>For next semester, you need to take the following subjects:</p>
+                            <ul>
+                            <li>UZW133 - RADIO GILA</li>
+                            <li>EKT111 - ELEKTRONIK DUNA</li>
+                            </ul>
                         `;
                         break;
 
@@ -476,42 +483,35 @@
                     reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
                 }
 
-                // Display new schedule information
-                if (schedule) {
-                    newScheduleDiv.innerHTML = `
-                        <h3>New Schedule</h3>
-                        <p>For next semester, you need to take the following subjects:</p>
-                        <ul>${schedule}</ul>
-                    `;
-                }
+		if (newScheduleMessage) {
+        	newScheduleDiv.innerHTML = newScheduleMessage;
+    		}
             }
                 
                     // Display the fail subjects and reminder
                     const failSubjectsList = document.getElementById('failSubjects');
                     const reminderDiv = document.getElementById('reminder');
                 
-                    if (failSubjects.length > 0) {
-                        // Display the fail subjects
-                        failSubjectsList.innerHTML = failSubjects.map(subject => `<li>${subject}</li>`).join('');
+                    if (hasFailedSubjects) {
+        // Display fail subjects and reminder
+        failSubjectsList.innerHTML = failSubjects.map(subject => `<li>${subject}</li>`).join('');
 
-			    const reminderDiv = document.getElementById('reminder');
-			    reminderDiv.style.width = '90%';
-			    reminderDiv.style.marginLeft = 'auto';
-			    reminderDiv.style.marginRight = 'auto';
-                
-                        // Display the reminder message
-                        const reminderMessage = `You should retake the ${failSubjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${failSubjects.join(', ')}`;
-                        const reminderParagraph = document.createElement('p');
-                        reminderParagraph.textContent = reminderMessage;
-                
-                        // Append the reminder message to the reminderDiv
-                        reminderDiv.appendChild(reminderParagraph);
-                
-                        // Show the reminder
-                        reminderDiv.style.display = 'block';
-                    } else {
-                        reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
-                    }
+        reminderDiv.style.width = '90%';
+        reminderDiv.style.marginLeft = 'auto';
+        reminderDiv.style.marginRight = 'auto';
+
+        const reminderMessage = `You should retake the ${failSubjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${failSubjects.join(', ')}`;
+        const reminderParagraph = document.createElement('p');
+        reminderParagraph.textContent = reminderMessage;
+
+        reminderDiv.innerHTML = ''; // Clear existing content
+        reminderDiv.appendChild(reminderParagraph);
+        reminderDiv.style.display = 'block';
+    } else {
+        // Hide the reminder if no fail subjects
+        reminderDiv.style.display = 'none';
+    }
+}
 
 		    // Check if there are any failed subjects
   			  const hasFailedSubjects = failSubjects.length > 0;
@@ -519,22 +519,6 @@
    		   // Update the detect element based on the presence of failed subjects
     			const detectElement = document.getElementById('Detect');
    			 detectElement.textContent = hasFailedSubjects ? 'P1' : 'Active';
-
-		// New Schedule information
-		    const newScheduleDiv = document.getElementById('newSchedule');
-		    const newScheduleMessage = `
-		        <h3>New Schedule</h3>
-		        <p>For next semester, you need to take the following subjects:</p>
-		        <ul>
-		            <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
-		            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
-	      		    <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
-	     		    <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
-	    		    <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
-	   		    <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
-		        </ul>
-		    `;
-		    newScheduleDiv.innerHTML = newScheduleMessage;
 
 	    	// Calculate CGPA based on current GPA
     		const currentGPA = parseFloat(GPA);
