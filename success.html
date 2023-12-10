@@ -388,6 +388,7 @@
 
 		// Function to update reminder and new schedule based on semester
             function updateReminderAndSchedule(semester) {
+	
                 const failSubjectsList = document.getElementById('failSubjects');
                 const reminderDiv = document.getElementById('reminder');
                 const newScheduleDiv = document.getElementById('newSchedule');
@@ -395,6 +396,10 @@
                 // Define subjects and schedules based on semester
                 let subjects = [];
                 let schedule = '';
+
+		// Clear existing content in the reminder
+   		 failSubjectsList.innerHTML = '';
+    		reminderDiv.innerHTML = '';
 
                 switch (semester) {
 		    case '1':
