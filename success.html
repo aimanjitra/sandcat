@@ -218,6 +218,7 @@
 
                 <!-- Add more rows as needed for Semester 2 -->
             </table>
+
         </div>
 
 
@@ -259,6 +260,8 @@
                 if (selectedSemesterContent) {
                     selectedSemesterContent.style.display = 'block';
                 }
+
+		updateReminderAndSchedule(selectedSemester);
             };
 
         // Retrieve URL parameters
@@ -349,34 +352,89 @@
                     // Check if the numeric grade is greater than or equal to 2
                     return (grade >= 2) ? 'Pass' : 'Fail';
                 }
-            
-                // Check for the first subjects
-                result1.textContent = determineResult(uzw164);
-                result2.textContent = determineResult(uuw130);
-                result3.textContent = determineResult(ekt102);
-                result4.textContent = determineResult(eqt101);
-                result5.textContent = determineResult(ekt120);
-                result6.textContent = determineResult(ekt101);
 
-                // Check for the first subjects
-                    if (determineResult(uzw164) === 'Fail') {
-                        failSubjects.push('KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I');
-                    }
-                    if (determineResult(uuw130) === 'Fail') {
-                        failSubjects.push('FALSAFAH DAN ISU SEMASA');
-                    }
-                    if (determineResult(ekt102) === 'Fail') {
-                        failSubjects.push('ASAS KEJURUTERAAN ELEKTRONIK');
-                    }
-                    if (determineResult(eqt101) === 'Fail') {
-                        failSubjects.push('MATEMATIK KEJURUTERAAN I');
-                    }
-                    if (determineResult(ekt120) === 'Fail') {
-                        failSubjects.push('PENGATURCARAAN KOMPUTER');
-                    }
-                    if (determineResult(ekt101) === 'Fail') {
-                        failSubjects.push('TEORI LITAR ELEKTRIK');
-                    }
+		// Function to update reminder and new schedule based on semester
+            function updateReminderAndSchedule(semester) {
+                const failSubjectsList = document.getElementById('failSubjects');
+                const reminderDiv = document.getElementById('reminder');
+                const newScheduleDiv = document.getElementById('newSchedule');
+
+                // Reset reminder and new schedule content
+                failSubjectsList.innerHTML = '';
+                reminderDiv.innerHTML = '';
+                newScheduleDiv.innerHTML = '';
+
+                // Define subjects and schedules based on semester
+                let subjects = [];
+                let schedule = '';
+
+                switch (semester) {
+                    case '1':
+                        subjects = [
+                            'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I',
+                            'FALSAFAH DAN ISU SEMASA',
+                            'ASAS KEJURUTERAAN ELEKTRONIK',
+                            'MATEMATIK KEJURUTERAAN I',
+                            'PENGATURCARAAN KOMPUTER',
+                            'TEORI LITAR ELEKTRIK'
+                        ];
+                        schedule = `
+                            <li>UZW195 - RADIO KAMPUS [CAMPUS RADIO]</li>
+                            <li>EKT124 - ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]</li>
+                            <li>EKT103 - KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]</li>
+                            <li>EKT119 - LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]</li>
+                            <li>EQT102 - MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]</li>
+                            <li>EKT104 - LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]</li>
+                        `;
+                        break;
+
+                    case '2':
+                        // Define subjects and schedules for Semester 2
+                        subjects = [
+                            'ABC - Subject ABC',
+                            // Add more subjects as needed
+                        ];
+                        schedule = `
+                            <li>Subject 1</li>
+                            <li>Subject 2</li>
+                            <!-- Add more subjects as needed -->
+                        `;
+                        break;
+
+                    // Add cases for Semester 3 to 8 as needed
+
+                    default:
+                        break;
+                }
+
+                // Display the fail subjects and reminder
+                if (subjects.length > 0) {
+                    // Display the fail subjects
+                    failSubjectsList.innerHTML = subjects.map(subject => `<li>${subject}</li>`).join('');
+
+                    // Display the reminder message
+                    const reminderMessage = `You should retake the ${subjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjects.join(', ')}`;
+                    const reminderParagraph = document.createElement('p');
+                    reminderParagraph.textContent = reminderMessage;
+
+                    // Append the reminder message to the reminderDiv
+                    reminderDiv.appendChild(reminderParagraph);
+
+                    // Show the reminder
+                    reminderDiv.style.display = 'block';
+                } else {
+                    reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
+                }
+
+                // Display new schedule information
+                if (schedule) {
+                    newScheduleDiv.innerHTML = `
+                        <h3>New Schedule</h3>
+                        <p>For next semester, you need to take the following subjects:</p>
+                        <ul>${schedule}</ul>
+                    `;
+                }
+            }
                 
                     // Display the fail subjects and reminder
                     const failSubjectsList = document.getElementById('failSubjects');
