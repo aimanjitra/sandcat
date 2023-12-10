@@ -209,11 +209,11 @@
                 </tr>
 
                 <tr>
-                    <td>ABC</td>
-                    <td>Subject ABC</td>
-                    <td>3</td>
-                    <td>4.00</td>
-                    <td>Pass</td>
+                    <td>id="subjectCode7">[Subject Code]</td>
+                    <td id="subjectName7">[Subject Name]</td>
+                    <td id="creditHour7">[Credit Hour]</td>
+                    <td id="ekt124">[EKT124]</td>
+                    <td id="result7">[Result]</td>
                 </tr>
 
                 <!-- Add more rows as needed for Semester 2 -->
@@ -282,6 +282,8 @@
             const ekt102 = urlParams.get('ekt102') || 'N/A';
             const eqt101 = urlParams.get('eqt101') || 'N/A';
 
+	    const ekt124 = urlParams.get('ekt124') || 'N/A';
+
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
             document.getElementById('matric').textContent = `No Matric: ${matric}`;
@@ -298,6 +300,8 @@
             document.getElementById('uzw164').textContent = getLetterGrade(uzw164);
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 
+	    document.getElementById('ekt124').textContent = getLetterGrade(ekt124);
+
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
             
@@ -313,7 +317,8 @@
                 { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
                 { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
                 { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
-                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 }
+                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 },
+		{ code: 'EKT124', name: 'ELEKTRONIK DIGIT I', creditHour: 3 }
             ];
 
             subjects.forEach((subject, index) => {
@@ -355,6 +360,7 @@
                 result4.textContent = determineResult(eqt101);
                 result5.textContent = determineResult(ekt120);
                 result6.textContent = determineResult(ekt101);
+		result7.textContent = determineResult(ekt124);
 
 		// Check for the first subjects
                     if (determineResult(uzw164) === 'Fail') {
@@ -374,6 +380,9 @@
                     }
                     if (determineResult(ekt101) === 'Fail') {
                         failSubjects.push('TEORI LITAR ELEKTRIK');
+                    }
+		    if (determineResult(ekt124) === 'Fail') {
+                        failSubjects.push('ELEKTRONIK DIGIT I');
                     }
 
                // Function to determine pass/fail result
@@ -420,7 +429,7 @@
                     case '2':
                         // Define subjects and schedules for Semester 2
                         subjects = [
-                            'ABC - Subject ABC',
+                            'EKT124 - ELEKTRONIK DIGIT I',
                             // Add more subjects as needed
                         ];
                         schedule = `
