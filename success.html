@@ -424,6 +424,7 @@
                             <li>Subject 2</li>
                             <!-- Add more subjects as needed -->
                         `;
+			schedule = subjects.map(subject => `<li>${subject}</li>`).join('');
                         break;
 
                     // Add cases for Semester 3 to 8 as needed
@@ -432,24 +433,44 @@
                         break;
                 }
 
+			// Function to display fail subjects and reminder
+function displayFailSubjectsAndReminder(subjects, reminderDivSelector) {
+    const failSubjectsList = document.querySelector(`${reminderDivSelector} .failSubjects`);
+    failSubjectsList.innerHTML = subjects.map(subject => `<li>${subject}</li>`).join('');
+
+    const reminderMessage = `You should retake the ${subjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjects.join(', ')}`;
+    const reminderParagraph = document.createElement('p');
+    reminderParagraph.textContent = reminderMessage;
+
+    const reminderDiv = document.querySelector(reminderDivSelector);
+    reminderDiv.appendChild(reminderParagraph);
+}
+
+
                 // Display the fail subjects and reminder
                 if (subjects.length > 0) {
                     // Display the fail subjects
                     failSubjectsList.innerHTML = subjects.map(subject => `<li>${subject}</li>`).join('');
 
-                    // Display the reminder message
-                    const reminderMessage = `You should retake the ${subjects.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjects.join(', ')}`;
-                    const reminderParagraph = document.createElement('p');
-                    reminderParagraph.textContent = reminderMessage;
+                    // Display the fail subjects and reminder
+    if (subjects.length > 0) {
+        if (semester === '1') {
+            // Display for Semester 1
+            displayFailSubjectsAndReminder(subjects, '.reminder');
+        } else if (semester === '2') {
+            // Display for Semester 2
+            displayFailSubjectsAndReminder(subjects, '.reminder.semester2');
+        }
 
-                    // Append the reminder message to the reminderDiv
-                    reminderDiv.appendChild(reminderParagraph);
+        // ... (your existing code) ...
+    } else {
+        // Hide the reminder if no fail subjects
+        const reminderDiv = document.querySelector('.reminder');
+        reminderDiv.style.display = 'none';
 
-                    // Show the reminder
-                    reminderDiv.style.display = 'block';
-                } else {
-                    reminderDiv.style.display = 'none'; // Hide the reminder if no fail subjects
-                }
+        // Hide the reminder for Semester 2
+        const reminderDivSemester2 = document.querySelector('.reminder.semester2');
+        reminderDivSemester2.style.display = 'none';
 
                 // Display new schedule information
                 if (schedule) {
@@ -459,6 +480,12 @@
                         <ul>${schedule}</ul>
                     `;
                 }
+
+                if (schedule) {
+                 const newScheduleList = document.querySelector('.newSchedule.semester2 .schedule');
+                 newScheduleList.innerHTML = schedule;
+                }
+
             }
                 
                     // Display the fail subjects and reminder
