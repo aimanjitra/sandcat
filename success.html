@@ -268,8 +268,6 @@
                 if (selectedSemesterContent) {
                     selectedSemesterContent.style.display = 'block';
                 }
-
-		updateReminderAndSchedule(selectedSemester);
             };
 
         // Retrieve URL parameters
@@ -380,7 +378,7 @@ function determineResult(grade) {
 		    // Check for failed subjects in Semester 1
 			const failSubjectsSemester1 = [];
 
-		    if (determineResult(uzw164_semester1) === 'Fail') {
+		    if (determineResult(uzw164) === 'Fail') {
                         failSubjectsSemester1.push('KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I');
 		    }if (determineResult(uuw130) === 'Fail') {
                         failSubjectsSemester1.push('FALSAFAH DAN ISU SEMASA');
