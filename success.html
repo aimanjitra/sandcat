@@ -228,9 +228,9 @@
                 
                         <tr>
                             <td id="blankCell"></td>
-	                    <td id="blankCell"></td>
+	                    <td id="CGPA">[Total CGPA]</td>
 	                    <td id="total2">[Total Hour]</td>
-	                    <td id="blankCell"></td>
+	                    <td id="GPA2">[Average GPA 2]</td>
 	                    <td id="DetectSemester2">[Active/P1]</td>
                         </tr>
 
@@ -386,14 +386,20 @@ subjectsSemester2.forEach((subject, index) => {
 
 
             // Display the total credit hours for Semester 1 and Semester 2
-document.getElementById('total').textContent = `Total Hour (Semester 1): ${totalCreditHoursSemester1}`;
-document.getElementById('total2').textContent = `Total Hour (Semester 2): ${totalCreditHoursSemester2}`;
+document.getElementById('total').textContent = `Total Hour: ${totalCreditHoursSemester1}`;
+document.getElementById('total2').textContent = `Total Hour: ${totalCreditHoursSemester2}`;
 		
-		// Update the GPA calculation
+		// Update the GPA Semester 1 calculation
    	        const GPA1 = (getGPA(nekt102) + getGPA(neqt101) + getGPA(nekt101) + getGPA(nekt120) + getGPA(nuzw164) + getGPA(nuuw130)) / subjectsSemester1.length;
 
 		// Display the GPA for Semester 1
 		document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
+
+		// Update the GPA Semester 2 calculation
+   	        const GPA2 = getGPA(nekt124) / subjectsSemester2.length;
+
+		// Display the GPA for Semester 2
+		document.getElementById('GPA2').textContent = `GPA: ${GPA2.toFixed(2)}`;
 
 
             // Function to convert numerical grade to letter grade
@@ -554,13 +560,16 @@ const newScheduleMessage2 = `
 newScheduleDiv2.innerHTML = newScheduleMessage2;
 
 
-	    	// Calculate CGPA based on current GPA
-    		const currentGPA = parseFloat(GPA1);
-	    	// Calculate CGPA as half of the GPA
-		const currentCGPA = currentGPA / 2;
-	    	// Display CGPA on the right side
-		    const cgpaElement = document.getElementById('CGPA');
-		    cgpaElement.textContent = `CGPA: ${currentCGPA.toFixed(2)}`;
+    const semestersGPAs = [GPA1, GPA2]; // Add more GPAs as needed
+
+    // Calculate CGPA based on available semesters
+    const totalSemesters = semestersGPAs.length;
+    const totalGPA = semestersGPAs.reduce((sum, gpa) => sum + gpa, 0);
+    const currentCGPA = totalGPA / totalSemesters;
+
+    // Display CGPA on the right side
+    const cgpaElement = document.getElementById('CGPA');
+    cgpaElement.textContent = `CGPA: ${currentCGPA.toFixed(2)}`;
 
     });
         
