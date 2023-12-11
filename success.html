@@ -313,9 +313,6 @@ const nekt124 = eqt124;
 		
 	    document.getElementById('ekt124').textContent = getLetterGrade(ekt124);
 
-	    GPA1= (nekt102+neqt101+nekt101+nekt120+nuzw164+nuuw130)/6;
-	    document.getElementById('GPA1').textContent = `GPA: ${parseFloat(GPA1).toFixed(2)}`;
-
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
             
@@ -323,6 +320,26 @@ const nekt124 = eqt124;
             if (codeCourse === 'UR6523002') {
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
             }
+
+	    // Function to convert numerical grade to GPA scale
+    function getGPA(grade) {
+        if (grade >= 4.00) return 4.00;
+        else if (grade >= 3.75) return 3.75;
+        else if (grade >= 3.5) return 3.5;
+        else if (grade >= 3) return 3.0;
+        else if (grade >= 2.75) return 2.75;
+        else if (grade >= 2.5) return 2.5;
+        else if (grade >= 2) return 2.0;
+        else if (grade >= 1.75) return 1.75;
+        else if (grade >= 1.5) return 1.5;
+        else if (grade >= 1) return 1.0;
+        else if (grade >= 0.75) return 0.75;
+        else return 0.00;
+    }
+
+    // Update the GPA calculation
+    const GPA1 = (getGPA(nekt102) + getGPA(neqt101) + getGPA(nekt101) + getGPA(nekt120) + getGPA(nuzw164) + getGPA(nuuw130)) / 6;
+    document.getElementById('GPA1').textContent = `GPA: ${parseFloat(GPA1).toFixed(2)}`;
         
             // Education Subjects
             const subjects = [
