@@ -190,7 +190,7 @@
                 
                         <tr>
                             <td id="blankCell"></td>
-	                    <td id="CGPA">[Total CGPA]</td>
+	                    <td id="CGPA1">[Total CGPA]</td>
 	                    <td id="total">[Total Hour]</td>
 	                    <td id="GPA1">[Average GPA 1]</td>
 	                    <td id="DetectSemester1">[Active/P1]</td>
@@ -228,7 +228,7 @@
                 
                         <tr>
                             <td id="blankCell"></td>
-	                    <td id="CGPA">[Total CGPA]</td>
+	                    <td id="CGPA2">[Total CGPA]</td>
 	                    <td id="total2">[Total Hour]</td>
 	                    <td id="GPA2">[Average GPA 2]</td>
 	                    <td id="DetectSemester2">[Active/P1]</td>
@@ -560,16 +560,12 @@ const newScheduleMessage2 = `
 newScheduleDiv2.innerHTML = newScheduleMessage2;
 
 
-    const semestersGPAs = [GPA1, GPA2]; // Add more GPAs as needed
+    const cgpa1 = document.getElementById('CGPA1');
+    cgpa1.textContent = `CGPA: ${currentCGPA.toFixed(2)}`;
 
-    // Calculate CGPA based on available semesters
-    const totalSemesters = semestersGPAs.length;
-    const totalGPA = semestersGPAs.reduce((sum, gpa) => sum + gpa, 0);
-    const currentCGPA = totalGPA / totalSemesters;
-
-    // Display CGPA on the right side
-    const cgpaElement = document.getElementById('CGPA');
-    cgpaElement.textContent = `CGPA: ${currentCGPA.toFixed(2)}`;
+    const CGPA2= (GPA1 + GPA2)/2;
+    const cgpa2 = document.getElementById('CGPA2');
+    cgpa2.textContent = `CGPA: ${currentCGPA.toFixed(2)}`;
 
     });
         
