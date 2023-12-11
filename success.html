@@ -532,16 +532,15 @@ if (failSubjectsSemester2.length > 0) {
 }
 
 
-// Check if there are any failed subjects in either Semester
-const hasFailedSubjectsSemester1 = failSubjectsSemester1.length > 0;
-const hasFailedSubjectsSemester2 = failSubjectsSemester2.length > 0;
-
-// Update the detect element based on the presence of failed subjects for both Semesters
+// Update the detect element based on the GPA for both Semesters
 const detectElementSemester1 = document.getElementById('DetectSemester1');
 const detectElementSemester2 = document.getElementById('DetectSemester2');
 
-detectElementSemester1.textContent = hasFailedSubjectsSemester1 ? 'P1' : 'Active';
-detectElementSemester2.textContent = hasFailedSubjectsSemester2 ? 'P1' : 'Active';
+// Assuming GPA1 and GPA2 are defined variables
+
+detectElementSemester1.textContent = (GPA1 < 2) ? 'P1' : 'Active';
+detectElementSemester2.textContent = (GPA2 < 2) ? 'P1' : 'Active';
+
 
 
 
