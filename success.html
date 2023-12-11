@@ -337,36 +337,60 @@ const nekt124 = eqt124;
         else return 0.00;
     }
 
-    // Update the GPA calculation
-    const GPA1 = (getGPA(nekt102) + getGPA(neqt101) + getGPA(nekt101) + getGPA(nekt120) + getGPA(nuzw164) + getGPA(nuuw130)) / 6;
-    document.getElementById('GPA1').textContent = `GPA: ${parseFloat(GPA1).toFixed(2)}`;
         
-            // Education Subjects
-            const subjects = [
-                { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
-                { code: 'UUW130', name: 'FALSAFAH DAN ISU SEMASA', creditHour: 2 },
-                { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
-                { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
-                { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
-                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 },
-		{ code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 }
-            ];
+           // Education Subjects for Semester 1
+const subjectsSemester1 = [
+    { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
+    { code: 'UUW130', name: 'FALSAFAH DAN ISU SEMASA', creditHour: 2 },
+    { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
+    { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
+    { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
+    { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 },
+];
 
-            subjects.forEach((subject, index) => {
-                const subjectCode = document.getElementById(`subjectCode${index + 1}`);
-                const subjectName = document.getElementById(`subjectName${index + 1}`);
-                const creditHour = document.getElementById(`creditHour${index + 1}`);
+// Education Subjects for Semester 2
+const subjectsSemester2 = [
+    { code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 }
+];
 
-                subjectCode.textContent = subject.code;
-                subjectName.textContent = subject.name;
-                creditHour.textContent = subject.creditHour;
+// Display subjects for Semester 1
+subjectsSemester1.forEach((subject, index) => {
+    const subjectCode = document.getElementById(`subjectCode${index + 1}`);
+    const subjectName = document.getElementById(`subjectName${index + 1}`);
+    const creditHour = document.getElementById(`creditHour${index + 1}`);
 
-                // Add credit hours to the total
-                totalCreditHours += subject.creditHour;
-            });
+    subjectCode.textContent = subject.code;
+    subjectName.textContent = subject.name;
+    creditHour.textContent = subject.creditHour;
+
+    // Add credit hours to the total
+    totalCreditHours += subject.creditHour;
+});
+
+// Display subjects for Semester 2
+subjectsSemester2.forEach((subject, index) => {
+    const subjectCode = document.getElementById(`subjectCode${index + 7}`);
+    const subjectName = document.getElementById(`subjectName${index + 7}`);
+    const creditHour = document.getElementById(`creditHour${index + 7}`);
+
+    subjectCode.textContent = subject.code;
+    subjectName.textContent = subject.name;
+    creditHour.textContent = subject.creditHour;
+
+    // Add credit hours to the total
+    totalCreditHours += subject.creditHour;
+});
+
 
             // Display the total credit hours
              document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
+		
+		// Update the GPA calculation
+   	        const GPA1 = (getGPA(nekt102) + getGPA(neqt101) + getGPA(nekt101) + getGPA(nekt120) + getGPA(nuzw164) + getGPA(nuuw130)) / subjectsSemester1.length;
+
+		// Display the GPA for Semester 1
+		document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
+
 
             // Function to convert numerical grade to letter grade
                 function getLetterGrade(grade) {
