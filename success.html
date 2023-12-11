@@ -288,6 +288,14 @@
 
 	    const eqt124 = urlParams.get('eqt124') || 'N/A';
 
+	    const nekt102 = ekt102;
+const neqt101 = eqt101;
+const nekt101 = ekt101;
+const nekt120 = ekt120;
+const nuzw164 = uzw164;
+const nuuw130 = uuw130;
+const nekt124 = eqt124;
+
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
             document.getElementById('matric').textContent = `No Matric: ${matric}`;
@@ -304,15 +312,6 @@
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 		
 	    document.getElementById('ekt124').textContent = getLetterGrade(ekt124);
-
-		
-	    document.getElementById('nekt102').textContent = ekt102;
-            document.getElementById('neqt101').textContent = eqt101;
-            document.getElementById('nekt101').textContent = ekt101;
-            document.getElementById('nekt120').textContent = ekt120;
-            document.getElementById('nuzw164').textContent = uzw164;
-            document.getElementById('nuuw130').textContent = uuw130;
-            document.getElementById('nekt124').textContent = eqt124;
 
 	    GPA1= (nekt102+neqt101+nekt101+nekt120+nuzw164+nuuw130)/6;
 	    document.getElementById('GPA1').textContent = `GPA: ${parseFloat(GPA1).toFixed(2)}`;
