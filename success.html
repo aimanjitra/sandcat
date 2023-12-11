@@ -192,7 +192,7 @@
                             <td id="blankCell"></td>
 	                    <td id="CGPA">[Total CGPA]</td>
 	                    <td id="total">[Total Hour]</td>
-	                    <td id="GPA">[Average GPA]</td>
+	                    <td id="GPA1">[Average GPA 1]</td>
 	                    <td id="DetectSemester1">[Active/P1]</td>
                         </tr>
             </table>
@@ -278,7 +278,6 @@
             const codeCourse = urlParams.get('codeCourse') || 'N/A';
             const year = urlParams.get('year') || 'N/A';
             const semester = urlParams.get('semester') || 'N/A';
-            const GPA = urlParams.get('GPA') || 'N/A';
         
             const ekt101 = urlParams.get('ekt101') || 'N/A';
             const ekt120 = urlParams.get('ekt120') || 'N/A';
@@ -296,7 +295,6 @@
             document.getElementById('codeCourse').textContent = `Code Course: ${codeCourse}`;
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
-            document.getElementById('GPA').textContent = `GPA: ${parseFloat(GPA).toFixed(2)}`;
 
             document.getElementById('ekt102').textContent = getLetterGrade(ekt102);
             document.getElementById('eqt101').textContent = getLetterGrade(eqt101);
@@ -306,6 +304,18 @@
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
 		
 	    document.getElementById('ekt124').textContent = getLetterGrade(ekt124);
+
+		
+	    document.getElementById('nekt102').textContent = ekt102;
+            document.getElementById('neqt101').textContent = eqt101;
+            document.getElementById('nekt101').textContent = ekt101;
+            document.getElementById('nekt120').textContent = ekt120;
+            document.getElementById('nuzw164').textContent = uzw164;
+            document.getElementById('nuuw130').textContent = uuw130;
+            document.getElementById('nekt124').textContent = eqt124;
+
+	    GPA1= (nekt102+neqt101+nekt101+nekt120+nuzw164+nuuw130)/6;
+	    document.getElementById('GPA1').textContent = `GPA: ${parseFloat(GPA1).toFixed(2)}`;
 
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
