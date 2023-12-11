@@ -222,14 +222,14 @@
                             <td id="subjectCode7">[Subject Code]</td>
                             <td id="subjectName7">[Subject Name]</td>
                             <td id="creditHour7">[Credit Hour]</td>
-                            <td id="ekt124">[EKT101]</td>
+                            <td id="ekt124">[EKT124]</td>
                             <td id="result7">[Result]</td>
                         </tr>
                 
                         <tr>
                             <td id="blankCell"></td>
 	                    <td id="blankCell"></td>
-	                    <td id="total">[Total Hour]</td>
+	                    <td id="total2">[Total Hour]</td>
 	                    <td id="blankCell"></td>
 	                    <td id="DetectSemester2">[Active/P1]</td>
                         </tr>
@@ -286,7 +286,7 @@
             const ekt102 = urlParams.get('ekt102') || 'N/A';
             const eqt101 = urlParams.get('eqt101') || 'N/A';
 
-	    const eqt124 = urlParams.get('eqt124') || 'N/A';
+	    const ekt124 = urlParams.get('ekt124') || 'N/A';
 
 	    const nekt102 = ekt102;
 const neqt101 = eqt101;
@@ -294,7 +294,7 @@ const nekt101 = ekt101;
 const nekt120 = ekt120;
 const nuzw164 = uzw164;
 const nuuw130 = uuw130;
-const nekt124 = eqt124;
+const nekt124 = ekt124;
 
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
@@ -364,7 +364,7 @@ subjectsSemester1.forEach((subject, index) => {
     creditHour.textContent = subject.creditHour;
 
     // Add credit hours to the total
-    totalCreditHours += subject.creditHour;
+    totalCreditHoursSemester1 += subject.creditHour;
 });
 
 // Display subjects for Semester 2
@@ -378,12 +378,13 @@ subjectsSemester2.forEach((subject, index) => {
     creditHour.textContent = subject.creditHour;
 
     // Add credit hours to the total
-    totalCreditHours += subject.creditHour;
+    totalCreditHoursSemester2 += subject.creditHour;
 });
 
 
-            // Display the total credit hours
-             document.getElementById('total').textContent = `Total Hour: ${totalCreditHours}`;
+            // Display the total credit hours for Semester 1 and Semester 2
+document.getElementById('total').textContent = `Total Hour (Semester 1): ${totalCreditHoursSemester1}`;
+document.getElementById('total2').textContent = `Total Hour (Semester 2): ${totalCreditHoursSemester2}`;
 		
 		// Update the GPA calculation
    	        const GPA1 = (getGPA(nekt102) + getGPA(neqt101) + getGPA(nekt101) + getGPA(nekt120) + getGPA(nuzw164) + getGPA(nuuw130)) / subjectsSemester1.length;
