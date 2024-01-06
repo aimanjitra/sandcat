@@ -305,14 +305,6 @@
 
 	    const ekt124 = urlParams.get('ekt124') || 'N/A';
 
-	    const nekt102 = ekt102;
-	    const neqt101 = eqt101;
-	    const nekt101 = ekt101;
-	    const nekt120 = ekt120;
-	    const nuzw164 = uzw164;
-	    const nuuw130 = uuw130;
-	    const nekt124 = ekt124;
-
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
             document.getElementById('matric').textContent = `No Matric: ${matric}`;
@@ -340,6 +332,22 @@
             if (codeCourse === 'UR6523002') {
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
             }
+
+	    // Function to convert numerical grade to GPA scale
+    function getGPA(grade) {
+        if (grade >= 4.00) return 4.00;
+        else if (grade >= 3.75) return 3.75;
+        else if (grade >= 3.5) return 3.5;
+        else if (grade >= 3) return 3.0;
+        else if (grade >= 2.75) return 2.75;
+        else if (grade >= 2.5) return 2.5;
+        else if (grade >= 2) return 2.0;
+        else if (grade >= 1.75) return 1.75;
+        else if (grade >= 1.5) return 1.5;
+        else if (grade >= 1) return 1.0;
+        else if (grade >= 0.75) return 0.75;
+        else return 0.00;
+    }
 
         
            // Education Subjects for Semester 1
@@ -391,13 +399,13 @@ document.getElementById('total').textContent = `Total Hour: ${totalCreditHoursSe
 document.getElementById('total2').textContent = `Total Hour: ${totalCreditHoursSemester2}`;
 		
 		// Update the GPA Semester 1 calculation
-   	        const GPA1 = (nekt102 + neqt101 + nekt101 + nekt120 + nuzw164 + nuuw130) / subjectsSemester1.length;
+   	        const GPA1 = (getGPA(ekt102) + getGPA(eqt101) + getGPA(ekt101) + getGPA(ekt120) + getGPA(uzw164) + getGPA(uuw130)) / subjectsSemester1.length;
 
 		// Display the GPA for Semester 1
 		document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
 
 		// Update the GPA Semester 2 calculation
-   	        const GPA2 = nekt124 / subjectsSemester2.length;
+   	        const GPA2 = getGPA(ekt124) / subjectsSemester2.length;
 
 		// Display the GPA for Semester 2
 		document.getElementById('GPA2').textContent = `GPA: ${GPA2.toFixed(2)}`;
