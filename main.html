@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Log in UniMAP</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background:#001b3d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Center both horizontally and vertically */
+            font-family: Arial, sans-serif;
+            color: white; /* Set text color to white */
+        }
+
+        .container {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .middle-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Style for the login container with a border and padding */
+        .container-login {
+            display: flex;
+            flex-direction: column;
+            width: 450px;
+            /* Increase the width to make the container wider */
+            padding: 15px;
+            border: 1px solid skyblue;
+            border-radius: 5px;
+            margin: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Set background color for the login container with some opacity */
+            z-index: 1; /* Set z-index to place it above the background */
+        }
+
+        /* Style for the role selection dropdown */
+        select {
+            margin: 10px 0;
+            height: 35px;
+            width: 100%;
+            padding: 7px;
+        }
+
+        /* Style for input fields (username and password) */
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input {
+            flex: 1;
+            margin: 10px 0;
+            height: 35px;
+            padding: 7px;
+        }
+
+        /* Style for the login button */
+        button {
+            height: 45px;
+            /* Increase the height of the button */
+            width: 100%;
+            /* Make the button the same width as the container */
+            background-color: skyblue;
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Style for the button on hover (when the mouse pointer is over it) */
+        button:hover {
+            background-color: #333;
+            color: skyblue;
+        }
+
+        /* Style for the registration and forgot password links */
+        .links {
+            text-align: center;
+            margin-top: 20px;
+            /* Add margin to separate from the login box */
+            color: black; /* Set text color to black */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>System Log In</h1>
+    </div>
+    <div class="container-login">
+        <form id="loginForm">
+            <select id="status" required>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Admin</option>
+            </select>
+            <!-- Remove the username and password inputs -->
+            <button type="button" onclick="redirectBasedOnRole()">Log In</button>
+        </form>
+    </div>
+
+    <script>
+        function redirectBasedOnRole() {
+            const status = document.getElementById('status').value;
+
+            switch (status) {
+                case 'student':
+                    window.location.href = 'https://aimanjitra.github.io/saja/loginstudent.html';
+                    break;
+                case 'teacher':
+                    window.location.href = 'https://aimanjitra.github.io/saja/loginteacher.html';
+                    break;
+                case 'admin':
+                    window.location.href = 'https://aimanjitra.github.io/saja/loginadmin.html';
+                    break;
+                default:
+                    console.error('Invalid role selected');
+                    // Handle other cases if needed
+            }
+        }
+    </script>
+</body>
+
+</html>
