@@ -97,78 +97,45 @@
             /* Add margin to separate from the login box */
             color: black; /* Set text color to black */
         }
+
     </style>
 </head>
 
 <body>
-    <!-- Header at the top center -->
     <div class="header">
         <h1>System Log In</h1>
     </div>
-    <!-- Login form -->
     <div class="container-login">
         <form id="loginForm">
-            <!-- Role selection dropdown at the top -->
             <select id="status" required>
                 <option value="student">Student</option>
                 <option value="teacher">Teacher</option>
                 <option value="admin">Admin</option>
             </select>
-            <div class="input-group">
-                <input type="text" id="loginUsername" placeholder="Username" required>
-                <input type="password" id="loginPassword" placeholder="Password" required>
-            </div>
-            <button type="submit">Log In</button>
+            <!-- Remove the username and password inputs -->
+            <button type="button" onclick="redirectBasedOnRole()">Log In</button>
         </form>
     </div>
-    <!-- Display the results from the Google Apps Script here -->
-    <div id="data"></div>
+
     <script>
-        async function fetchData(username, password, status) {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzi7YMi0IPTKDBoh5PC6TddFIsgpDYfptNFqM_voCTRja9VAhRsES5StEDVXk1xwW-NKA/exec';
-            const queryParams = `?username=${username}&password=${password}&status=${status}&action=login`;
-            const response = await fetch(scriptURL + queryParams);
-            const data = await response.json();
-            const dataDiv = document.getElementById('data');
-            dataDiv.textContent = JSON.stringify(data, null, 2);
-
-            if (data.success) {
-                if (data.data && data.data.length > 0) {
-                    // Extract relevant information from jsonData
-                    const fullName = data.data[0]?.full_name;
-                    const matric = data.data[0]?.matrik;
-                    const codeCourse = data.data[0]?.code_course;
-                    const year = data.data[0]?.tahun;
-                    const semester = data.data[0]?.sem;
-                    const GPA = data.data[0]?.gpa;
-                    const ekt102 = data.data[0]?.EKT102;
-                    const eqt101 = data.data[0]?.EQT101;
-                    const uuw130 = data.data[0]?.UUW130;
-                    const uzw164 = data.data[0]?.UZW164;
-                    const ekt120 = data.data[0]?.EKT120;
-                    const ekt101 = data.data[0]?.EKT101;
-                    const ekt124 = data.data[0]?.EKT124;
-
-                    // Redirect to success.html with additional parameters
-                    window.location.href = `https://aimanjitra.github.io/github.io/success.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&GPA=${GPA}&ekt124=${ekt124}`;
-                } else {
-                    // Handle the case where data.data is undefined or empty
-                    console.error('No data found for the given credentials.');
-                }
-            } else {
-                // Handle the case where authentication failed
-                console.error('Authentication failed:', data.error);
-            }
-
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
+        function redirectBasedOnRole() {
             const status = document.getElementById('status').value;
-            fetchData(username, password, status);
-        });
+
+            switch (status) {
+                case 'student':
+                    window.location.href = 'https://aimanjitra.github.io/saja/loginstudent.html';
+                    break;
+                case 'teacher':
+                    window.location.href = 'https://aimanjitra.github.io/saja/loginteacher.html';
+                    break;
+                case 'admin':
+                    window.location.href = 'https://aimanjitra.github.io/saja/loginadmin.html';
+                    break;
+                default:
+                    console.error('Invalid role selected');
+                    // Handle other cases if needed
+            }
+        }
     </script>
 </body>
 
