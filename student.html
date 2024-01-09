@@ -590,7 +590,7 @@ if (failSubjectsSemester1.length > 0) {
 // Display logic for Semester 2
 if (failSubjectsSemester2.length > 0) {
     // Display the fail subjects
-    failSubjectsListSemester2.innerHTML = failSubjectsSemester2.map(subject => `<li>${subject}</li>`).join('');
+    failSubjectsListSemester2.innerHTML = failSubjectsSemester2.map(subject => `<li>${subject.name}</li>`).join('');
 
     // Display the reminder message
     const subjectNamesSemester2 = failSubjectsSemester2.map(subject => subject.name); // Extract subject names
