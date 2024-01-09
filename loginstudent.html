@@ -123,7 +123,6 @@
                     const codeCourse = data.data[0]?.code_course;
                     const year = data.data[0]?.tahun;
                     const semester = data.data[0]?.sem;
-                    const GPA = data.data[0]?.gpa;
                     const ekt102 = data.data[0]?.EKT102;
                     const eqt101 = data.data[0]?.EQT101;
                     const uuw130 = data.data[0]?.UUW130;
@@ -138,7 +137,7 @@
                     const ekt104 = data.data[0]?.EKT104;
 
                     // Redirect to success.html with additional parameters
-                    window.location.href = `https://aimanjitra.github.io/googlesheet/student.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&GPA=${GPA}&ekt124=${ekt124}&ekt103=${ekt103}&ekt119=${ekt119}&eqt102=${eqt102}&uzw195=${uzw195}&ekt104=${ekt104}`;
+                    window.location.href = `https://aimanjitra.github.io/googlesheet/student.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&ekt124=${ekt124}&ekt103=${ekt103}&ekt119=${ekt119}&eqt102=${eqt102}&uzw195=${uzw195}&ekt104=${ekt104}`;
 
                 } else {
                     // Handle the case where data.data is undefined or empty
