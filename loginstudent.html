@@ -131,9 +131,15 @@
                     const ekt120 = data.data[0]?.EKT120;
                     const ekt101 = data.data[0]?.EKT101;
                     const ekt124 = data.data[0]?.EKT124;
+                    const ekt103 = data.data[0]?.EKT103;
+                    const ekt119 = data.data[0]?.EKT119;
+                    const eqt102 = data.data[0]?.EQT102;
+                    const uzw195 = data.data[0]?.UZW195;
+                    const ekt104 = data.data[0]?.EKT104;
 
                     // Redirect to success.html with additional parameters
-                    window.location.href = `https://aimanjitra.github.io/googlesheet/student.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&GPA=${GPA}&ekt124=${ekt124}`;
+                    window.location.href = `https://aimanjitra.github.io/googlesheet/student.html?fullName=${fullName}&codeCourse=${codeCourse}&year=${year}&semester=${semester}&ekt102=${ekt102}&eqt101=${eqt101}&matric=${matric}&uuw130=${uuw130}&uzw164=${uzw164}&ekt120=${ekt120}&ekt101=${ekt101}&GPA=${GPA}&ekt124=${ekt124}&ekt103=${ekt103}&ekt119=${ekt119}&eqt102=${eqt102}&uzw195=${uzw195}&ekt104=${ekt104}`;
+
                 } else {
                     // Handle the case where data.data is undefined or empty
                     console.error('No data found for the given credentials.');
