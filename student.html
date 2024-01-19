@@ -612,14 +612,17 @@ if (failSubjectsSemester2.length > 0) {
 const detectElementSemester1 = document.getElementById('DetectSemester1');
 const detectElementSemester2 = document.getElementById('DetectSemester2');
 
-// Assuming GPA1 and GPA2 are defined variables
-
+// Stipulation for Semester 1
 detectElementSemester1.textContent = (GPA1 < 2) ? 'P1' : 'Active';
-detectElementSemester2.textContent = (GPA2 < 2) ? 'P1' : 'Active';
 
-
-
-
+// Stipulation for Semester 2
+if (detectElementSemester1.textContent === 'P1') {
+    // If Semester 1 is P1, check GPA for Semester 2
+    detectElementSemester2.textContent = (GPA2 < 2) ? 'P2' : 'Active';
+} else {
+    // If Semester 1 is Active, Semester 2 can be Active or P1
+    detectElementSemester2.textContent = (GPA2 < 2) ? 'P1' : 'Active';
+}
 
 		// Version 1 of new schedule information
 const newScheduleDiv1 = document.getElementById('newSchedule1');
