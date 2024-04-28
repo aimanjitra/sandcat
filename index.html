@@ -109,7 +109,7 @@
 
             if (matchedUser) {
                 // Redirect to success.html with additional parameters
-                window.location.href = `https://aimanjitra.github.io/googlesheet/loginsemester.html?fullName=${matchedUser.full_name}&codeCourse=${matchedUser.code_course}&year=${matchedUser.tahun}&semester=${matchedUser.sem}&ekt102=${matchedUser.ekt102}&eqt101=${matchedUser.eqt101}&matric=${matchedUser.matrik}&uuw130=${matchedUser.uuw130}&uzw164=${matchedUser.uzw164}&ekt120=${matchedUser.ekt120}&ekt101=${matchedUser.ekt101}&ekt124=${matchedUser.ekt124}&ekt103=${matchedUser.ekt103}&ekt119=${matchedUser.ekt119}&eqt102=${matchedUser.eqt102}&uzw195=${matchedUser.uzw195}&ekt104=${matchedUser.ekt104}`;
+                window.location.href = `https://aimanjitra.github.io/googlesheet/loginsemester.html?fullName=${matchedUser.full_name}&codeCourse=${matchedUser.code_course}&year=${matchedUser.tahun}&semester=${matchedUser.sem}&ekt102=${matchedUser.ekt102}&eqt101=${matchedUser.eqt101}&matric=${matchedUser.matrik}&uuw130=${matchedUser.uuw130}&uzw164=${matchedUser.uzw164}&ekt120=${matchedUser.ekt120}&ekt101=${matchedUser.ekt101}&ekt124=${matchedUser.ekt124}&ekt103=${matchedUser.ekt103}&ekt119=${matchedUser.ekt119}&eqt102=${matchedUser.eqt102}&uzw195=${matchedUser.uzw195}&ekt104=${matchedUser.ekt104}&username=${matchedUser.username}&password=${matchedUser.password}`;
             } else {
                 console.error('No matching user found for the given credentials.');
             }
