@@ -90,33 +90,24 @@
             margin: auto;
         }
 
-	#CGPA2 {
-        text-align: right;  /* Align the content to the right */
-	position: relative;
-        padding-right: 20px; /* Add padding for the cross-line on the left */
-   	 }
-
-	#CGPA2::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 75%; /* Width of the cross-line */
-            background-color: rgb(180, 172, 172); /* Color of the cross-line */
-            margin: auto;
-        }
-
 	#blankCell {
 	   background-color: rgb(180, 172, 172);
 	}
 
-	#semesterSelector {
-            width: 150px; /* Set your desired width */
-            font-size: 18px; /* Set your desired font size */
-            margin: 10px auto; /* Center the dropdown and add space around it */
-            display: block; /* Ensure it's a block-level element for margin to work */
-        }
+    .semester-selector-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    }
+
+    .semester-selector-box {
+        display: inline-block;
+        padding: 4px 8px;
+        border: 1px solid black; /* Black border */
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
 
     </style>
 </head>
@@ -133,15 +124,13 @@
             <h2 id="semester">Semester: [Semester]</h2>
         </div>
         
+        <div class="semester-selector-container">
+            <div class="semester-selector-box">
+                <h2 id="semesterSelector">Semester 1</h2> <!-- Display "Semester 1" directly -->
+            </div>
+        </div>        
+        
         <div>
-            <select id="semesterSelector" onchange="changeSemester()">
-                <option value="1">Semester 1</option>
-                <option value="2">Semester 2</option>
-                <!-- Add options for Semester 3 to 8 as needed -->
-            </select>
-        </div>
-
-        <div id="semester1" class="semesterContent">
             <table>
                                 <tr>
                             <th>Code Subject</th>
@@ -224,113 +213,10 @@
 
         </div>
 
-        <div id="semester2" class="semesterContent" style="display: none;">
-            <table>
-                <tr>
-                    <th>Code Subject</th>
-                    <th>Name of Subject</th>
-                    <th>Credit Hour</th>
-                    <th>Result of CGPA</th>
-                    <th>Result (Pass/Fail)</th>
-                </tr>
-
-                <!-- Subject 7 -->
-                        <tr>
-                            <td id="subjectCode7">[Subject Code]</td>
-                            <td id="subjectName7">[Subject Name]</td>
-                            <td id="creditHour7">[Credit Hour]</td>
-                            <td id="uzw195">[UZW195]</td>
-                            <td id="result7">[Result]</td>
-                        </tr>
-		
-		<!-- Subject 8 -->
-                        <tr>
-                            <td id="subjectCode8">[Subject Code]</td>
-                            <td id="subjectName8">[Subject Name]</td>
-                            <td id="creditHour8">[Credit Hour]</td>
-                            <td id="ekt124">[EKT124]</td>
-                            <td id="result8">[Result]</td>
-                        </tr>
-
-                <!-- Subject 9 -->
-                <tr>
-                            <td id="subjectCode9">[Subject Code]</td>
-                            <td id="subjectName9">[Subject Name]</td>
-                            <td id="creditHour9">[Credit Hour]</td>
-                            <td id="ekt103">[EKT103]</td>
-                            <td id="result9">[Result]</td>
-                        </tr>
-                
-                <!-- Subject 10 -->
-                <tr>
-                            <td id="subjectCode10">[Subject Code]</td>
-                            <td id="subjectName10">[Subject Name]</td>
-                            <td id="creditHour10">[Credit Hour]</td>
-                            <td id="ekt119">[EKT119]</td>
-                            <td id="result10">[Result]</td>
-                        </tr>
-
-                <!-- Subject 11 -->
-                <tr>
-                            <td id="subjectCode11">[Subject Code]</td>
-                            <td id="subjectName11">[Subject Name]</td>
-                            <td id="creditHour11">[Credit Hour]</td>
-                            <td id="eqt102">[EQT102]</td>
-                            <td id="result11">[Result]</td>
-                        </tr>
-
-                <!-- Subject 12 -->
-                <tr>
-                            <td id="subjectCode12">[Subject Code]</td>
-                            <td id="subjectName12">[Subject Name]</td>
-                            <td id="creditHour12">[Credit Hour]</td>
-                            <td id="ekt104">[EKT104]</td>
-                            <td id="result12">[Result]</td>
-                        </tr>
-                
-                        <tr>
-                            <td id="blankCell"></td>
-	                    <td id="CGPA2">[Total CGPA]</td>
-	                    <td id="total2">[Total Hour]</td>
-	                    <td id="GPA2">[Average GPA 2]</td>
-	                    <td id="DetectSemester2">[Active/P1]</td>
-                        </tr>
-
-                <!-- Add more rows as needed for Semester 2 -->
-            </table>
-
-		        <div id="reminderSemester2" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
-	    <h3>Reminder</h3>
-	    <ul id="failSubjectsSemester2"></ul>
-	</div>
-
-		<div id="newSchedule2" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
-		</div>
-	    
-    </div>
-
-
         </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-
-	// Function to change the displayed semester content
-            window.changeSemester = function () {
-                const semesterSelector = document.getElementById('semesterSelector');
-                const selectedSemester = semesterSelector.value;
-
-                // Hide all semester content
-                document.querySelectorAll('.semesterContent').forEach(function (content) {
-                    content.style.display = 'none';
-                });
-
-                // Show the selected semester content
-                const selectedSemesterContent = document.getElementById(`semester${selectedSemester}`);
-                if (selectedSemesterContent) {
-                    selectedSemesterContent.style.display = 'block';
-                }
-            };
 
         // Retrieve URL parameters
             const urlParams = new URLSearchParams(window.location.search);
@@ -348,13 +234,6 @@
             const ekt102 = urlParams.get('ekt102') || 'N/A';
             const eqt101 = urlParams.get('eqt101') || 'N/A';
 
-	const ekt124 = urlParams.get('ekt124') || 'N/A';
-	const ekt103 = urlParams.get('ekt103') || 'N/A';
-	const ekt119 = urlParams.get('ekt119') || 'N/A';
-	const eqt102 = urlParams.get('eqt102') || 'N/A';
-	const uzw195 = urlParams.get('uzw195') || 'N/A';
-	const ekt104 = urlParams.get('ekt104') || 'N/A';
-
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
             document.getElementById('matric').textContent = `No Matric: ${matric}`;
@@ -369,18 +248,10 @@
             document.getElementById('ekt120').textContent = getLetterGrade(ekt120);
             document.getElementById('uzw164').textContent = getLetterGrade(uzw164);
             document.getElementById('uuw130').textContent = getLetterGrade(uuw130);
-		
-	    document.getElementById('ekt124').textContent = getLetterGrade(ekt124);
-	    document.getElementById('uzw195').textContent = getLetterGrade(uzw195);
-	    document.getElementById('ekt103').textContent = getLetterGrade(ekt103);
-	    document.getElementById('ekt119').textContent = getLetterGrade(ekt119);
-	    document.getElementById('eqt102').textContent = getLetterGrade(eqt102);
-	    document.getElementById('ekt104').textContent = getLetterGrade(ekt104);
 
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
 	    let totalCreditHoursSemester1 = 0;
-	    let totalCreditHoursSemester2 = 0;
 
             
             // Additional check for course code
@@ -439,37 +310,14 @@ subjectsSemester1.forEach((subject, index) => {
     totalCreditHoursSemester1 += subject.creditHour;
 });
 
-// Display subjects for Semester 2
-subjectsSemester2.forEach((subject, index) => {
-    const subjectCode = document.getElementById(`subjectCode${index + 7}`);
-    const subjectName = document.getElementById(`subjectName${index + 7}`);
-    const creditHour = document.getElementById(`creditHour${index + 7}`);
-
-    subjectCode.textContent = subject.code;
-    subjectName.textContent = subject.name;
-    creditHour.textContent = subject.creditHour;
-
-    // Add credit hours to the total
-    totalCreditHoursSemester2 += subject.creditHour;
-});
-
-
-            // Display the total credit hours for Semester 1 and Semester 2
+            // Display the total credit hours for Semester 1
 document.getElementById('total').textContent = `Total Hour: ${totalCreditHoursSemester1}`;
-document.getElementById('total2').textContent = `Total Hour: ${totalCreditHoursSemester2}`;
 		
 		// Update the GPA Semester 1 calculation
    	        const GPA1 = (getGPA(ekt102) + getGPA(eqt101) + getGPA(ekt101) + getGPA(ekt120) + getGPA(uzw164) + getGPA(uuw130)) / subjectsSemester1.length;
 
 		// Display the GPA for Semester 1
 		document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
-
-		// Update the GPA Semester 2 calculation
-   	        const GPA2 = (getGPA(uzw195) + getGPA(ekt124) + getGPA(ekt103) + getGPA(ekt119) + getGPA(eqt102) + getGPA(ekt104)) / subjectsSemester2.length;
-
-		// Display the GPA for Semester 2
-		document.getElementById('GPA2').textContent = `GPA: ${GPA2.toFixed(2)}`;
-
 
             // Function to convert numerical grade to letter grade
                 function getLetterGrade(grade) {
@@ -494,14 +342,6 @@ document.getElementById('total2').textContent = `Total Hour: ${totalCreditHoursS
                 result4.textContent = determineResult(eqt101);
                 result5.textContent = determineResult(ekt120);
                 result6.textContent = determineResult(ekt101);
-
-		// Check for Semester 2 subjects
-                result7.textContent = determineResult(uzw195);
-                result8.textContent = determineResult(ekt124);
-                result9.textContent = determineResult(ekt103);
-                result10.textContent = determineResult(ekt119);
-                result11.textContent = determineResult(eqt102);
-                result12.textContent = determineResult(ekt104);
 
 		// Function to determine pass/fail result
 function determineResult(grade) {
@@ -532,38 +372,9 @@ function determineResult(grade) {
             }
 
 
-// Check for failed subjects in Semester 2
-const failSubjectsSemester2 = [];
-
-	    if (determineResult(uzw195) === 'Fail') {
-                failSubjectsSemester2.push({ code: 'UZW195', name: 'RADIO KAMPUS [CAMPUS RADIO]', creditHour: 1 });
-            }
-            if (determineResult(ekt124) === 'Fail') {
-                failSubjectsSemester2.push({ code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 });
-            }
-            if (determineResult(ekt103) === 'Fail') {
-                failSubjectsSemester2.push({ code: 'EKT103', name: 'KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]', creditHour: 3 });
-            }
-            if (determineResult(ekt119) === 'Fail') {
-                failSubjectsSemester2.push({ code: 'EKT119', name: 'LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]', creditHour: 3 });
-            }
-            if (determineResult(eqt102) === 'Fail') {
-                failSubjectsSemester2.push({ code: 'EQT102', name: 'MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]', creditHour: 3 });
-            }
-            if (determineResult(ekt104) === 'Fail') {
-                failSubjectsSemester2.push({ code: 'EKT104', name: 'LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]', creditHour: 4 });
-            }
-
-
-
 // Display the fail subjects and reminder for Semester 1
 const failSubjectsListSemester1 = document.getElementById('failSubjectsSemester1');
 const reminderDivSemester1 = document.getElementById('reminderSemester1');
-
-// Display the fail subjects and reminder for Semester 2
-const failSubjectsListSemester2 = document.getElementById('failSubjectsSemester2');
-const reminderDivSemester2 = document.getElementById('reminderSemester2');
-
 
 // Display logic for Semester 1
 if (failSubjectsSemester1.length > 0) {
@@ -585,44 +396,11 @@ if (failSubjectsSemester1.length > 0) {
     reminderDivSemester1.style.display = 'none'; // Hide the reminder if no fail subjects
 }
 
-
-
-// Display logic for Semester 2
-if (failSubjectsSemester2.length > 0) {
-    // Display the fail subjects
-    failSubjectsListSemester2.innerHTML = failSubjectsSemester2.map(subject => `<li>${subject.name}</li>`).join('');
-
-    // Display the reminder message
-    const subjectNamesSemester2 = failSubjectsSemester2.map(subject => subject.name); // Extract subject names
-    const reminderMessageSemester2 = `You should retake the ${subjectNamesSemester2.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjectNamesSemester2.join(', ')}`;
-    const reminderParagraphSemester2 = document.createElement('p');
-    reminderParagraphSemester2.textContent = reminderMessageSemester2;
-
-    // Append the reminder message to the reminderDiv
-    reminderDivSemester2.appendChild(reminderParagraphSemester2);
-
-    // Show the reminder
-    reminderDivSemester2.style.display = 'block';
-} else {
-    reminderDivSemester2.style.display = 'none'; // Hide the reminder if no fail subjects
-}
-
-
 // Update the detect element based on the GPA for both Semesters
 const detectElementSemester1 = document.getElementById('DetectSemester1');
-const detectElementSemester2 = document.getElementById('DetectSemester2');
 
 // Stipulation for Semester 1
 detectElementSemester1.textContent = (GPA1 < 2) ? 'P1' : 'Active';
-
-// Stipulation for Semester 2
-if (detectElementSemester1.textContent === 'P1') {
-    // If Semester 1 is P1, check GPA for Semester 2
-    detectElementSemester2.textContent = (GPA2 < 2) ? 'P2' : 'Active';
-} else {
-    // If Semester 1 is Active, Semester 2 can be Active or P1
-    detectElementSemester2.textContent = (GPA2 < 2) ? 'P1' : 'Active';
-}
 
 		// Version 1 of new schedule information
 const newScheduleDiv1 = document.getElementById('newSchedule1');
@@ -630,33 +408,13 @@ const newScheduleMessage1 = `
     <h3>New Schedule For Semester 2</h3>
     <p>For next semester, you need to take the following subjects:</p>
     <ul>
-    ${subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('')}
+        ${subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('')}
     </ul>
 `;
 newScheduleDiv1.innerHTML = newScheduleMessage1;
 
-// Version 2 of new schedule information
-const newScheduleDiv2 = document.getElementById('newSchedule2');
-const newScheduleMessage2 = `
-    <h3>New Schedule For Semester 3</h3>
-    <p>For next semester, you need to take the following subjects:</p>
-    <ul>
-        ${failSubjectsSemester1.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('')}
-        <li>ABC123 - EXAMPLE SUBJECT 1</li>
-        <li>DEF456 - EXAMPLE SUBJECT 2</li>
-        <li>GHI789 - EXAMPLE SUBJECT 3</li>
-        <!-- Add more subjects as needed -->
-    </ul>
-`;
-newScheduleDiv2.innerHTML = newScheduleMessage2;
-
-
     const cgpa1 = document.getElementById('CGPA1');
     cgpa1.textContent = `CGPA: ${GPA1.toFixed(2)}`;
-
-    const CGPA2= (GPA1 + GPA2)/2;
-    const cgpa2 = document.getElementById('CGPA2');
-    cgpa2.textContent = `CGPA: ${CGPA2.toFixed(2)}`;
 
     });
         
