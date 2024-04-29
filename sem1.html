@@ -314,7 +314,12 @@ subjectsSemester1.forEach((subject, index) => {
 document.getElementById('total').textContent = `Total Hour: ${totalCreditHoursSemester1}`;
 		
 		// Update the GPA Semester 1 calculation
-   	        const GPA1 = (getGPA(ekt102) + getGPA(eqt101) + getGPA(ekt101) + getGPA(ekt120) + getGPA(uzw164) + getGPA(uuw130)) / subjectsSemester1.length;
+   	        const GPA1 = (getGPA(ekt102) * subjectsSemester1[0].creditHour +
+                  getGPA(uuw130) * subjectsSemester1[1].creditHour +
+                  getGPA(ekt102) * subjectsSemester1[2].creditHour +
+                  getGPA(eqt101) * subjectsSemester1[3].creditHour +
+                  getGPA(ekt120) * subjectsSemester1[4].creditHour +
+                  getGPA(ekt101) * subjectsSemester1[5].creditHour) / totalCreditHoursSemester1;
 
 		// Display the GPA for Semester 1
 		document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
