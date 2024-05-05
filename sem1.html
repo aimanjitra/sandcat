@@ -101,12 +101,37 @@
     }
 
     .semester-selector-box {
-        display: inline-block;
-        padding: 4px 8px;
-        border: 1px solid black; /* Black border */
-        border-radius: 4px;
-        cursor: pointer;
+    display: inline-block; /* Change display to inline-block */
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px; /* Add some margin for spacing */
     }
+
+            .navigation-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add margin bottom for space */
+        }
+
+    .navigation-button {
+            display: inline-block;
+            padding: 4px 8px;
+            border: 1px solid black;
+            /* Black border */
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            margin-right: 10px;
+            width: 100px; /* Adjust the width as needed */
+            text-align: center; /* Center align text */
+        }
+
+    .navigation-button:hover {
+            background-color: #ccc;
+        }
 
 
     </style>
@@ -129,6 +154,9 @@
                 <h2 id="semesterSelector">Semester 1</h2> <!-- Display "Semester 1" directly -->
             </div>
         </div>        
+        <div class="navigation-button-container">
+            <button id="next semester" class="navigation-button">Next Semester</button>
+        </div>
         
         <div>
             <table>
@@ -216,10 +244,13 @@
         </div>
 
     <script>
+
     document.addEventListener('DOMContentLoaded', function () {
 
         // Retrieve URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            const password = urlParams.get('password');
             const fullName = urlParams.get('fullName') || 'N/A';
             const matric = urlParams.get('matric') || 'N/A';
             const course = urlParams.get('course') || 'N/A';
@@ -233,6 +264,38 @@
             const uuw130 = urlParams.get('uuw130') || 'N/A';
             const ekt102 = urlParams.get('ekt102') || 'N/A';
             const eqt101 = urlParams.get('eqt101') || 'N/A';
+
+            document.getElementById('next semester').addEventListener('click', async function () {
+            try {
+                let apiUrl, redirectUrl;
+                apiUrl =
+                    'https://api.tinybird.co/v0/pipes/sem2_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIyMTBmMjZjNC00NzcwLTQ4NTEtODBmYi0yMDVlYWIxYTFlYzYiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.D90DCeLQAeNa0P78VTGcuLHDSTV00OmV357wt-D6H3I';
+
+                const response = await fetch(apiUrl);
+                const responseData = await response.json();
+
+                if (responseData.data && Array.isArray(responseData.data)) {
+                    const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
+
+                    if (matchedUser) {
+                        // Redirect to the determined URL
+                        window.location.href =
+                            `file:///C:/Users/DELL/Downloads/web/sem2.html?fullName=${encodeURIComponent(matchedUser.full_name)}&codeCourse=${encodeURIComponent(matchedUser.code_course)}&year=${encodeURIComponent(matchedUser.tahun)}&semester=${encodeURIComponent(matchedUser.sem)}&ekt102=${encodeURIComponent(matchedUser.ekt102)}&eqt101=${encodeURIComponent(matchedUser.eqt101)}&matric=${encodeURIComponent(matchedUser.matrik)}&uuw130=${encodeURIComponent(matchedUser.uuw130)}&uzw164=${encodeURIComponent(matchedUser.uzw164)}&ekt120=${encodeURIComponent(matchedUser.ekt120)}&ekt101=${encodeURIComponent(matchedUser.ekt101)}&ekt124=${encodeURIComponent(matchedUser.ekt124)}&ekt103=${encodeURIComponent(matchedUser.ekt103)}&ekt119=${encodeURIComponent(matchedUser.ekt119)}&eqt102=${encodeURIComponent(matchedUser.eqt102)}&uzw195=${encodeURIComponent(matchedUser.uzw195)}&ekt104=${encodeURIComponent(matchedUser.ekt104)}&username=${matchedUser.username}&password=${matchedUser.password}`;
+                    } else {
+                        // Handle no matched user case
+                        alert('Invalid username or password');
+                    }
+                } else {
+                    // Handle invalid data format received from API
+                    console.error('Invalid data format received from the API:', responseData);
+                    alert('Error fetching user data');
+                }
+            } catch (error) {
+                // Handle fetch error
+                console.error('Error fetching data:', error);
+                alert('Error fetching user data');
+            }
+        });
 
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
@@ -311,16 +374,14 @@ subjectsSemester1.forEach((subject, index) => {
 });
 
             // Display the total credit hours for Semester 1
-document.getElementById('total').textContent = `Total Hour: ${totalCreditHoursSemester1}`;
+            document.getElementById('total').textContent = `${totalCreditHoursSemester1}`;
 		
-		// Update the GPA Semester 1 calculation
-   	        const GPA1 = (getGPA(ekt102) * subjectsSemester1[0].creditHour +
+const GPA1 = (getGPA(ekt102) * subjectsSemester1[0].creditHour +
                   getGPA(uuw130) * subjectsSemester1[1].creditHour +
                   getGPA(ekt102) * subjectsSemester1[2].creditHour +
                   getGPA(eqt101) * subjectsSemester1[3].creditHour +
                   getGPA(ekt120) * subjectsSemester1[4].creditHour +
                   getGPA(ekt101) * subjectsSemester1[5].creditHour) / totalCreditHoursSemester1;
-
 		// Display the GPA for Semester 1
 		document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
 
@@ -401,11 +462,27 @@ if (failSubjectsSemester1.length > 0) {
     reminderDivSemester1.style.display = 'none'; // Hide the reminder if no fail subjects
 }
 
-// Update the detect element based on the GPA for both Semesters
+// Store failSubjectsSemester1 in sessionStorage
+sessionStorage.setItem('failSubjectsSemester1', JSON.stringify(failSubjectsSemester1));
+
+// Function to determine semester status based on GPA
+function determineSemesterStatus(GPA1) {
+    return parseFloat(GPA1) >= 2 ? 'Active' : 'P1';
+}
+
+// Update the detect element based on the GPA for Semester 1
 const detectElementSemester1 = document.getElementById('DetectSemester1');
 
-// Stipulation for Semester 1
-detectElementSemester1.textContent = (GPA1 < 2) ? 'P1' : 'Active';
+// Retrieve the semester status for Semester 1 from sessionStorage
+const semesterStatusSemester1 = determineSemesterStatus(GPA1);
+
+// Set the semester status as text content for Semester 1
+detectElementSemester1.textContent = semesterStatusSemester1;
+
+// Store the semester status in sessionStorage
+sessionStorage.setItem('semesterStatusSemester1', semesterStatusSemester1);
+
+
 
 		// Version 1 of new schedule information
 const newScheduleDiv1 = document.getElementById('newSchedule1');
@@ -413,10 +490,31 @@ const newScheduleMessage1 = `
     <h3>New Schedule For Semester 2</h3>
     <p>For next semester, you need to take the following subjects:</p>
     <ul>
-        ${subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('')}
+        ${(() => {
+            let totalCredit = 0;
+            let schedule = '';
+            if (detectElementSemester1.textContent === 'P1') {
+                for (const subject of subjectsSemester2) {
+                    if (totalCredit + subject.creditHour <= 12) {
+                        totalCredit += subject.creditHour;
+                        schedule += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
+                    } else {
+                        // If adding this subject exceeds the 12-credit limit, don't include it
+                        break;
+                    }
+                }
+            } else if (detectElementSemester1.textContent === 'Active') {
+                // Display all subjects for Active students
+                schedule = subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('');
+            }
+            return schedule;
+        })()}
     </ul>
 `;
 newScheduleDiv1.innerHTML = newScheduleMessage1;
+
+        // Store GPA1 in sessionStorage
+        sessionStorage.setItem('GPA1', GPA1);
 
     const cgpa1 = document.getElementById('CGPA1');
     cgpa1.textContent = `CGPA: ${GPA1.toFixed(2)}`;
