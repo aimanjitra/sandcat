@@ -444,23 +444,16 @@ const reminderDivSemester1 = document.getElementById('reminderSemester1');
 
 const prioritizedSubjects = ['UZW195', 'EKT119', 'EKT104', 'EKT103', 'EKT124', 'EQT102'];
 
-// Display logic for Semester 1
+// Display the reminder message
 if (failSubjectsSemester1.length > 0) {
-    // Display the fail subjects
-    failSubjectsListSemester1.innerHTML = failSubjectsSemester1.map(subject => `<li>${subject.name}</li>`).join('');
-
-    // Display the reminder message
-    const subjectNamesSemester1 = failSubjectsSemester1.map(subject => subject.name); // Extract subject names
-    const reminderMessageSemester1 = `You should retake the ${subjectNamesSemester1.length > 1 ? 'following subjects' : 'subject'} for the next semester: ${subjectNamesSemester1.join(', ')}`;
+    const subjectList = failSubjectsSemester1.map(subject => `- ${subject.name}`).join('<br>'); // Add <br> after each subject
+    const reminderMessageSemester1 = `You should retake the following subjects for the next semester: <br>${subjectList}`; // Include <br> between the subjects
     const reminderParagraphSemester1 = document.createElement('p');
-    reminderParagraphSemester1.textContent = reminderMessageSemester1;
-
-    // Append the reminder message to the reminderDiv
+    reminderParagraphSemester1.innerHTML = reminderMessageSemester1; // Use innerHTML to interpret <br> as HTML
     reminderDivSemester1.appendChild(reminderParagraphSemester1);
 
-    // Show the reminder
-    reminderDivSemester1.style.display = 'block';
-} else {
+    reminderDivSemester1.style.display = 'block'; // Show the reminder if there are failed subjects
+}else {
     reminderDivSemester1.style.display = 'none'; // Hide the reminder if no fail subjects
 }
 
