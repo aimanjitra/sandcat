@@ -280,7 +280,7 @@
                     if (matchedUser) {
                         // Redirect to the determined URL
                         window.location.href =
-                            `https://aimanjitra.github.io/googlesheet/sem2.html?fullName=${encodeURIComponent(matchedUser.full_name)}&codeCourse=${encodeURIComponent(matchedUser.code_course)}&year=${encodeURIComponent(matchedUser.tahun)}&semester=${encodeURIComponent(matchedUser.sem)}&ekt102=${encodeURIComponent(matchedUser.ekt102)}&eqt101=${encodeURIComponent(matchedUser.eqt101)}&matric=${encodeURIComponent(matchedUser.matrik)}&uuw130=${encodeURIComponent(matchedUser.uuw130)}&uzw164=${encodeURIComponent(matchedUser.uzw164)}&ekt120=${encodeURIComponent(matchedUser.ekt120)}&ekt101=${encodeURIComponent(matchedUser.ekt101)}&ekt124=${encodeURIComponent(matchedUser.ekt124)}&ekt103=${encodeURIComponent(matchedUser.ekt103)}&ekt119=${encodeURIComponent(matchedUser.ekt119)}&eqt102=${encodeURIComponent(matchedUser.eqt102)}&uzw195=${encodeURIComponent(matchedUser.uzw195)}&ekt104=${encodeURIComponent(matchedUser.ekt104)}&username=${matchedUser.username}&password=${matchedUser.password}`;
+                            `file:///C:/Users/DELL/Downloads/web/sem2.html?fullName=${encodeURIComponent(matchedUser.full_name)}&codeCourse=${encodeURIComponent(matchedUser.code_course)}&year=${encodeURIComponent(matchedUser.tahun)}&semester=${encodeURIComponent(matchedUser.sem)}&ekt102=${encodeURIComponent(matchedUser.ekt102)}&eqt101=${encodeURIComponent(matchedUser.eqt101)}&matric=${encodeURIComponent(matchedUser.matrik)}&uuw130=${encodeURIComponent(matchedUser.uuw130)}&uzw164=${encodeURIComponent(matchedUser.uzw164)}&ekt120=${encodeURIComponent(matchedUser.ekt120)}&ekt101=${encodeURIComponent(matchedUser.ekt101)}&ekt124=${encodeURIComponent(matchedUser.ekt124)}&ekt103=${encodeURIComponent(matchedUser.ekt103)}&ekt119=${encodeURIComponent(matchedUser.ekt119)}&eqt102=${encodeURIComponent(matchedUser.eqt102)}&uzw195=${encodeURIComponent(matchedUser.uzw195)}&ekt104=${encodeURIComponent(matchedUser.ekt104)}&username=${matchedUser.username}&password=${matchedUser.password}`;
                     } else {
                         // Handle no matched user case
                         alert('Invalid username or password');
@@ -442,6 +442,8 @@ function determineResult(grade) {
 const failSubjectsListSemester1 = document.getElementById('failSubjectsSemester1');
 const reminderDivSemester1 = document.getElementById('reminderSemester1');
 
+const prioritizedSubjects = ['UZW195', 'EKT119', 'EKT104', 'EKT103', 'EKT124', 'EQT102'];
+
 // Display logic for Semester 1
 if (failSubjectsSemester1.length > 0) {
     // Display the fail subjects
@@ -482,36 +484,83 @@ detectElementSemester1.textContent = semesterStatusSemester1;
 // Store the semester status in sessionStorage
 sessionStorage.setItem('semesterStatusSemester1', semesterStatusSemester1);
 
+// Initialize variables
+let totalCredit = 0;
+let schedule = '';
 
-
-		// Version 1 of new schedule information
-const newScheduleDiv1 = document.getElementById('newSchedule1');
-const newScheduleMessage1 = `
+// Display a header for Semester 2 schedule
+schedule += `
     <h3>New Schedule For Semester 2</h3>
-    <p>For next semester, you need to take the following subjects:</p>
+    <p>For the next semester, you need to take the following subjects:</p>
     <ul>
-        ${(() => {
-            let totalCredit = 0;
-            let schedule = '';
-            if (detectElementSemester1.textContent === 'P1') {
-                for (const subject of subjectsSemester2) {
-                    if (totalCredit + subject.creditHour <= 12) {
-                        totalCredit += subject.creditHour;
-                        schedule += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
-                    } else {
-                        // If adding this subject exceeds the 12-credit limit, don't include it
-                        break;
-                    }
-                }
-            } else if (detectElementSemester1.textContent === 'Active') {
-                // Display all subjects for Active students
-                schedule = subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('');
-            }
-            return schedule;
-        })()}
-    </ul>
 `;
-newScheduleDiv1.innerHTML = newScheduleMessage1;
+
+// Display combined subjects for Semester 1
+schedule += subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('');
+
+// Display a message based on the semester status
+let creditLimitMessage = '';
+if (detectElementSemester1.textContent === 'P1') {
+    creditLimitMessage = 'You can choose subjects up to 12 credits.';
+} else if (detectElementSemester1.textContent === 'Active') {
+    creditLimitMessage = 'You can choose subjects up to 20 credits.';
+} 
+
+// Display the message along with the subjects
+schedule += `
+    </ul>
+    <p>This is all the subjects that you can choose according to your credit. ${creditLimitMessage}</p>
+`;
+
+// Check if neither Semester 1 nor Semester 2 is "Active"
+const isNeitherSemesterActive = !(semesterStatusSemester1 === 'Active');
+
+// If neither Semester 1 nor Semester 2 is "Active", proceed with suggestion generation
+if (isNeitherSemesterActive) {
+    // Display suggested subjects recommended by students with prioritization
+    schedule += `
+        <h3>Suggested Subjects Recommended by Students</h3>
+        <ul>
+    `;
+
+    // Initialize a set to keep track of added subjects
+    const addedSubjects = new Set();
+
+    // Define the first priority subject
+    const firstPrioritySubject = subjectsSemester2.find(subject => subject.code === 'SMB20102');
+
+    // Add the first priority subject
+    if (firstPrioritySubject) {
+        totalCredit += firstPrioritySubject.creditHour;
+        addedSubjects.add(firstPrioritySubject.code);
+        schedule += `<li>${firstPrioritySubject.code} - ${firstPrioritySubject.name} [${firstPrioritySubject.creditHour} Kredit]</li>`;
+    }
+
+    // Prioritize subjects (excluding first priority subject)
+    const prioritizedSubjectsFiltered = subjectsSemester2.filter(subject => subject.code !== 'UZW195' && prioritizedSubjects.includes(subject.code) && (subject.marks === 6 || !subject.marks));
+
+    // Prioritize subjects based on the 'prioritizedSubjects' array
+    for (const subjectCode of prioritizedSubjects) {
+        const subject = subjectsSemester2.find(sub => sub.code === subjectCode);
+        if (subject && !addedSubjects.has(subject.code) &&
+            (
+                (detectElementSemester1.textContent === 'P1' && totalCredit + subject.creditHour <= 12) ||
+                (detectElementSemester1.textContent === 'Active' && totalCredit + subject.creditHour <= 20) 
+            )
+        ) {
+            totalCredit += subject.creditHour;
+            addedSubjects.add(subject.code);
+            schedule += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
+        }
+    }
+
+    // Close the unordered list tag
+    schedule += '</ul>';
+}
+
+// Update the HTML content
+const newSchedule1 = document.getElementById('newSchedule1');
+newSchedule1.innerHTML = schedule;
 
         // Store GPA1 in sessionStorage
         sessionStorage.setItem('GPA1', GPA1);
