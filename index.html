@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
+            overflow: hidden;
             background: #001b3d;
             display: flex;
             flex-direction: column;
@@ -20,45 +21,51 @@
             color: white;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
+        .container {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .middle-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         .container-login {
             display: flex;
             flex-direction: column;
-            width: 90%;
-            max-width: 450px;
+            width: 450px;
             padding: 15px;
             border: 1px solid skyblue;
             border-radius: 5px;
             margin: 10px;
             background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1;
         }
 
         .input-group {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
         }
 
         input {
-            width: 100%;
+            flex: 1;
             margin: 10px 0;
-            height: 45px;
-            padding: 10px;
-            font-size: 16px;
-            box-sizing: border-box;
+            height: 35px;
+            padding: 7px;
         }
 
         button {
-            height: 50px;
+            height: 45px;
             width: 100%;
             background-color: skyblue;
             border: none;
             border-radius: 5px;
             color: #333;
-            font-size: 18px;
             cursor: pointer;
         }
 
@@ -69,7 +76,7 @@
 
         @media (min-width: 768px) {
             .container-login {
-                width: 400px;
+                width: 600px;
             }
             input {
                 height: 35px;
@@ -80,6 +87,7 @@
                 font-size: 16px;
             }
         }
+        
     </style>
 </head>
 
@@ -102,31 +110,34 @@
     <div id="data"></div>
 
     <script>
-        async function fetchData(username, password) {
-            const apiUrl = 'https://api.tinybird.co/v0/pipes/sem1_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIzY2NhYTdhNy1iYWFhLTRlOTctYmNhYi0yMmRiZTJhZWJiNGEiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.Ur0RrRopXR48TinxXlGEGcYoa1-76EKCje32YkBU4eE';
+    async function fetchData(username, password) {
+    const apiUrl = 'https://api.tinybird.co/v0/pipes/sem1_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIzY2NhYTdhNy1iYWFhLTRlOTctYmNhYi0yMmRiZTJhZWJiNGEiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.Ur0RrRopXR48TinxXlGEGcYoa1-76EKCje32YkBU4eE';
 
-            try {
-                const response = await fetch(apiUrl);
-                const responseData = await response.json();
+    try {
+        const response = await fetch(apiUrl);
+        const responseData = await response.json();
 
-                // Check if the fetched data contains the 'data' property
-                if (responseData.data && Array.isArray(responseData.data)) {
-                    // Check if the username and password match any data from the API response
-                    const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
+        // Check if the fetched data contains the 'data' property
+        if (responseData.data && Array.isArray(responseData.data)) {
+            // Check if the username and password match any data from the API response
+            const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
 
-                    if (matchedUser) {
-                        // Redirect to success.html with additional parameters
-                        window.location.href = `https://aimanjitra.github.io/googlesheet/sem1.html?fullName=${matchedUser.full_name}&codeCourse=${matchedUser.code_course}&year=${matchedUser.tahun}&semester=${matchedUser.sem}&ekt102=${matchedUser.ekt102}&eqt101=${matchedUser.eqt101}&matric=${matchedUser.matrik}&uuw130=${matchedUser.uuw130}&uzw164=${matchedUser.uzw164}&ekt120=${matchedUser.ekt120}&ekt101=${matchedUser.ekt101}&ekt124=${matchedUser.ekt124}&ekt103=${matchedUser.ekt103}&ekt119=${matchedUser.ekt119}&eqt102=${matchedUser.eqt102}&uzw195=${matchedUser.uzw195}&ekt104=${matchedUser.ekt104}&username=${matchedUser.username}&password=${matchedUser.password}`;
-                    } else {
-                        console.error('No matching user found for the given credentials.');
-                    }
-                } else {
-                    console.error('Invalid data format received from the API: ', responseData);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
+            if (matchedUser) {
+                // Redirect to success.html with additional parameters
+                window.location.href = `https://aimanjitra.github.io/googlesheet/sem1.html?fullName=${matchedUser.full_name}&codeCourse=${matchedUser.code_course}&year=${matchedUser.tahun}&semester=${matchedUser.sem}&ekt102=${matchedUser.ekt102}&eqt101=${matchedUser.eqt101}&matric=${matchedUser.matrik}&uuw130=${matchedUser.uuw130}&uzw164=${matchedUser.uzw164}&ekt120=${matchedUser.ekt120}&ekt101=${matchedUser.ekt101}&ekt124=${matchedUser.ekt124}&ekt103=${matchedUser.ekt103}&ekt119=${matchedUser.ekt119}&eqt102=${matchedUser.eqt102}&uzw195=${matchedUser.uzw195}&ekt104=${matchedUser.ekt104}&username=${matchedUser.username}&password=${matchedUser.password}`;
+            } else {
+                console.error('No matching user found for the given credentials.');
             }
+        } else {
+            console.error('Invalid data format received from the API: ', responseData);
         }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+
+
 
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
