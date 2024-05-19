@@ -38,8 +38,7 @@
         .container-login {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            max-width: 450px;
+            width: 450px;
             padding: 15px;
             border: 1px solid skyblue;
             border-radius: 5px;
@@ -50,10 +49,11 @@
 
         .input-group {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
         }
 
         input {
+            flex: 1;
             margin: 10px 0;
             height: 35px;
             padding: 7px;
@@ -77,12 +77,8 @@
         /* Media query for mobile devices */
         @media (max-width: 768px) {
             .container-login {
-                width: 90%;
+                width: 10%;
                 max-width: none;
-            }
-
-            h1 {
-                font-size: 1.5em;
             }
         }
     </style>
@@ -108,37 +104,40 @@
 
     <script>
     async function fetchData(username, password) {
-        const apiUrl = 'https://api.tinybird.co/v0/pipes/sem1_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIzY2NhYTdhNy1iYWFhLTRlOTctYmNhYi0yMmRiZTJhZWJiNGEiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.Ur0RrRopXR48TinxXlGEGcYoa1-76EKCje32YkBU4eE';
+    const apiUrl = 'https://api.tinybird.co/v0/pipes/sem1_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIzY2NhYTdhNy1iYWFhLTRlOTctYmNhYi0yMmRiZTJhZWJiNGEiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.Ur0RrRopXR48TinxXlGEGcYoa1-76EKCje32YkBU4eE';
 
-        try {
-            const response = await fetch(apiUrl);
-            const responseData = await response.json();
+    try {
+        const response = await fetch(apiUrl);
+        const responseData = await response.json();
 
-            // Check if the fetched data contains the 'data' property
-            if (responseData.data && Array.isArray(responseData.data)) {
-                // Check if the username and password match any data from the API response
-                const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
+        // Check if the fetched data contains the 'data' property
+        if (responseData.data && Array.isArray(responseData.data)) {
+            // Check if the username and password match any data from the API response
+            const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
 
-                if (matchedUser) {
-                    // Redirect to success.html with additional parameters
-                    window.location.href = `https://aimanjitra.github.io/googlesheet/sem1.html?fullName=${matchedUser.full_name}&codeCourse=${matchedUser.code_course}&year=${matchedUser.tahun}&semester=${matchedUser.sem}&ekt102=${matchedUser.ekt102}&eqt101=${matchedUser.eqt101}&matric=${matchedUser.matrik}&uuw130=${matchedUser.uuw130}&uzw164=${matchedUser.uzw164}&ekt120=${matchedUser.ekt120}&ekt101=${matchedUser.ekt101}&ekt124=${matchedUser.ekt124}&ekt103=${matchedUser.ekt103}&ekt119=${matchedUser.ekt119}&eqt102=${matchedUser.eqt102}&uzw195=${matchedUser.uzw195}&ekt104=${matchedUser.ekt104}&username=${matchedUser.username}&password=${matchedUser.password}`;
-                } else {
-                    console.error('No matching user found for the given credentials.');
-                }
+            if (matchedUser) {
+                // Redirect to success.html with additional parameters
+                window.location.href = `https://aimanjitra.github.io/googlesheet/sem1.html?fullName=${matchedUser.full_name}&codeCourse=${matchedUser.code_course}&year=${matchedUser.tahun}&semester=${matchedUser.sem}&ekt102=${matchedUser.ekt102}&eqt101=${matchedUser.eqt101}&matric=${matchedUser.matrik}&uuw130=${matchedUser.uuw130}&uzw164=${matchedUser.uzw164}&ekt120=${matchedUser.ekt120}&ekt101=${matchedUser.ekt101}&ekt124=${matchedUser.ekt124}&ekt103=${matchedUser.ekt103}&ekt119=${matchedUser.ekt119}&eqt102=${matchedUser.eqt102}&uzw195=${matchedUser.uzw195}&ekt104=${matchedUser.ekt104}&username=${matchedUser.username}&password=${matchedUser.password}`;
             } else {
-                console.error('Invalid data format received from the API: ', responseData);
+                console.error('No matching user found for the given credentials.');
             }
-        } catch (error) {
-            console.error('Error fetching data:', error);
+        } else {
+            console.error('Invalid data format received from the API: ', responseData);
         }
+    } catch (error) {
+        console.error('Error fetching data:', error);
     }
+}
 
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const username = document.getElementById('loginUsername').value;
-        const password = document.getElementById('loginPassword').value;
-        fetchData(username, password);
-    });
+
+
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            fetchData(username, password);
+        });
     </script>
 </body>
 
