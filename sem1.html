@@ -56,7 +56,8 @@
             margin-right: auto;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
@@ -72,13 +73,13 @@
             color: black;
         }
 
-	#CGPA1 {
-        text-align: right;  /* Align the content to the right */
-	position: relative;
-        padding-right: 20px; /* Add padding for the cross-line on the left */
-   	 }
+        #CGPA1 {
+            text-align: right;  /* Align the content to the right */
+            position: relative;
+            padding-right: 20px; /* Add padding for the cross-line on the left */
+        }
 
-	#CGPA1::before {
+        #CGPA1::before {
             content: '';
             position: absolute;
             top: 0;
@@ -89,32 +90,32 @@
             margin: auto;
         }
 
-	#blankCell {
-	   background-color: rgb(180, 172, 172);
-	}
+        #blankCell {
+            background-color: rgb(180, 172, 172);
+        }
 
-    .semester-selector-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    }
+        .semester-selector-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-    .semester-selector-box {
-    display: inline-block; /* Change display to inline-block */
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px; /* Add some margin for spacing */
-    }
+        .semester-selector-box {
+            display: inline-block; /* Change display to inline-block */
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px; /* Add some margin for spacing */
+        }
 
-            .navigation-button-container {
+        .navigation-button-container {
             display: flex;
             justify-content: center;
             margin-top: 20px;
             margin-bottom: 20px; /* Add margin bottom for space */
         }
 
-    .navigation-button {
+        .navigation-button {
             display: inline-block;
             padding: 4px 8px;
             border: 1px solid black;
@@ -128,20 +129,70 @@
             text-align: center; /* Center align text */
         }
 
-    .navigation-button:hover {
+        .navigation-button:hover {
             background-color: #ccc;
         }
 
-    @media (max-width: 600px) {
+        @media (max-width: 600px) {
             table {
                 overflow-x: auto;
-		transform: scale(0.95);
-		transform-origin: top left; /* Anchor the scale transformation to the top left */
+                transform: scale(0.95);
+                transform-origin: top left; /* Anchor the scale transformation to the top left */
             }
 
             th,
             td {
                 padding: 4px; /* Adjust padding */
+            }
+        }
+
+        .predicted-graduation {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .print-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .print-button:hover {
+            background-color: #ccc;
+        }
+
+        @media print {
+            body {
+                background-color: gray;
+            }
+
+            .container {
+                padding: 20px;
+                color: white;
+            }
+
+            .print-button,
+            .semester-selector-container,
+            .navigation-button-container,
+            #reminderSemester1,
+            #newSchedule1 {
+                display: none;
+            }
+
+            .biodata,
+            table,
+            .predicted-graduation {
+                display: block;
             }
         }
     </style>
@@ -170,95 +221,94 @@
         
         <div>
             <table>
-                                <tr>
-                            <th>Code Subject</th>
-                            <th>Name of Subject</th>
-                            <th>Credit Hour</th>
-                            <th>Result of CGPA</th>
-                            <th>Result (Pass/Fail)</th>
-                        </tr>
-                
-                        <!-- Subject 1 -->
-                        <tr>
-                            <td id="subjectCode1">[Subject Code]</td>
-                            <td id="subjectName1">[Subject Name]</td>
-                            <td id="creditHour1">[Credit Hour]</td>
-                            <td id="uzw164">[UZW164]</td>
-                            <td id="result1">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 2 -->
-                        <tr>
-                            <td id="subjectCode2">[Subject Code]</td>
-                            <td id="subjectName2">[Subject Name]</td>
-                            <td id="creditHour2">[Credit Hour]</td>
-                            <td id="uuw130">[UUW130]</td>
-                            <td id="result2">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 3 -->
-                        <tr>
-                            <td id="subjectCode3">[Subject Code]</td>
-                            <td id="subjectName3">[Subject Name]</td>
-                            <td id="creditHour3">[Credit Hour]</td>
-                            <td id="ekt102">[EKT102]</td>
-                            <td id="result3">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 4 -->
-                        <tr>
-                            <td id="subjectCode4">[Subject Code]</td>
-                            <td id="subjectName4">[Subject Name]</td>
-                            <td id="creditHour4">[Credit Hour]</td>
-                            <td id="eqt101">[EQT101]</td>
-                            <td id="result4">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 5 -->
-                        <tr>
-                            <td id="subjectCode5">[Subject Code]</td>
-                            <td id="subjectName5">[Subject Name]</td>
-                            <td id="creditHour5">[Credit Hour]</td>
-                            <td id="ekt120">[EKT120]</td>
-                            <td id="result5">[Result]</td>
-                        </tr>
-                
-                        <!-- Subject 6 -->
-                        <tr>
-                            <td id="subjectCode6">[Subject Code]</td>
-                            <td id="subjectName6">[Subject Name]</td>
-                            <td id="creditHour6">[Credit Hour]</td>
-                            <td id="ekt101">[EKT101]</td>
-                            <td id="result6">[Result]</td>
-                        </tr>
-                
-                        <tr>
-                            <td id="blankCell"></td>
-	                    <td id="CGPA1">[Total CGPA]</td>
-	                    <td id="total">[Total Hour]</td>
-	                    <td id="GPA1">[Average GPA 1]</td>
-	                    <td id="DetectSemester1">[Active/P1]</td>
-                        </tr>
+                <tr>
+                    <th>Code Subject</th>
+                    <th>Name of Subject</th>
+                    <th>Credit Hour</th>
+                    <th>Result of CGPA</th>
+                    <th>Result (Pass/Fail)</th>
+                </tr>
+        
+                <!-- Subject 1 -->
+                <tr>
+                    <td id="subjectCode1">[Subject Code]</td>
+                    <td id="subjectName1">[Subject Name]</td>
+                    <td id="creditHour1">[Credit Hour]</td>
+                    <td id="uzw164">[UZW164]</td>
+                    <td id="result1">[Result]</td>
+                </tr>
+        
+                <!-- Subject 2 -->
+                <tr>
+                    <td id="subjectCode2">[Subject Code]</td>
+                    <td id="subjectName2">[Subject Name]</td>
+                    <td id="creditHour2">[Credit Hour]</td>
+                    <td id="uuw130">[UUW130]</td>
+                    <td id="result2">[Result]</td>
+                </tr>
+        
+                <!-- Subject 3 -->
+                <tr>
+                    <td id="subjectCode3">[Subject Code]</td>
+                    <td id="subjectName3">[Subject Name]</td>
+                    <td id="creditHour3">[Credit Hour]</td>
+                    <td id="ekt102">[EKT102]</td>
+                    <td id="result3">[Result]</td>
+                </tr>
+        
+                <!-- Subject 4 -->
+                <tr>
+                    <td id="subjectCode4">[Subject Code]</td>
+                    <td id="subjectName4">[Subject Name]</td>
+                    <td id="creditHour4">[Credit Hour]</td>
+                    <td id="eqt101">[EQT101]</td>
+                    <td id="result4">[Result]</td>
+                </tr>
+        
+                <!-- Subject 5 -->
+                <tr>
+                    <td id="subjectCode5">[Subject Code]</td>
+                    <td id="subjectName5">[Subject Name]</td>
+                    <td id="creditHour5">[Credit Hour]</td>
+                    <td id="ekt120">[EKT120]</td>
+                    <td id="result5">[Result]</td>
+                </tr>
+        
+                <!-- Subject 6 -->
+                <tr>
+                    <td id="subjectCode6">[Subject Code]</td>
+                    <td id="subjectName6">[Subject Name]</td>
+                    <td id="creditHour6">[Credit Hour]</td>
+                    <td id="ekt101">[EKT101]</td>
+                    <td id="result6">[Result]</td>
+                </tr>
+        
+                <tr>
+                    <td id="blankCell"></td>
+                    <td id="CGPA1">[Total CGPA]</td>
+                    <td id="total">[Total Hour]</td>
+                    <td id="GPA1">[Average GPA 1]</td>
+                    <td id="DetectSemester1">[Active/P1]</td>
+                </tr>
             </table>
 
-		<div id="reminderSemester1" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
-	    <h3>Reminder</h3>
-	    <ul id="failSubjectsSemester1"></ul>
-	</div>
+            <div id="reminderSemester1" style="margin-top: 20px; padding: 10px; background-color: #ffcccc; color: #ff0000; width: 90%; margin-left: auto; margin-right: auto;">
+                <h3>Reminder</h3>
+                <ul id="failSubjectsSemester1"></ul>
+            </div>
 
-		<div id="newSchedule1" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
-		</div>
-
+            <div id="newSchedule1" style="margin-top: 20px; padding: 10px; background-color: #ffffff; color: #000000; width: 90%; margin-left: auto; margin-right: auto;">
+            </div>
         </div>
+    </div>
 
-        </div>
+    <div id="predictedGraduationDate" class="predicted-graduation"></div>
+    <button id="printButton" class="print-button">Print</button>
 
     <script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-        // Retrieve URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
             const username = urlParams.get('username');
             const password = urlParams.get('password');
             const fullName = urlParams.get('fullName') || 'N/A';
@@ -276,36 +326,36 @@
             const eqt101 = urlParams.get('eqt101') || 'N/A';
 
             document.getElementById('next semester').addEventListener('click', async function () {
-            try {
-                let apiUrl, redirectUrl;
-                apiUrl =
-                    'https://api.tinybird.co/v0/pipes/sem2_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIyMTBmMjZjNC00NzcwLTQ4NTEtODBmYi0yMDVlYWIxYTFlYzYiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.D90DCeLQAeNa0P78VTGcuLHDSTV00OmV357wt-D6H3I';
+                try {
+                    let apiUrl, redirectUrl;
+                    apiUrl =
+                        'https://api.tinybird.co/v0/pipes/sem2_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIyMTBmMjZjNC00NzcwLTQ4NTEtODBmYi0yMDVlYWIxYTFlYzYiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.D90DCeLQAeNa0P78VTGcuLHDSTV00OmV357wt-D6H3I';
 
-                const response = await fetch(apiUrl);
-                const responseData = await response.json();
+                    const response = await fetch(apiUrl);
+                    const responseData = await response.json();
 
-                if (responseData.data && Array.isArray(responseData.data)) {
-                    const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
+                    if (responseData.data && Array.isArray(responseData.data)) {
+                        const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
 
-                    if (matchedUser) {
-                        // Redirect to the determined URL
-                        window.location.href =
-                            `https://aimanjitra.github.io/googlesheet/sem2.html?fullName=${encodeURIComponent(matchedUser.full_name)}&codeCourse=${encodeURIComponent(matchedUser.code_course)}&year=${encodeURIComponent(matchedUser.tahun)}&semester=${encodeURIComponent(matchedUser.sem)}&ekt102=${encodeURIComponent(matchedUser.ekt102)}&eqt101=${encodeURIComponent(matchedUser.eqt101)}&matric=${encodeURIComponent(matchedUser.matrik)}&uuw130=${encodeURIComponent(matchedUser.uuw130)}&uzw164=${encodeURIComponent(matchedUser.uzw164)}&ekt120=${encodeURIComponent(matchedUser.ekt120)}&ekt101=${encodeURIComponent(matchedUser.ekt101)}&ekt124=${encodeURIComponent(matchedUser.ekt124)}&ekt103=${encodeURIComponent(matchedUser.ekt103)}&ekt119=${encodeURIComponent(matchedUser.ekt119)}&eqt102=${encodeURIComponent(matchedUser.eqt102)}&uzw195=${encodeURIComponent(matchedUser.uzw195)}&ekt104=${encodeURIComponent(matchedUser.ekt104)}&username=${matchedUser.username}&password=${matchedUser.password}`;
+                        if (matchedUser) {
+                            // Redirect to the determined URL
+                            window.location.href =
+                                `https://aimanjitra.github.io/googlesheet/sem2.html?fullName=${encodeURIComponent(matchedUser.full_name)}&codeCourse=${encodeURIComponent(matchedUser.code_course)}&year=${encodeURIComponent(matchedUser.tahun)}&semester=${encodeURIComponent(matchedUser.sem)}&ekt102=${encodeURIComponent(matchedUser.ekt102)}&eqt101=${encodeURIComponent(matchedUser.eqt101)}&matric=${encodeURIComponent(matchedUser.matrik)}&uuw130=${encodeURIComponent(matchedUser.uuw130)}&uzw164=${encodeURIComponent(matchedUser.uzw164)}&ekt120=${encodeURIComponent(matchedUser.ekt120)}&ekt101=${encodeURIComponent(matchedUser.ekt101)}&ekt124=${encodeURIComponent(matchedUser.ekt124)}&ekt103=${encodeURIComponent(matchedUser.ekt103)}&ekt119=${encodeURIComponent(matchedUser.ekt119)}&eqt102=${encodeURIComponent(matchedUser.eqt102)}&uzw195=${encodeURIComponent(matchedUser.uzw195)}&ekt104=${encodeURIComponent(matchedUser.ekt104)}&username=${matchedUser.username}&password=${matchedUser.password}`;
+                        } else {
+                            // Handle no matched user case
+                            alert('Invalid username or password');
+                        }
                     } else {
-                        // Handle no matched user case
-                        alert('Invalid username or password');
+                        // Handle invalid data format received from API
+                        console.error('Invalid data format received from the API:', responseData);
+                        alert('Error fetching user data');
                     }
-                } else {
-                    // Handle invalid data format received from API
-                    console.error('Invalid data format received from the API:', responseData);
+                } catch (error) {
+                    // Handle fetch error
+                    console.error('Error fetching data:', error);
                     alert('Error fetching user data');
                 }
-            } catch (error) {
-                // Handle fetch error
-                console.error('Error fetching data:', error);
-                alert('Error fetching user data');
-            }
-        });
+            });
 
             // Update elements with URL parameter values
             document.getElementById('fullName').textContent = `Name: ${fullName}`;
@@ -324,111 +374,109 @@
 
             let totalCreditHours = 0;
             let failSubjects = []; // Array to store failed subjects
-	    let totalCreditHoursSemester1 = 0;
+            let totalCreditHoursSemester1 = 0;
 
-            
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
                 document.getElementById('course').textContent = 'Course: Computer Engineering';
             }
 
-	    // Function to convert numerical grade to GPA scale
-    function getGPA(grade) {
-        if (grade >= 4.00) return 4.00;
-        else if (grade >= 3.75) return 3.75;
-        else if (grade >= 3.5) return 3.5;
-        else if (grade >= 3) return 3.0;
-        else if (grade >= 2.75) return 2.75;
-        else if (grade >= 2.5) return 2.5;
-        else if (grade >= 2) return 2.0;
-        else if (grade >= 1.75) return 1.75;
-        else if (grade >= 1.5) return 1.5;
-        else if (grade >= 1) return 1.0;
-        else if (grade >= 0.75) return 0.75;
-        else return 0.00;
-    }
+            // Function to convert numerical grade to GPA scale
+            function getGPA(grade) {
+                if (grade >= 4.00) return 4.00;
+                else if (grade >= 3.75) return 3.75;
+                else if (grade >= 3.5) return 3.5;
+                else if (grade >= 3) return 3.0;
+                else if (grade >= 2.75) return 2.75;
+                else if (grade >= 2.5) return 2.5;
+                else if (grade >= 2) return 2.0;
+                else if (grade >= 1.75) return 1.75;
+                else if (grade >= 1.5) return 1.5;
+                else if (grade >= 1) return 1.0;
+                else if (grade >= 0.75) return 0.75;
+                else return 0.00;
+            }
 
-        
-           // Education Subjects for Semester 1
-const subjectsSemester1 = [
-    { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
-    { code: 'UUW130', name: 'FALSAFAH DAN ISU SEMASA', creditHour: 2 },
-    { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
-    { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
-    { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
-    { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 },
-];
+            // Education Subjects for Semester 1
+            const subjectsSemester1 = [
+                { code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 },
+                { code: 'UUW130', name: 'FALSAFAH DAN ISU SEMASA', creditHour: 2 },
+                { code: 'EKT102', name: 'ASAS KEJURUTERAAN ELEKTRONIK', creditHour: 3 },
+                { code: 'EQT101', name: 'MATEMATIK KEJURUTERAAN I', creditHour: 3 },
+                { code: 'EKT120', name: 'PENGATURCARAAN KOMPUTER', creditHour: 4 },
+                { code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 },
+            ];
 
-// Education Subjects for Semester 2
-const subjectsSemester2 = [
-    { code: 'UZW195', name: 'RADIO KAMPUS [CAMPUS RADIO]', creditHour: 3 },
-    { code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 },
-    { code: 'EKT103', name: 'KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]', creditHour: 3 },
-    { code: 'EKT119', name: 'LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]', creditHour: 3 },
-    { code: 'EQT102', name: 'MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]', creditHour: 3 },
-    { code: 'EKT104', name: 'LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]', creditHour: 3 }
-];
+            // Education Subjects for Semester 2
+            const subjectsSemester2 = [
+                { code: 'UZW195', name: 'RADIO KAMPUS [CAMPUS RADIO]', creditHour: 3 },
+                { code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 },
+                { code: 'EKT103', name: 'KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]', creditHour: 3 },
+                { code: 'EKT119', name: 'LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]', creditHour: 3 },
+                { code: 'EQT102', name: 'MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]', creditHour: 3 },
+                { code: 'EKT104', name: 'LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]', creditHour: 3 }
+            ];
 
-// Display subjects for Semester 1
-subjectsSemester1.forEach((subject, index) => {
-    const subjectCode = document.getElementById(`subjectCode${index + 1}`);
-    const subjectName = document.getElementById(`subjectName${index + 1}`);
-    const creditHour = document.getElementById(`creditHour${index + 1}`);
+            // Display subjects for Semester 1
+            subjectsSemester1.forEach((subject, index) => {
+                const subjectCode = document.getElementById(`subjectCode${index + 1}`);
+                const subjectName = document.getElementById(`subjectName${index + 1}`);
+                const creditHour = document.getElementById(`creditHour${index + 1}`);
 
-    subjectCode.textContent = subject.code;
-    subjectName.textContent = subject.name;
-    creditHour.textContent = subject.creditHour;
+                subjectCode.textContent = subject.code;
+                subjectName.textContent = subject.name;
+                creditHour.textContent = subject.creditHour;
 
-    // Add credit hours to the total
-    totalCreditHoursSemester1 += subject.creditHour;
-});
+                // Add credit hours to the total
+                totalCreditHoursSemester1 += subject.creditHour;
+            });
 
             // Display the total credit hours for Semester 1
             document.getElementById('total').textContent = `${totalCreditHoursSemester1}`;
-		
-const GPA1 = (getGPA(ekt102) * subjectsSemester1[0].creditHour +
-                  getGPA(uuw130) * subjectsSemester1[1].creditHour +
-                  getGPA(ekt102) * subjectsSemester1[2].creditHour +
-                  getGPA(eqt101) * subjectsSemester1[3].creditHour +
-                  getGPA(ekt120) * subjectsSemester1[4].creditHour +
-                  getGPA(ekt101) * subjectsSemester1[5].creditHour) / totalCreditHoursSemester1;
-		// Display the GPA for Semester 1
-		document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
+
+            const GPA1 = (getGPA(ekt102) * subjectsSemester1[0].creditHour +
+                        getGPA(uuw130) * subjectsSemester1[1].creditHour +
+                        getGPA(ekt102) * subjectsSemester1[2].creditHour +
+                        getGPA(eqt101) * subjectsSemester1[3].creditHour +
+                        getGPA(ekt120) * subjectsSemester1[4].creditHour +
+                        getGPA(ekt101) * subjectsSemester1[5].creditHour) / totalCreditHoursSemester1;
+            // Display the GPA for Semester 1
+            document.getElementById('GPA1').textContent = `GPA: ${GPA1.toFixed(2)}`;
 
             // Function to convert numerical grade to letter grade
-                function getLetterGrade(grade) {
-                    if (grade >= 4.00) return 'A';
-                    else if (grade >= 3.75) return 'A-';
-                    else if (grade >= 3.5) return 'B+';
-                    else if (grade >= 3) return 'B';
-                    else if (grade >= 2.75) return 'B-';
-                    else if (grade >= 2.5) return 'C+';
-                    else if (grade >= 2) return 'C';
-                    else if (grade >= 1.75) return 'C-';
-                    else if (grade >= 1.5) return 'D+';
-                    else if (grade >= 1) return 'D';
-                    else if (grade >= 0.75) return 'D-';
-                    else return 'F';
-                }
+            function getLetterGrade(grade) {
+                if (grade >= 4.00) return 'A';
+                else if (grade >= 3.75) return 'A-';
+                else if (grade >= 3.5) return 'B+';
+                else if (grade >= 3) return 'B';
+                else if (grade >= 2.75) return 'B-';
+                else if (grade >= 2.5) return 'C+';
+                else if (grade >= 2) return 'C';
+                else if (grade >= 1.75) return 'C-';
+                else if (grade >= 1.5) return 'D+';
+                else if (grade >= 1) return 'D';
+                else if (grade >= 0.75) return 'D-';
+                else return 'F';
+            }
 
-		// Check for the Semester 1
-                result1.textContent = determineResult(uzw164);
-                result2.textContent = determineResult(uuw130);
-                result3.textContent = determineResult(ekt102);
-                result4.textContent = determineResult(eqt101);
-                result5.textContent = determineResult(ekt120);
-                result6.textContent = determineResult(ekt101);
+            // Check for the Semester 1
+            result1.textContent = determineResult(uzw164);
+            result2.textContent = determineResult(uuw130);
+            result3.textContent = determineResult(ekt102);
+            result4.textContent = determineResult(eqt101);
+            result5.textContent = determineResult(ekt120);
+            result6.textContent = determineResult(ekt101);
 
-		// Function to determine pass/fail result
-function determineResult(grade) {
-    // Check if the numeric grade is greater than or equal to 2
-    return (grade >= 2) ? 'Pass' : 'Fail';
-}
+            // Function to determine pass/fail result
+            function determineResult(grade) {
+                // Check if the numeric grade is greater than or equal to 2
+                return (grade >= 2) ? 'Pass' : 'Fail';
+            }
 
-		    // Check for failed subjects in Semester 1
-			const failSubjectsSemester1 = [];
+            // Check for failed subjects in Semester 1
+            const failSubjectsSemester1 = [];
 
-	    if (determineResult(uzw164) === 'Fail') {
+            if (determineResult(uzw164) === 'Fail') {
                 failSubjectsSemester1.push({ code: 'UZW164', name: 'KURSUS PERSIJILAN BULAN SABIT MERAH MALAYSIA I', creditHour: 1 });
             }
             if (determineResult(uuw130) === 'Fail') {
@@ -447,134 +495,217 @@ function determineResult(grade) {
                 failSubjectsSemester1.push({ code: 'EKT101', name: 'TEORI LITAR ELEKTRIK', creditHour: 4 });
             }
 
+            // Display the fail subjects and reminder for Semester 1
+            const failSubjectsListSemester1 = document.getElementById('failSubjectsSemester1');
+            const reminderDivSemester1 = document.getElementById('reminderSemester1');
 
-// Display the fail subjects and reminder for Semester 1
-const failSubjectsListSemester1 = document.getElementById('failSubjectsSemester1');
-const reminderDivSemester1 = document.getElementById('reminderSemester1');
+            // Display the reminder message
+            if (failSubjectsSemester1.length > 0) {
+                const subjectList = failSubjectsSemester1.map(subject => `- ${subject.name}`).join('<br>'); // Add <br> after each subject
+                const reminderMessageSemester1 = `You should retake the following subjects for the next semester: <br>${subjectList}`; // Include <br> between the subjects
+                const reminderParagraphSemester1 = document.createElement('p');
+                reminderParagraphSemester1.innerHTML = reminderMessageSemester1; // Use innerHTML to interpret <br> as HTML
+                reminderDivSemester1.appendChild(reminderParagraphSemester1);
 
-const prioritizedSubjects = ['UZW195', 'EKT119', 'EKT104', 'EKT103', 'EKT124', 'EQT102'];
+                reminderDivSemester1.style.display = 'block'; // Show the reminder if there are failed subjects
+            } else {
+                reminderDivSemester1.style.display = 'none'; // Hide the reminder if no fail subjects
+            }
 
-// Display the reminder message
-if (failSubjectsSemester1.length > 0) {
-    const subjectList = failSubjectsSemester1.map(subject => `- ${subject.name}`).join('<br>'); // Add <br> after each subject
-    const reminderMessageSemester1 = `You should retake the following subjects for the next semester: <br>${subjectList}`; // Include <br> between the subjects
-    const reminderParagraphSemester1 = document.createElement('p');
-    reminderParagraphSemester1.innerHTML = reminderMessageSemester1; // Use innerHTML to interpret <br> as HTML
-    reminderDivSemester1.appendChild(reminderParagraphSemester1);
-
-    reminderDivSemester1.style.display = 'block'; // Show the reminder if there are failed subjects
-}else {
-    reminderDivSemester1.style.display = 'none'; // Hide the reminder if no fail subjects
+            try {
+    sessionStorage.setItem('failSubjectsSemester1', JSON.stringify(failSubjectsSemester1));
+    console.log('Failed subjects for Semester 1 stored successfully:', failSubjectsSemester1);
+} catch (error) {
+    console.error('Error storing failSubjectsSemester1 in sessionStorage:', error);
 }
 
-// Store failSubjectsSemester1 in sessionStorage
-sessionStorage.setItem('failSubjectsSemester1', JSON.stringify(failSubjectsSemester1));
+            // Function to determine semester status based on GPA
+            function determineSemesterStatus(GPA1) {
+                return parseFloat(GPA1) >= 2 ? 'Active' : 'P1';
+            }
 
-// Function to determine semester status based on GPA
-function determineSemesterStatus(GPA1) {
-    return parseFloat(GPA1) >= 2 ? 'Active' : 'P1';
-}
+            // Update the detect element based on the GPA for Semester 1
+            const detectElementSemester1 = document.getElementById('DetectSemester1');
 
-// Update the detect element based on the GPA for Semester 1
-const detectElementSemester1 = document.getElementById('DetectSemester1');
+            // Retrieve the semester status for Semester 1 from sessionStorage
+            const semesterStatusSemester1 = determineSemesterStatus(GPA1);
 
-// Retrieve the semester status for Semester 1 from sessionStorage
-const semesterStatusSemester1 = determineSemesterStatus(GPA1);
+            // Set the semester status as text content for Semester 1
+            detectElementSemester1.textContent = semesterStatusSemester1;
 
-// Set the semester status as text content for Semester 1
-detectElementSemester1.textContent = semesterStatusSemester1;
+            // Store the semester status in sessionStorage
+            sessionStorage.setItem('semesterStatusSemester1', semesterStatusSemester1);
 
-// Store the semester status in sessionStorage
-sessionStorage.setItem('semesterStatusSemester1', semesterStatusSemester1);
+            // Initialize variables
+            let totalCreditLecturer = 0;
+            let totalCreditStudent = 0;
+            let schedule = '';
 
-// Initialize variables
-let totalCredit = 0;
-let schedule = '';
+            // Display a header for Semester 2 schedule
+            schedule += `
+                <h3>New Schedule For Semester 2</h3>
+                <p>For the next semester, you need to take the following subjects:</p>
+                <ul>
+            `;
 
-// Display a header for Semester 2 schedule
-schedule += `
-    <h3>New Schedule For Semester 2</h3>
-    <p>For the next semester, you need to take the following subjects:</p>
-    <ul>
-`;
+            // Display combined subjects for Semester 2
+            schedule += subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('');
 
-// Display combined subjects for Semester 1
-schedule += subjectsSemester2.map(subject => `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`).join('');
+            // Display a message based on the semester status
+            let creditLimitMessage = '';
+            if (detectElementSemester1.textContent === 'P1') {
+                creditLimitMessage = 'You can choose subjects up to 12 credits.';
+            } else if (detectElementSemester1.textContent === 'Active') {
+                creditLimitMessage = 'You can choose subjects up to 20 credits.';
+            }
 
-// Display a message based on the semester status
-let creditLimitMessage = '';
-if (detectElementSemester1.textContent === 'P1') {
-    creditLimitMessage = 'You can choose subjects up to 12 credits.';
-} else if (detectElementSemester1.textContent === 'Active') {
-    creditLimitMessage = 'You can choose subjects up to 20 credits.';
-} 
+            // Display the message along with the subjects
+            schedule += `
+                </ul>
+                <p>This is all the subjects that you can choose according to your credit. ${creditLimitMessage}</p>
+            `;
 
-// Display the message along with the subjects
-schedule += `
-    </ul>
-    <p>This is all the subjects that you can choose according to your credit. ${creditLimitMessage}</p>
-`;
+            // Display suggested subjects recommended by lecturer
+            schedule += `
+                <h3>Suggested Subjects Recommended by Lecturer</h3>
+                <ul>
+            `;
 
-// Check if neither Semester 1 nor Semester 2 is "Active"
-const isNeitherSemesterActive = !(semesterStatusSemester1 === 'Active');
+            // Lecturer recommended subjects
+            const lecturerRecommendedSubjects = [
+                { code: 'UZW195', name: 'RADIO KAMPUS [CAMPUS RADIO]', creditHour: 3 },
+                { code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 },
+                { code: 'EKT103', name: 'KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]', creditHour: 3 },
+                { code: 'EKT119', name: 'LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]', creditHour: 3 },
+                { code: 'EQT102', name: 'MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]', creditHour: 3 },
+                { code: 'EKT104', name: 'LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]', creditHour: 3 }
+            ];
 
-// If neither Semester 1 nor Semester 2 is "Active", proceed with suggestion generation
-if (isNeitherSemesterActive) {
-    // Display suggested subjects recommended by students with prioritization
-    schedule += `
-        <h3>Suggested Subjects Recommended by Students</h3>
-        <ul>
-    `;
+            // Lecturer prioritized subjects
+            const prioritizedSubjectsLecturer = ['UZW195', 'EKT124', 'EKT103', 'EKT119', 'EKT104', 'EQT102'];
+            // Initialize a set to keep track of added subjects for lecturers
+            const addedSubjectsLecturer = new Set();
 
-    // Initialize a set to keep track of added subjects
-    const addedSubjects = new Set();
+            // Define the first priority subject for lecturer
+            const firstPrioritySubjectLecturer = lecturerRecommendedSubjects.find(subject => subject.code === prioritizedSubjectsLecturer[0]);
 
-    // Define the first priority subject
-    const firstPrioritySubject = subjectsSemester2.find(subject => subject.code === 'SMB20102');
+            // Add the first priority subject for lecturer
+            if (firstPrioritySubjectLecturer) {
+                totalCreditLecturer += firstPrioritySubjectLecturer.creditHour;
+                addedSubjectsLecturer.add(firstPrioritySubjectLecturer.code);
+                schedule += `<li>${firstPrioritySubjectLecturer.code} - ${firstPrioritySubjectLecturer.name} [${firstPrioritySubjectLecturer.creditHour} Kredit]</li>`;
+            }
 
-    // Add the first priority subject
-    if (firstPrioritySubject) {
-        totalCredit += firstPrioritySubject.creditHour;
-        addedSubjects.add(firstPrioritySubject.code);
-        schedule += `<li>${firstPrioritySubject.code} - ${firstPrioritySubject.name} [${firstPrioritySubject.creditHour} Kredit]</li>`;
-    }
+            // Prioritize subjects for lecturer
+            for (const subjectCode of prioritizedSubjectsLecturer) {
+                const subject = lecturerRecommendedSubjects.find(sub => sub.code === subjectCode);
+                if (subject && !addedSubjectsLecturer.has(subject.code) &&
+                    (
+                        (detectElementSemester1.textContent === 'P1' && totalCreditLecturer + subject.creditHour <= 12) ||
+                        (detectElementSemester1.textContent === 'Active' && totalCreditLecturer + subject.creditHour <= 20)
+                    )
+                ) {
+                    totalCreditLecturer += subject.creditHour;
+                    addedSubjectsLecturer.add(subject.code);
+                    schedule += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
+                }
+            }
 
-    // Prioritize subjects (excluding first priority subject)
-    const prioritizedSubjectsFiltered = subjectsSemester2.filter(subject => subject.code !== 'UZW195' && prioritizedSubjects.includes(subject.code) && (subject.marks === 6 || !subject.marks));
+            // Close the unordered list tag for lecturers
+            schedule += '</ul>';
 
-    // Prioritize subjects based on the 'prioritizedSubjects' array
-    for (const subjectCode of prioritizedSubjects) {
-        const subject = subjectsSemester2.find(sub => sub.code === subjectCode);
-        if (subject && !addedSubjects.has(subject.code) &&
-            (
-                (detectElementSemester1.textContent === 'P1' && totalCredit + subject.creditHour <= 12) ||
-                (detectElementSemester1.textContent === 'Active' && totalCredit + subject.creditHour <= 20) 
-            )
-        ) {
-            totalCredit += subject.creditHour;
-            addedSubjects.add(subject.code);
-            schedule += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
-        }
-    }
+            // Display suggested subjects recommended by students
+            schedule += `
+                <h3>Suggested Subjects Recommended by Students</h3>
+                <ul>
+            `;
 
-    // Close the unordered list tag
-    schedule += '</ul>';
-}
+            // Student recommended subjects
+            const studentRecommendedSubjects = [
+                { code: 'UZW195', name: 'RADIO KAMPUS [CAMPUS RADIO]', creditHour: 3 },
+                { code: 'EKT124', name: 'ELEKTRONIK DIGIT I [DIGITAL ELECTRONICS I]', creditHour: 3 },
+                { code: 'EKT103', name: 'KEJURUTERAAN ELEKTRIK [ELECTRICAL ENGINEERING]', creditHour: 3 },
+                { code: 'EKT119', name: 'LITAR ELEKTRIK II [ELECTRIC CIRCUIT II]', creditHour: 3 },
+                { code: 'EQT102', name: 'MATEMATIK KEJURUTERAAN II [ENGINEERING MATHEMATICS II]', creditHour: 3 },
+                { code: 'EKT104', name: 'LITAR ELEKTRONIK ANALOG 1 [ANALOG ELECTRONIC CIRCUITS 1]', creditHour: 3 }
+            ];
 
-// Update the HTML content
-const newSchedule1 = document.getElementById('newSchedule1');
-newSchedule1.innerHTML = schedule;
+            // Student prioritized subjects
+            const prioritizedSubjectsStudent = ['EKT104', 'EQT102', 'EKT103', 'EKT124', 'UZW195', 'EKT119'];
 
-        // Store GPA1 in sessionStorage
-        sessionStorage.setItem('GPA1', GPA1);
+            // Initialize a set to keep track of added subjects for students
+            const addedSubjectsStudents = new Set();
 
-    const cgpa1 = document.getElementById('CGPA1');
-    cgpa1.textContent = `CGPA: ${GPA1.toFixed(2)}`;
+            // Define the first priority subject for students
+            const firstPrioritySubjectStudents = studentRecommendedSubjects.find(subject => subject.code === prioritizedSubjectsStudent[0]);
 
-    });
-        
-</script>
+            // Add the first priority subject for students
+            if (firstPrioritySubjectStudents) {
+                totalCreditStudent += firstPrioritySubjectStudents.creditHour;
+                addedSubjectsStudents.add(firstPrioritySubjectStudents.code);
+                schedule += `<li>${firstPrioritySubjectStudents.code} - ${firstPrioritySubjectStudents.name} [${firstPrioritySubjectStudents.creditHour} Kredit]</li>`;
+            }
 
+            // Prioritize subjects for students
+            for (const subjectCode of prioritizedSubjectsStudent) {
+                const subject = studentRecommendedSubjects.find(sub => sub.code === subjectCode);
+                if (subject && !addedSubjectsStudents.has(subject.code) &&
+                    (
+                        (detectElementSemester1.textContent === 'P1' && totalCreditStudent + subject.creditHour <= 12) ||
+                        (detectElementSemester1.textContent === 'Active' && totalCreditStudent + subject.creditHour <= 20)
+                    )
+                ) {
+                    totalCreditStudent += subject.creditHour;
+                    addedSubjectsStudents.add(subject.code);
+                    schedule += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
+                }
+            }
+
+            // Close the unordered list tag for students
+            schedule += '</ul>';
+
+            // Update the HTML content
+            const newSchedule1 = document.getElementById('newSchedule1');
+            newSchedule1.innerHTML = schedule;
+
+            // Store GPA1 in sessionStorage
+            sessionStorage.setItem('GPA1', GPA1);
+
+            const cgpa1 = document.getElementById('CGPA1');
+            cgpa1.textContent = `CGPA: ${GPA1.toFixed(2)}`;
+
+            const predictedGraduationDate = document.getElementById('predictedGraduationDate');
+            let baseGraduationDate = new Date('2024-10-10'); // Base graduation date
+            if (detectElementSemester1.textContent === 'P1') {
+                baseGraduationDate = addMonths(baseGraduationDate, 6); // Add 6 months if status is P1
+            }
+            const formattedGraduationDate = formatDate(baseGraduationDate);
+            predictedGraduationDate.textContent = `Predicted to graduate on ${formattedGraduationDate}`;
+
+            // Function to format date to "DD MMMM YYYY"
+            function formatDate(date) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return date.toLocaleDateString('en-GB', options);
+            }
+
+            // Function to add months to a date
+            function addMonths(date, months) {
+                const d = new Date(date);
+                d.setMonth(d.getMonth() + months);
+                return d;
+            }
+
+            // Store the predicted graduation date in localStorage
+            localStorage.setItem('predictedGraduationDate1', formattedGraduationDate);
+
+            // Function to print the page
+        document.getElementById('printButton').addEventListener('click', function() {
+            window.print();
+        });
+
+
+        });
+    </script>
 </body>
 
 </html>
