@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
+            overflow: hidden;
             background-color: #001b3d;
         }
 
@@ -84,7 +85,7 @@
             top: 0;
             bottom: 0;
             left: 0;
-            width: 25%; /* Width of the cross-line */
+            width: 75%; /* Width of the cross-line */
             background-color: rgb(180, 172, 172); /* Color of the cross-line */
             margin: auto;
         }
@@ -132,16 +133,53 @@
             background-color: #ccc;
         }
 
-    @media (max-width: 600px) {
-            table {
-                overflow-x: auto;
-		transform: scale(0.95);
-		transform-origin: top left; /* Anchor the scale transformation to the top left */
+    .predicted-graduation {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px;
+            border-radius: 4px;
+        }
+     
+        .print-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .print-button:hover {
+            background-color: #ccc;
+        }
+
+        @media print {
+            body {
+                background-color: gray;
             }
 
-            th,
-            td {
-                padding: 4px; /* Adjust padding */
+            .container {
+                padding: 20px;
+                color: white;
+            }
+
+            .print-button,
+            .semester-selector-container,
+            .navigation-button-container,
+            #reminderSemester2,
+            #newSchedule2 {
+                display: none;
+            }
+
+            .biodata,
+            table,
+            .predicted-graduation {
+                display: block;
             }
         }
 
@@ -166,7 +204,8 @@
             </div>
         </div>        
         <div class="navigation-button-container">
-            <button id="next semester" class="navigation-button">Next Semester</button>
+            <button id="prevSemester" class="navigation-button">Previous Semester</button>
+            <button id="nextSemester" class="navigation-button">Next Semester</button>
         </div>
         <div>
             <table>
@@ -202,6 +241,9 @@
 
     </div>
 
+    <div id="predictedGraduationDate" class="predicted-graduation"></div>
+    <button id="printButton" class="print-button">Print</button>
+
     <script>
         // Retrieve marks from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -222,36 +264,70 @@
             document.getElementById('year').textContent = `Year: ${year}`;
             document.getElementById('semester').textContent = `Semester: ${semester}`;
 
-            document.getElementById('next semester').addEventListener('click', async function () {
-            try {
-                let apiUrl, redirectUrl;
-                apiUrl =
-                    'https://api.tinybird.co/v0/pipes/sem3_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICI2MzlhNGZkNC02MzVjLTQ5YjYtOWJmMi01NGE4NGRjY2NlYWUiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.qaB7b_JqYRlihDeIeSQsQa8jrVSnwhcNE0XaTK9j3J4';
+            // Event listener for the next semester button
+                document.getElementById('nextSemester').addEventListener('click', async function () {
+                    try {
+                        let apiUrl, redirectUrl;
+                        apiUrl =
+                            'https://api.tinybird.co/v0/pipes/sem3_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICI2MzlhNGZkNC02MzVjLTQ5YjYtOWJmMi01NGE4NGRjY2NlYWUiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.qaB7b_JqYRlihDeIeSQsQa8jrVSnwhcNE0XaTK9j3J4';
 
-                const response = await fetch(apiUrl);
-                const responseData = await response.json();
+                        const response = await fetch(apiUrl);
+                        const responseData = await response.json();
 
-                if (responseData.data && Array.isArray(responseData.data)) {
-                    const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
+                        if (responseData.data && Array.isArray(responseData.data)) {
+                            const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
 
-                    if (matchedUser) {
-                        // Redirect to the determined URL
-                        window.location.href = `https://aimanjitra.github.io/googlesheet/sem3.html?fullName=${encodeURIComponent(matchedUser.full_name)}&codeCourse=${encodeURIComponent(matchedUser.code_course)}&year=${encodeURIComponent(matchedUser.tahun)}&semester=${encodeURIComponent(matchedUser.sem)}&ekt102=${encodeURIComponent(matchedUser.ekt102)}&eqt101=${encodeURIComponent(matchedUser.eqt101)}&matric=${encodeURIComponent(matchedUser.matrik)}&uuw130=${encodeURIComponent(matchedUser.uuw130)}&uzw164=${encodeURIComponent(matchedUser.uzw164)}&ekt120=${encodeURIComponent(matchedUser.ekt120)}&ekt101=${encodeURIComponent(matchedUser.ekt101)}&smb20102=${encodeURIComponent(matchedUser.smb20102)}&nmj20003=${encodeURIComponent(matchedUser.nmj20003)}&smq22103=${encodeURIComponent(matchedUser.smq22103)}&nmj20404=${encodeURIComponent(matchedUser.nmj20404)}&nmj20904=${encodeURIComponent(matchedUser.nmj20904)}&username=${matchedUser.username}&password=${matchedUser.password}`;
-                    } else {
-                        // Handle no matched user case
-                        alert('Invalid username or password');
+                            if (matchedUser) {
+                                // Redirect to the determined URL
+                                window.location.href = `https://aimanjitra.github.io/googlesheet/sem3.html?fullName=${encodeURIComponent(matchedUser.full_name)}&codeCourse=${encodeURIComponent(matchedUser.code_course)}&year=${encodeURIComponent(matchedUser.tahun)}&semester=${encodeURIComponent(matchedUser.sem)}&ekt102=${encodeURIComponent(matchedUser.ekt102)}&eqt101=${encodeURIComponent(matchedUser.eqt101)}&matric=${encodeURIComponent(matchedUser.matrik)}&uuw130=${encodeURIComponent(matchedUser.uuw130)}&uzw164=${encodeURIComponent(matchedUser.uzw164)}&ekt120=${encodeURIComponent(matchedUser.ekt120)}&ekt101=${encodeURIComponent(matchedUser.ekt101)}&smb20102=${encodeURIComponent(matchedUser.smb20102)}&nmj20003=${encodeURIComponent(matchedUser.nmj20003)}&smq22103=${encodeURIComponent(matchedUser.smq22103)}&nmj20404=${encodeURIComponent(matchedUser.nmj20404)}&nmj20904=${encodeURIComponent(matchedUser.nmj20904)}&username=${matchedUser.username}&password=${matchedUser.password}`;
+                            } else {
+                                // Handle no matched user case
+                                alert('Invalid username or password');
+                            }
+                        } else {
+                            // Handle invalid data format received from API
+                            console.error('Invalid data format received from the API:', responseData);
+                            alert('Error fetching user data');
+                        }
+                    } catch (error) {
+                        // Handle fetch error
+                        console.error('Error fetching data:', error);
+                        alert('Error fetching user data');
                     }
-                } else {
-                    // Handle invalid data format received from API
-                    console.error('Invalid data format received from the API:', responseData);
-                    alert('Error fetching user data');
-                }
-            } catch (error) {
-                // Handle fetch error
-                console.error('Error fetching data:', error);
-                alert('Error fetching user data');
-            }
-        });
+                });
+
+                // Event listener for the previous semester button
+                document.getElementById('prevSemester').addEventListener('click', async function () {
+                    try {
+                        let apiUrl, redirectUrl;
+                        apiUrl =
+                            'https://api.tinybird.co/v0/pipes/sem1_data.json?token=p.eyJ1IjogImQ5YTVkMDEyLWQ4ZjYtNDkxMS1hYzgyLTcxODJmOTJiNGVlMiIsICJpZCI6ICIzY2NhYTdhNy1iYWFhLTRlOTctYmNhYi0yMmRiZTJhZWJiNGEiLCAiaG9zdCI6ICJldV9zaGFyZWQifQ.Ur0RrRopXR48TinxXlGEGcYoa1-76EKCje32YkBU4eE';
+
+                        const response = await fetch(apiUrl);
+                        const responseData = await response.json();
+
+                        if (responseData.data && Array.isArray(responseData.data)) {
+                            const matchedUser = responseData.data.find(user => user.username === username && user.password === password);
+
+                            if (matchedUser) {
+                                // Redirect to the determined URL
+                                window.location.href = `https://aimanjitra.github.io/googlesheet/sem1.html?fullName=${matchedUser.full_name}&codeCourse=${matchedUser.code_course}&year=${matchedUser.tahun}&semester=${matchedUser.sem}&ekt102=${matchedUser.ekt102}&eqt101=${matchedUser.eqt101}&matric=${matchedUser.matrik}&uuw130=${matchedUser.uuw130}&uzw164=${matchedUser.uzw164}&ekt120=${matchedUser.ekt120}&ekt101=${matchedUser.ekt101}&ekt124=${matchedUser.ekt124}&ekt103=${matchedUser.ekt103}&ekt119=${matchedUser.ekt119}&eqt102=${matchedUser.eqt102}&uzw195=${matchedUser.uzw195}&ekt104=${matchedUser.ekt104}&username=${matchedUser.username}&password=${matchedUser.password}`;
+                            } else {
+                                // Handle no matched user case
+                                alert('Invalid username or password');
+                            }
+                        } else {
+                            // Handle invalid data format received from API
+                            console.error('Invalid data format received from the API:', responseData);
+                            alert('Error fetching user data');
+                        }
+                    } catch (error) {
+                        // Handle fetch error
+                        console.error('Error fetching data:', error);
+                        alert('Error fetching user data');
+                    }        
+                });
+
 
             // Additional check for course code
             if (codeCourse === 'UR6523002') {
@@ -396,6 +472,7 @@ if (failSubjectsSemester2.length > 0) {
         sessionStorage.setItem('detectElementSemester2', detectElementSemester2);
 
 
+
             // Function to determine semester status
             function determineSemesterStatus(GPA2) {
                 return parseFloat(GPA2) >= 2 ? 'Active' : 'P1';
@@ -417,10 +494,23 @@ if (failSubjectsSemester2.length > 0) {
             }
 
             // Retrieve failSubjectsSemester1 from sessionStorage
-const failSubjectsSemester1JSON = sessionStorage.getItem('failSubjectsSemester1');
-const failSubjectsSemester1 = failSubjectsSemester1JSON ? JSON.parse(failSubjectsSemester1JSON) : [];
+            let  failSubjectsSemester1JSON = sessionStorage.getItem('failSubjectsSemester1');
+let failSubjectsSemester1 = failSubjectsSemester1JSON ? JSON.parse(failSubjectsSemester1JSON) : [];
+
+try {
+    let failSubjectsSemester1JSON = sessionStorage.getItem('failSubjectsSemester1');
+    if (failSubjectsSemester1JSON) {
+        failSubjectsSemester1 = JSON.parse(failSubjectsSemester1JSON);
+        console.log('Failed subjects from Semester 1 retrieved successfully:', failSubjectsSemester1);
+    } else {
+        console.warn('No failSubjectsSemester1 found in sessionStorage.');
+    }
+} catch (error) {
+    console.error('Error parsing failSubjectsSemester1 from sessionStorage:', error);
+}
 
 const prioritizedSubjects = ['SMB20102', 'EQT101', 'SMQ22103', 'EKT120', 'NMJ20904', 'EKT102', 'NMJ20404', 'NMJ20003', 'EKT101'];
+const prioritizedSubjectsLecturer = ['SMB20102', 'EQT101', 'EKT101', 'EKT102', 'EKT120', 'SMQ22103', 'NMJ20904', 'NMJ20404', 'NMJ20003'];
 
 // Combine failSubjectsSemester2 with subjects with marks equal to '6'
 const failOrIncompleteSubjectsSemester2 = failSubjectsSemester2.concat(
@@ -430,9 +520,12 @@ const failOrIncompleteSubjectsSemester2 = failSubjectsSemester2.concat(
 // Store failOrIncompleteSubjectsSemester2 in sessionStorage
 sessionStorage.setItem('failOrIncompleteSubjectsSemester2', JSON.stringify(failOrIncompleteSubjectsSemester2));
 
-           // Initialize variables
-let totalCredit = 0;
+// Initialize variables
+let totalCreditLecturer = 0;
+let totalCreditStudent = 0;
 let schedule = '';
+let schedule1 = '';
+let schedule2 = '';
 
 // Display a header for Semester 2 schedule
 schedule += '<h3>New Schedule For Semester 3</h3>';
@@ -469,59 +562,140 @@ schedule += `<p>This is all the subjects that you can choose according to your c
 // Check if neither Semester 1 nor Semester 2 is "Active"
 const isNeitherSemesterActive = !(semesterStatusSemester1 === 'Active' && detectElementSemester2.textContent === 'Active');
 
-// If neither Semester 1 nor Semester 2 is "Active", proceed with suggestion generation
-if (isNeitherSemesterActive) {
-    // Display suggested subjects recommended by students with prioritization
-    schedule += '<h3>Suggested Subjects Recommended by Students</h3>';
-    schedule += '<ul>';
+// Display suggested subjects recommended by lecturers
+schedule1 += '<h3>Suggested Subjects Recommended by Lecturer</h3>';
+schedule1 += '<ul>';
 
-    // Initialize a set to keep track of added subjects
-    const addedSubjects = new Set();
+// Initialize a set to keep track of added subjects for lecturers
+const addedSubjectsLecturer = new Set();
 
 // Define the first priority subject
-    const firstPrioritySubject = subjectsSemester3.find(subject => subject.code === 'SMB20102');
+const firstPrioritySubjectLecturer = subjectsSemester3.find(subject => subject.code === 'SMB20102');
 
-    // Add the first priority subject
-    if (firstPrioritySubject) {
-        totalCredit += firstPrioritySubject.creditHour;
-        addedSubjects.add(firstPrioritySubject.code);
-        schedule += `<li>${firstPrioritySubject.code} - ${firstPrioritySubject.name} [${firstPrioritySubject.creditHour} Kredit]</li>`;
-    }
-
-    // Prioritize subjects (excluding first priority subject)
-    const prioritizedSubjectsFiltered = subjectsSemester3.filter(subject => subject.code !== 'SMB20102' && prioritizedSubjects.includes(subject.code) && (subject.marks === 6 || !subject.marks));
-
-    // Prioritize subjects based on the 'prioritizedSubjects' array
-    for (const subjectCode of prioritizedSubjects) {
-        const subject = subjectsSemester3WithFailed1.find(sub => sub.code === subjectCode);
-        if (subject && !addedSubjects.has(subject.code) &&
-            (
-                (detectElementSemester2.textContent === 'P1' && totalCredit + subject.creditHour <= 12) ||
-                (detectElementSemester2.textContent === 'Active' && totalCredit + subject.creditHour <= 20) ||
-                (detectElementSemester2.textContent === 'P2' && totalCredit + subject.creditHour <= 10)
-            )
-        ) {
-            totalCredit += subject.creditHour;
-            addedSubjects.add(subject.code);
-            schedule += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
-        }
-    }
-
-    // Close the unordered list tag
-    schedule += '</ul>';
+// Add the first priority subject
+if (firstPrioritySubjectLecturer) {
+    totalCreditLecturer += firstPrioritySubjectLecturer.creditHour;
+    addedSubjectsLecturer.add(firstPrioritySubjectLecturer.code);
+    schedule1 += `<li>${firstPrioritySubjectLecturer.code} - ${firstPrioritySubjectLecturer.name} [${firstPrioritySubjectLecturer.creditHour} Kredit]</li>`;
 }
+
+// Prioritize subjects (excluding first priority subject)
+for (const subjectCode of prioritizedSubjectsLecturer) {
+    const subject = subjectsSemester3WithFailed1.find(sub => sub.code === subjectCode);
+    if (subject && !addedSubjectsLecturer.has(subject.code) &&
+        (
+            (detectElementSemester2.textContent === 'P1' && totalCreditLecturer + subject.creditHour <= 12) ||
+            (detectElementSemester2.textContent === 'Active' && totalCreditLecturer + subject.creditHour <= 20) ||
+            (detectElementSemester2.textContent === 'P2' && totalCreditLecturer + subject.creditHour <= 10)
+        )
+    ) {
+        totalCreditLecturer += subject.creditHour;
+        addedSubjectsLecturer.add(subject.code);
+        schedule1 += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
+    }
+}
+
+// Close the unordered list tag
+schedule1 += '</ul>';
+
+// Display suggested subjects recommended by students
+schedule2 += '<h3>Suggested Subjects Recommended by Students</h3>';
+schedule2 += '<ul>';
+
+// Initialize a set to keep track of added subjects for students
+const addedSubjectsStudent = new Set();
+
+// Define the first priority subject
+const firstPrioritySubjectStudent = subjectsSemester3.find(subject => subject.code === 'SMB20102');
+
+// Add the first priority subject
+if (firstPrioritySubjectStudent) {
+    totalCreditStudent += firstPrioritySubjectStudent.creditHour;
+    addedSubjectsStudent.add(firstPrioritySubjectStudent.code);
+    schedule2 += `<li>${firstPrioritySubjectStudent.code} - ${firstPrioritySubjectStudent.name} [${firstPrioritySubjectStudent.creditHour} Kredit]</li>`;
+}
+
+// Prioritize subjects (excluding first priority subject)
+for (const subjectCode of prioritizedSubjects) {
+    const subject = subjectsSemester3WithFailed1.find(sub => sub.code === subjectCode);
+    if (subject && !addedSubjectsStudent.has(subject.code) &&
+        (
+            (detectElementSemester2.textContent === 'P1' && totalCreditStudent + subject.creditHour <= 12) ||
+            (detectElementSemester2.textContent === 'Active' && totalCreditStudent + subject.creditHour <= 20) ||
+            (detectElementSemester2.textContent === 'P2' && totalCreditStudent + subject.creditHour <= 10)
+        )
+    ) {
+        totalCreditStudent += subject.creditHour;
+        addedSubjectsStudent.add(subject.code);
+        schedule2 += `<li>${subject.code} - ${subject.name} [${subject.creditHour} Kredit]</li>`;
+    }
+}
+
+// Close the unordered list tag
+schedule2 += '</ul>';
 
 // Update the HTML content
 const newSchedule2 = document.getElementById('newSchedule2');
 newSchedule2.innerHTML = schedule;
 
+const schedule1Container = document.createElement('div');
+schedule1Container.innerHTML = schedule1;
+newSchedule2.appendChild(schedule1Container);
 
+const schedule2Container = document.createElement('div');
+schedule2Container.innerHTML = schedule2;
+newSchedule2.appendChild(schedule2Container);
 
-// Update the HTML content
-newSchedule2.innerHTML = schedule;
-
-
+        // Assuming there's an element with id 'CGPA', update its content with calculated CGPA
+        const CGPA = document.getElementById('CGPA');
         CGPA.textContent = `CGPA: ${CGPA2.toFixed(2)}`;
+
+        // Retrieve the previously stored predicted graduation date
+        let predictedGraduationDate1 = localStorage.getItem('predictedGraduationDate1');
+
+        let baseGraduationDate;
+        if (predictedGraduationDate1) {
+            // Convert the stored date string to a Date object
+            baseGraduationDate = new Date(predictedGraduationDate1);
+        } else {
+            // Set a default base graduation date if none is stored
+            baseGraduationDate = new Date('2024-10-10');
+        }
+
+        // Function to format date to "DD MMMM YYYY"
+        function formatDate(date) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-GB', options);
+        }
+
+        // Function to add months to a date
+        function addMonths(date, months) {
+            const d = new Date(date);
+            d.setMonth(d.getMonth() + months);
+            return d;
+        }
+
+        // Update predicted graduation date
+        if (detectElementSemester2.textContent === 'P1') {
+            baseGraduationDate = addMonths(baseGraduationDate, 6); // Add 6 months if status is P1
+        } else if (detectElementSemester2.textContent === 'P2') {
+            baseGraduationDate = addMonths(baseGraduationDate, 12); // Add 12 months if status is P2
+        } else if (detectElementSemester2.textContent === 'Active'){
+            baseGraduationDate = (baseGraduationDate);
+        }
+
+        formattedGraduationDate = formatDate(baseGraduationDate);
+        predictedGraduationDate = document.getElementById('predictedGraduationDate');
+        predictedGraduationDate.textContent = `Predicted to graduate on ${formattedGraduationDate}`;
+
+        // Store the new predicted graduation date in localStorage
+        localStorage.setItem('predictedGraduationDate2', baseGraduationDate.toISOString());
+
+        // Function to print the page
+        document.getElementById('printButton').addEventListener('click', function() {
+            window.print();
+        });
+
     </script>
         
     
