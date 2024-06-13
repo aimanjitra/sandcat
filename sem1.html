@@ -219,7 +219,8 @@
             </div>
         </div>        
         <div class="navigation-button-container">
-            <button id="next semester" class="navigation-button">Next Semester</button>
+            <button id="nextSemester" class="navigation-button">Next Semester</button>
+            <button id="logoutButton" class="navigation-button">Logout</button>
         </div>
         
         <div>
@@ -329,7 +330,7 @@
             const ekt102 = urlParams.get('ekt102') || 'N/A';
             const eqt101 = urlParams.get('eqt101') || 'N/A';
 
-            document.getElementById('next semester').addEventListener('click', async function () {
+            document.getElementById('nextSemester').addEventListener('click', async function () {
                 try {
                     let apiUrl, redirectUrl;
                     apiUrl =
@@ -706,6 +707,11 @@
         document.getElementById('printButton').addEventListener('click', function() {
             window.print();
         });
+
+            document.getElementById('logoutButton').addEventListener('click', function () {
+                    const LoPageUrl = `https://aimanjitra.github.io/googlesheet/`;
+                    window.location.href = LoPageUrl;
+                });
 
 
         });
