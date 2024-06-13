@@ -209,6 +209,7 @@
         <div class="navigation-button-container">
             <button id="prevSemester" class="navigation-button">Previous Semester</button>
             <button id="nextSemester" class="navigation-button">Next Semester</button>
+	    <button id="logoutButton" class="navigation-button">Logout</button>
         </div>
         <div>
             <table>
@@ -682,6 +683,11 @@ newSchedule3.appendChild(schedule2Container);
         document.getElementById('printButton').addEventListener('click', function() {
             window.print();
         });
+
+	    document.getElementById('logoutButton').addEventListener('click', function () {
+                    const LoPageUrl = `https://aimanjitra.github.io/googlesheet/`;
+                    window.location.href = LoPageUrl;
+                });
     </script>
         
     
