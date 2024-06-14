@@ -354,7 +354,7 @@
                 return 'N/A'; // Return a special case for mark '6'
             } else {
                 // Check if the numeric grade is greater than or equal to 2
-                return (parseFloat(mark) >= 2) ? 'Pass' : 'Fail';
+                return (parseFloat(mark) >= 1.5) ? 'Pass' : 'Fail';
             }
         }
 
@@ -566,7 +566,7 @@ schedule += `<p>This is all the subjects that you can choose according to your c
 const isNeitherSemesterActive = !(semesterStatusSemester1 === 'Active' && detectElementSemester2.textContent === 'Active');
 
 // Display suggested subjects recommended by lecturers
-schedule1 += '<h3>Suggested Subjects Recommended by Lecturer</h3>';
+schedule1 += '<h3>Suggested Subjects Ranked by Lecturer</h3>';
 schedule1 += '<ul>';
 
 // Initialize a set to keep track of added subjects for lecturers
@@ -602,7 +602,7 @@ for (const subjectCode of prioritizedSubjectsLecturer) {
 schedule1 += '</ul>';
 
 // Display suggested subjects recommended by students
-schedule2 += '<h3>Suggested Subjects Recommended by Students</h3>';
+schedule2 += '<h3>Suggested Subjects Ranked by Students</h3>';
 schedule2 += '<ul>';
 
 // Initialize a set to keep track of added subjects for students
