@@ -475,7 +475,7 @@
             // Function to determine pass/fail result
             function determineResult(grade) {
                 // Check if the numeric grade is greater than or equal to 2
-                return (grade >= 2) ? 'Pass' : 'Fail';
+                return (grade >= 1.5) ? 'Pass' : 'Fail';
             }
 
             // Check for failed subjects in Semester 1
@@ -572,7 +572,7 @@
 
             // Display suggested subjects recommended by lecturer
             schedule += `
-                <h3>Suggested Subjects Recommended by Lecturer</h3>
+                <h3>Suggested Subjects Ranked by Lecturer</h3>
                 <ul>
             `;
 
@@ -621,7 +621,7 @@
 
             // Display suggested subjects recommended by students
             schedule += `
-                <h3>Suggested Subjects Recommended by Students</h3>
+                <h3>Suggested Subjects Ranked by Students</h3>
                 <ul>
             `;
 
