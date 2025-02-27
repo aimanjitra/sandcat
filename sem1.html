@@ -3,97 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Injury Risk Predictor</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            max-width: 350px;
-            margin: auto;
-            background: #222;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-        }
-        .title {
-            font-size: 22px;
-            font-weight: bold;
-        }
-        .status {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-        .risk-low { color: lightgreen; }
-        .risk-moderate { color: orange; font-weight: bold; }
-        .risk-high { color: red; font-weight: bold; }
-        .fatigue { color: cyan; }
-        .button {
-            background: red;
-            color: white;
-            font-size: 16px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-            display: none;
-        }
-        .button:hover { background: darkred; }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <div class="title">🏃‍♂️ Injury Risk Predictor</div>
-        <div class="status" id="riskStatus">✅ Safe: No Risk Detected</div>
-        <div class="status fatigue">⚡ Muscle Fatigue: <span id="fatigueLevel">Normal</span></div>
-        <div class="status">🦵 Gait Stability: <span id="gaitStability">Stable</span></div>
-        <button class="button" id="alertButton" onclick="acknowledgeAlert()">🚨 ALERT Sent</button>
-    </div>
-
+    <title>Message Display</title>
     <script>
-        let riskLevel = 0; // 0 = Low, 1 = Moderate, 2 = High
-
-        function updateRisk() {
-            if (riskLevel === 0) {
-                document.getElementById("riskStatus").innerHTML = "✅ Safe: No Risk Detected";
-                document.getElementById("riskStatus").className = "status risk-low";
-                document.getElementById("fatigueLevel").innerText = "Normal";
-                document.getElementById("gaitStability").innerText = "Stable";
-                document.getElementById("alertButton").style.display = "none";
-            } else if (riskLevel === 1) {
-                document.getElementById("riskStatus").innerHTML = "⚠️ Caution: Injury Risk Increasing!";
-                document.getElementById("riskStatus").className = "status risk-moderate";
-                document.getElementById("fatigueLevel").innerText = "Mild";
-                document.getElementById("gaitStability").innerText = "Irregular";
-            } else {
-                document.getElementById("riskStatus").innerHTML = "🚨 ALERT: High Injury Risk!";
-                document.getElementById("riskStatus").className = "status risk-high";
-                document.getElementById("fatigueLevel").innerText = "Severe";
-                document.getElementById("gaitStability").innerText = "Unstable";
-                document.getElementById("alertButton").style.display = "block"; // Auto-trigger alert
-            }
-
-            if (riskLevel < 2) {
-                riskLevel++;
-                setTimeout(updateRisk, 5000); // Increase risk every 5 seconds
+        async function fetchMessage() {
+            try {
+                const response = await fetch("https://ae3ce65d-dce4-47bb-be34-d730b98b32f7-00-38re36qx6orb6.pike.replit.dev:8080/message");
+                const data = await response.json();
+                document.getElementById("message").innerText = data.message;
+            } catch (error) {
+                console.error("Error fetching message:", error);
+                document.getElementById("message").innerText = "Failed to load message.";
             }
         }
-
-        function acknowledgeAlert() {
-            document.getElementById("alertButton").innerText = "✔️ Alert Acknowledged";
-            document.getElementById("alertButton").disabled = true;
-        }
-
-        // Start risk level check after 3 seconds
-        setTimeout(updateRisk, 3000);
     </script>
-
+</head>
+<body onload="fetchMessage()">
+    <h1>Message from Server:</h1>
+    <p id="message">Loading...</p>
 </body>
 </html>
