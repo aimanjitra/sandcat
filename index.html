@@ -15,13 +15,13 @@
         <h2>SCSO Test Suite Generator</h2>
         
         <label for="strength">Strength (t):</label>
-        <input type="number" id="strength" min="2" max="6">
+        <input type="number" id="strength" min="2" max="6" required>
 
         <label for="numInputs">Number of Inputs:</label>
-        <input type="number" id="numInputs" min="1">
+        <input type="number" id="numInputs" min="1" required>
 
-        <label for="paramValues">Values of Parameters (space-separated):</label>
-        <input type="text" id="paramValues" placeholder="2 2 2 2 2 2">
+        <label for="paramValues">Values of Parameters (comma-separated):</label>
+        <input type="text" id="paramValues" placeholder="2,2,2,2,2,2" required>
 
         <button onclick="submitForm()">Generate Test Suite</button>
 
@@ -34,26 +34,40 @@
             let strength = document.getElementById("strength").value;
             let numInputs = document.getElementById("numInputs").value;
             let paramValues = document.getElementById("paramValues").value;
-            
+
             if (!strength || !numInputs || !paramValues) {
                 document.getElementById("result").innerText = "Please fill in all fields.";
+                console.error("❌ [ERROR] Missing input fields.");
                 return;
             }
 
+            let paramString = `strength=${encodeURIComponent(strength)}&numInputs=${encodeURIComponent(numInputs)}&paramValues=${paramValues.replace(/\s+/g, ',')}`;
+            let requestUrl = `https://ae3ce65d-dce4-47bb-be34-d730b98b32f7-00-38re36qx6orb6.pike.replit.dev/generate?${paramString}`;
+
+            console.log("🚀 [DEBUG] Sending request to:", requestUrl);
+
             try {
-                const response = await fetch('https://your-replit-project.repl.co/generate', { 
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ strength, numInputs, paramValues })
+                console.log("📡 [DEBUG] Fetching data...");
+                const response = await fetch(requestUrl, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
                 });
 
-                const result = await response.json(); 
-                let output = "<strong>Generated Test Cases:</strong><br><ul>";
-                result.forEach(tuple => output += `<li>${tuple}</li>`);
-                output += "</ul>";
-                document.getElementById("result").innerHTML = output;
+                console.log("🔍 [DEBUG] Response received. Status:", response.status);
+
+                if (!response.ok) {
+                    let errorText = await response.text();
+                    console.error("❌ [ERROR] Server returned:", response.status, errorText);
+                    throw new Error(`Server Error: ${response.status} - ${errorText}`);
+                }
+
+                const result = await response.text();
+                console.log("✅ [SUCCESS] Server response:", result);
+
+                document.getElementById("result").innerText = result;
             } catch (error) {
-                document.getElementById("result").innerText = "Error: " + error;
+                console.error("❌ [ERROR] Fetch error:", error);
+                document.getElementById("result").innerText = "Error generating test suite: " + error.message;
             }
         }
     </script>
