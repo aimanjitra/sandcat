@@ -41,19 +41,18 @@
                 return;
             }
 
-            let paramString = `strength=${encodeURIComponent(strength)}&numInputs=${encodeURIComponent(numInputs)}&paramValues=${paramValues.replace(/\s+/g, ',')}`;
-            let requestUrl = `https://ae3ce65d-dce4-47bb-be34-d730b98b32f7-00-38re36qx6orb6.pike.replit.dev/generate?${paramString}`;
+            // Update this URL to use your Codespaces API endpoint
+            let baseUrl = "https://congenial-broccoli-4jvgxxjqjw6h55rw-8080.app.github.dev/generate";
+            let params = `?strength=${encodeURIComponent(strength)}&numInputs=${encodeURIComponent(numInputs)}&paramValues=${encodeURIComponent(paramValues)}`;
+            let requestUrl = baseUrl + params;
 
             console.log("🚀 [DEBUG] Sending request to:", requestUrl);
 
             try {
-                console.log("📡 [DEBUG] Fetching data...");
                 const response = await fetch(requestUrl, {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'text/plain' }
                 });
-
-                console.log("🔍 [DEBUG] Response received. Status:", response.status);
 
                 if (!response.ok) {
                     let errorText = await response.text();
