@@ -5,62 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCSO Test Suite Generator</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            background-color: #FFDDC1; /* Warm and lively sand cat theme */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFEDD5; /* Soft sand color */
+            text-align: center;
         }
         .container {
-            max-width: 600px; 
-            margin: auto; 
-            padding: 20px; 
-            background-color: #FFC785; /* Enthusiastic warm orange */
-            border-radius: 15px; 
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #FDBA74; /* Warm sandy orange */
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #8B4513; /* Dark brown */
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            color: #78350F; /* Deep sand brown */
         }
         input {
-            margin: 10px; 
-            padding: 8px; 
-            width: 80%; /* Smaller input boxes */
+            width: 80%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #D97706; /* Vibrant sand border */
             border-radius: 8px;
-            border: 1px solid #8B5A2B;
-            background-color: #FFF4E0; /* Light, warm contrast */
+            font-size: 16px;
             text-align: center;
         }
         button {
-            margin: 15px; 
-            padding: 12px; 
-            width: 85%; 
-            background-color: #D2691E; /* Rich, enthusiastic brown-orange */
+            margin-top: 20px;
+            padding: 12px;
+            width: 85%;
+            background-color: #D97706; /* Strong orange */
             color: white;
-            font-weight: bold;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
         }
         button:hover {
-            background-color: #A0522D; /* Darker tone on hover */
+            background-color: #B45309; /* Darker orange */
         }
-        h2 {
-            color: #8B4513;
-        }
-        h3 {
-            color: #A0522D;
-            font-weight: bold;
-        }
-        .result-box {
-            background-color: #FFDAB9; /* Light peach background for results */
+        .result-container {
+            margin-top: 20px;
             padding: 15px;
+            background-color: #FDE68A; /* Light golden */
             border-radius: 10px;
-            margin-top: 10px;
+            font-weight: bold;
+            color: #92400E; /* Dark text */
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>SCSO Test Suite Generator</h2>
-        
+
         <label for="strength">Strength (t):</label>
         <input type="number" id="strength" min="2" required>
 
@@ -72,8 +77,9 @@
 
         <button onclick="submitForm()">Generate Test Suite</button>
 
-        <h3>Result:</h3>
-        <div id="result" class="result-box">Awaiting input...</div>
+        <div class="result-container" id="result">
+            Awaiting input...
+        </div>
     </div>
 
     <script>
