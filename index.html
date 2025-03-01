@@ -15,13 +15,13 @@
         <h2>SCSO Test Suite Generator</h2>
         
         <label for="strength">Strength (t):</label>
-        <input type="number" id="strength" min="2" max="6" required>
+        <input type="number" id="strength" min="2" required>
 
         <label for="numInputs">Number of Inputs:</label>
-        <input type="number" id="numInputs" min="1" required>
+        <input type="number" id="numInputs" min="2" required>
 
-        <label for="paramValues">Values of Parameters (comma-separated):</label>
-        <input type="text" id="paramValues" placeholder="2,2,2,2,2,2" required>
+        <label for="paramValue">Value of Parameter:</label>
+        <input type="number" id="paramValue" min="2" required>
 
         <button onclick="submitForm()">Generate Test Suite</button>
 
@@ -33,17 +33,16 @@
         async function submitForm() {
             let strength = document.getElementById("strength").value;
             let numInputs = document.getElementById("numInputs").value;
-            let paramValues = document.getElementById("paramValues").value;
+            let paramValue = document.getElementById("paramValue").value;
 
-            if (!strength || !numInputs || !paramValues) {
+            if (!strength || !numInputs || !paramValue) {
                 document.getElementById("result").innerText = "Please fill in all fields.";
                 console.error("❌ [ERROR] Missing input fields.");
                 return;
             }
 
-            // Update this URL to use your Codespaces API endpoint
             let baseUrl = "https://congenial-broccoli-4jvgxxjqjw6h55rw-8080.app.github.dev/generate";
-            let params = `?strength=${encodeURIComponent(strength)}&numInputs=${encodeURIComponent(numInputs)}&paramValues=${encodeURIComponent(paramValues)}`;
+            let params = `?strength=${encodeURIComponent(strength)}&numInputs=${encodeURIComponent(numInputs)}&paramValue=${encodeURIComponent(paramValue)}`;
             let requestUrl = baseUrl + params;
 
             console.log("🚀 [DEBUG] Sending request to:", requestUrl);
