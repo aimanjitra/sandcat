@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>SCSO Variable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('r99e_l0hq_210426.jpg');
+            background-size: cover; /* Ensures the background covers the entire screen */
+            background-repeat: no-repeat; /* Prevents the background from repeating */
+            background-attachment: fixed; /* Makes the background fixed during scrolling */
+            background-size: cover;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #FDBA74; /* Warm sandy orange */
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #8B4513; /* Dark brown */
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            color: #78350F; /* Deep sand brown */
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #D97706; /* Vibrant sand border */
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            width: 85%;
+            background-color: #D97706; /* Strong orange */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #B45309; /* Darker orange */
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #FDE68A; /* Light golden */
+            border-radius: 10px;
+            font-weight: bold;
+            color: #92400E; /* Dark text */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>VSCSO Test Suite Generator</h2>
+
+        <label for="strength">Strength (t):</label>
+        <input type="number" id="strength" min="2" required>
+
+        <label for="numInputs">Number of Inputs:</label>
+        <input type="number" id="numInputs" min="2" required>
+
+        <label for="paramValue">Value of Parameter:</label>
+        <input type="number" id="paramValue" min="2" required>
+
+        <button onclick="submitForm()">Generate Test Suite</button>
+
+        <div class="result-container" id="result">
+            Awaiting input...
+        </div>
+    </div>
+
+    <script>
+        async function submitForm() {
+            let strength = document.getElementById("strength").value;
+            let numInputs = document.getElementById("numInputs").value;
+            let paramValue = document.getElementById("paramValue").value;
+
+            if (!strength || !numInputs || !paramValue) {
+                document.getElementById("result").innerText = "Please fill in all fields.";
+                console.error("❌ [ERROR] Missing input fields.");
+                return;
+            }
+
+            let baseUrl = "https://fantastic-space-engine-97779pqv47pqf7vgw.github.dev/generate";
+            let params = `?strength=${encodeURIComponent(strength)}&numInputs=${encodeURIComponent(numInputs)}&paramValue=${encodeURIComponent(paramValue)}`;
+            let requestUrl = baseUrl + params;
+
+            console.log("🚀 [DEBUG] Sending request to:", requestUrl);
+
+            try {
+                const response = await fetch(requestUrl, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'text/plain' }
+                });
+
+                if (!response.ok) {
+                    let errorText = await response.text();
+                    console.error("❌ [ERROR] Server returned:", response.status, errorText);
+                    throw new Error(`Server Error: ${response.status} - ${errorText}`);
+                }
+
+                const result = await response.text();
+                console.log("✅ [SUCCESS] Server response:", result);
+
+                document.getElementById("result").innerText = result;
+            } catch (error) {
+                console.error("❌ [ERROR] Fetch error:", error);
+                document.getElementById("result").innerText = "Error generating test suite: " + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
