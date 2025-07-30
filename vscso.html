@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Way Variable Strength Testing - Sand Cat</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #5a4a3a;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Video background containers for left and right */
+        .video-side {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 20%; /* Adjust width as needed */
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        #video-left {
+            left: 0;
+        }
+        
+        #video-right {
+            right: 0;
+        }
+        
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Overlay to tint the videos */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 20%;
+            background-color: rgba(245, 231, 213, 0.7);
+            z-index: -1;
+        }
+        
+        #overlay-left {
+            left: 0;
+        }
+        
+        #overlay-right {
+            right: 0;
+        }
+        
+        /* Main content container */
+        .container {
+            width: 60%; /* 100% - 2*20% for the side videos */
+            margin: 20px auto;
+            background-color: rgba(255, 248, 240, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border: 1px solid #d4b483;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Rest of your existing styles remain the same */
+        h1 {
+            color: #8c5e24;
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        h1:after {
+            content: "";
+            display: block;
+            width: 150px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" fill="none" stroke="%238c5e24" stroke-width="2"/></svg>');
+            background-repeat: no-repeat;
+            margin: 10px auto 0;
+        }
+        .input-section, .output-section {
+            border: 1px solid #d4b483;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: rgba(255, 248, 240, 0.7);
+            box-shadow: inset 0 0 10px rgba(212, 180, 131, 0.3);
+        }
+        .output-section {
+            display: none;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .vp-pair {
+            background-color: rgba(255, 239, 213, 0.7);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            position: relative;
+            border: 1px solid #d4b483;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .vp-pair h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #8c5e24;
+            font-size: 1.1em;
+        }
+        .remove-pair {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #c94b32;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+        }
+        .remove-pair:hover {
+            background-color: #a53a28;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #d4b483;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        input:focus {
+            outline: none;
+            border-color: #8c5e24;
+            box-shadow: 0 0 5px rgba(140, 94, 36, 0.5);
+        }
+        button {
+            background-color: #8c5e24;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #6d471b;
+            transform: translateY(-1px);
+        }
+        .add-pair {
+            background-color: #5a8c46;
+        }
+        .add-pair:hover {
+            background-color: #476d38;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4b483, transparent);
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: rgba(255, 248, 240, 0.8);
+            border: 1px solid #d4b483;
+        }
+        th, td {
+            border: 1px solid #d4b483;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: rgba(212, 180, 131, 0.3);
+            color: #5a4a3a;
+        }
+        .math-notation {
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+            color: #5a4a3a;
+        }
+        .tick-box {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            border: 1px solid #8c5e24;
+            margin: 0 auto;
+            cursor: pointer;
+            background-color: rgba(255, 248, 240, 0.8);
+            border-radius: 3px;
+        }
+        .tick-box.checked {
+            background-color: #8c5e24;
+            position: relative;
+        }
+        .tick-box.checked:after {
+            content: "✓";
+            position: absolute;
+            top: -1px;
+            left: 3px;
+            color: white;
+            font-size: 14px;
+        }
+        .remove-btn {
+            background-color: #c94b32;
+            margin-left: 10px;
+        }
+        .remove-btn:hover {
+            background-color: #a53a28;
+        }
+        .action-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .param-value-row td {
+            padding-top: 0;
+            border-top: none;
+            font-size: 0.9em;
+            color: #8c5e24;
+            background-color: rgba(212, 180, 131, 0.2);
+        }
+        .config-display {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(212, 180, 131, 0.2);
+            border-radius: 8px;
+            border-left: 4px solid #8c5e24;
+        }
+        .sand-cat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23f5e7d5" stroke="%238c5e24" stroke-width="2"/><circle cx="35" cy="40" r="5" fill="%238c5e24"/><circle cx="65" cy="40" r="5" fill="%238c5e24"/><path d="M40,60 Q50,70 60,60" fill="none" stroke="%238c5e24" stroke-width="2"/><path d="M25,30 L15,20 M75,30 L85,20 M30,80 L20,90 M70,80 L80,90" stroke="%238c5e24" stroke-width="2" stroke-linecap="round"/></svg>');
+            background-size: contain;
+            opacity: 0.8;
+            z-index: 1;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .video-side {
+                display: none;
+            }
+            .video-overlay {
+                display: none;
+            }
+            .container {
+                width: 90%;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Video Background -->
+    <div class="video-side" id="video-left">
+        <video autoplay muted loop class="video-bg" preload="auto">
+            <source src="c:/Users/DELL/Downloads/43789570-4db8-4b86-9f88-e712dc295b56_seed1733885775.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay" id="overlay-left"></div>
+    
+    <!-- Right Video Background -->
+    <div class="video-side" id="video-right">
+        <video autoplay muted loop class="video-bg" preload="auto">
+            <source src="c:/Users/DELL/Downloads/43789570-4db8-4b86-9f88-e712dc295b56_seed1733885775.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay" id="overlay-right"></div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <h1>T-Way Variable Strength Testing</h1>
+        <p style="text-align: center; color: #8c5e24; font-style: italic;">As resilient as a sand cat in the desert</p>
+        
+        <!-- Rest of your existing HTML content remains unchanged -->
+        <div class="input-section">
+            <h2 style="color: #8c5e24; border-bottom: 1px dashed #d4b483; padding-bottom: 5px;">Input Parameters</h2>
+            
+            <div class="input-group">
+                <h3 style="color: #8c5e24;">Strength (t):</h3>
+                <input type="number" id="strength" min="1" value="2" oninput="updateInputSummary()">
+            </div>
+            
+            <hr>
+            
+            <div id="vp-container">
+                <div class="vp-pair" id="pair-1">
+                    <h3>V₁-P₁ Pair</h3>
+                    <label style="color: #8c5e24;">V₁:</label>
+                    <input type="number" class="v-input" min="1" value="3" oninput="updateInputSummary()">
+                    <label style="color: #8c5e24;">P₁:</label>
+                    <input type="number" class="p-input" min="1" value="5" oninput="updateInputSummary()">
+                    <button class="remove-pair" onclick="removeVPPair(1)">Remove</button>
+                </div>
+            </div>
+
+            <div id="input-summary" class="math-notation" style="margin-top: 10px; font-size: 1.1em; text-align: center;"></div>
+            
+            <hr>
+            
+            <div class="action-buttons">
+                <button class="add-pair" onclick="addVPPair()">Add V-p Pair</button>
+                <button onclick="generateOutput()">Generate Output</button>
+            </div>
+        </div>
+        
+        <div class="output-section" id="output-section">
+            <h2 style="color: #8c5e24; border-bottom: 1px dashed #d4b483; padding-bottom: 5px;">Output Combinations</h2>
+            <div id="output-content"></div>
+        </div>
+    </div>
+
+    <div class="desert-pattern"></div>
+
+    <script>
+        let pairCount = 1;
+        let combinations = [];
+
+        function updateInputSummary() {
+            const strength = parseInt(document.getElementById('strength').value);
+            const vInputs = document.querySelectorAll('.v-input');
+            const pInputs = document.querySelectorAll('.p-input');
+            let summaryParts = [];
+
+            for (let i = 0; i < vInputs.length; i++) {
+                const v = parseInt(vInputs[i].value);
+                const p = parseInt(pInputs[i].value);
+                if (!isNaN(v) && !isNaN(p)) {
+                    summaryParts.push(`${v}<sup>${p}</sup>`);
+                }
+            }
+
+            document.getElementById('input-summary').innerHTML =
+                `Input: (${strength}, ${summaryParts.join(', ')})`;
+        }
+
+        function addVPPair() {
+            pairCount++;
+            const container = document.getElementById('vp-container');
+            const newPair = document.createElement('div');
+            newPair.className = 'vp-pair';
+            newPair.id = `pair-${pairCount}`;
+            newPair.innerHTML = `
+                <h3>V${pairCount}-P${pairCount} Pair</h3>
+                <label style="color: #8c5e24;">V${pairCount}:</label>
+                <input type="number" class="v-input" min="1" value="2" oninput="updateInputSummary()">
+                <label style="color: #8c5e24;">P${pairCount}:</label>
+                <input type="number" class="p-input" min="1" value="2" oninput="updateInputSummary()">
+                <button class="remove-pair" onclick="removeVPPair(${pairCount})">Remove</button>
+            `;
+            container.appendChild(newPair);
+            updateInputSummary();
+        }
+
+        function removeVPPair(pairNumber) {
+            if (pairCount > 1) {
+                const pairToRemove = document.getElementById(`pair-${pairNumber}`);
+                if (pairToRemove) {
+                    pairToRemove.remove();
+
+                    const remainingPairs = document.querySelectorAll('.vp-pair');
+                    pairCount = 0;
+
+                    remainingPairs.forEach((pair, index) => {
+                        pairCount++;
+                        const pairNum = pairCount;
+                        pair.id = `pair-${pairNum}`;
+                        pair.querySelector('h3').textContent = `V${pairNum}-P${pairNum} Pair`;
+
+                        const labels = pair.querySelectorAll('label');
+                        labels[0].textContent = `V${pairNum}:`;
+                        labels[1].textContent = `P${pairNum}:`;
+
+                        const removeBtn = pair.querySelector('.remove-pair');
+                        removeBtn.onclick = function() { removeVPPair(pairNum); };
+
+                        pair.querySelector('.v-input').oninput = updateInputSummary;
+                        pair.querySelector('.p-input').oninput = updateInputSummary;
+                    });
+                }
+            } else {
+                alert("You must have at least one V-P pair");
+            }
+            updateInputSummary();
+        }
+
+        function generateOutput() {
+            const strength = parseInt(document.getElementById('strength').value);
+            const vInputs = document.querySelectorAll('.v-input');
+            const pInputs = document.querySelectorAll('.p-input');
+            
+            const vpPairs = [];
+            for (let i = 0; i < vInputs.length; i++) {
+                vpPairs.push({
+                    v: parseInt(vInputs[i].value),
+                    p: parseInt(pInputs[i].value)
+                });
+            }
+            
+            // Generate parameter names and values
+            let parameters = [];
+            let paramIndex = 0;
+            vpPairs.forEach(pair => {
+                for (let i = 0; i < pair.p; i++) {
+                    paramIndex++;
+                    parameters.push({
+                        name: String.fromCharCode(64 + paramIndex),
+                        value: pair.v
+                    });
+                }
+            });
+            
+            // Generate the input notation
+            let inputNotation = strength;
+            vpPairs.forEach(pair => {
+                inputNotation += `    ${pair.v}    ${pair.p}`;
+            });
+            
+            // Generate parameter notation
+            let paramNotation = vpPairs.map(pair => `${pair.v}<sup>${pair.p}</sup>`).join(' ');
+            
+            // Generate output HTML
+            let outputHTML = `
+                <p class="math-notation"><strong>Input:</strong> (${strength}, ${vpPairs.map(pair => `${pair.v}<sup>${pair.p}</sup>`).join(', ')})</p>
+                <p class="math-notation">Which represents: t = ${strength}, v<sup>p</sup> = ${vpPairs.map(pair => `${pair.v}<sup>${pair.p}</sup>`).join(', ')}</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Strength</th>
+            `;
+            
+            // Create headers for parameters
+            parameters.forEach(param => {
+                outputHTML += `<th>${param.name}</th>`;
+            });
+            
+            outputHTML += `<th>Action</th></tr></thead><tbody>`;
+            
+            // Generate table rows for existing combinations
+            if (combinations.length === 0) {
+                // Add initial empty combination
+                combinations.push({
+                    strength: strength,
+                    selected: Array(parameters.length).fill(false)
+                });
+                // Pre-select first 'strength' parameters
+                for (let i = 0; i < strength; i++) {
+                    combinations[0].selected[i] = true;
+                }
+            }
+            
+            combinations.forEach((comb, combIndex) => {
+                // Main row with checkboxes
+                outputHTML += `
+                    <tr>
+                        <td><input type="number" class="comb-strength" value="${comb.strength}" min="1" onchange="updateStrength(${combIndex}, this.value)"></td>
+                `;
+                
+                parameters.forEach((param, paramIndex) => {
+                    const isChecked = comb.selected[paramIndex];
+                    outputHTML += `
+                        <td>
+                            <div class="tick-box ${isChecked ? 'checked' : ''}" 
+                                 onclick="toggleCheckbox(${combIndex}, ${paramIndex})"></div>
+                        </td>
+                    `;
+                });
+                
+                outputHTML += `
+                        <td>
+                            <button onclick="addCombination()">Add</button>
+                            ${combIndex > 0 ? `<button class="remove-btn" onclick="removeCombination(${combIndex})">Remove</button>` : ''}
+                        </td>
+                    </tr>
+                    <tr class="param-value-row">
+                        <td></td>
+                `;
+                
+                // Value row
+                parameters.forEach(param => {
+                    outputHTML += `<td>${param.value}</td>`;
+                });
+                
+                outputHTML += `<td></td></tr>`;
+            });
+            
+            outputHTML += `</tbody></table>`;
+            
+            // Generate current configuration display with power notation
+            let paramGroups = {};
+            parameters.forEach((param, index) => {
+                if (combinations[0].selected[index]) {
+                    const value = param.value;
+                    paramGroups[value] = (paramGroups[value] || 0) + 1;
+                }
+            });
+            
+            let currentConfig = [];
+            for (const [value, count] of Object.entries(paramGroups)) {
+                currentConfig.push(`${value}${count > 1 ? `<sup>${count}</sup>` : ''}`);
+            }
+            
+            outputHTML += `
+                <div class="config-display">
+                    <p class="math-notation">Current configuration: (${combinations[0].strength}, ${currentConfig.join('')})</p>
+                    <p class="math-notation">Full equation: (${strength}, ${paramNotation}, {${combinations[0].strength}, ${currentConfig.join('')}})</p>
+                </div>
+                <p style="color: #8c5e24; font-style: italic;">- Click checkboxes to select parameters. Selected parameters appear in the configuration.</p>
+            `;
+            
+            document.getElementById('output-content').innerHTML = outputHTML;
+            document.getElementById('output-section').style.display = 'block';
+        }
+        
+        function toggleCheckbox(combIndex, paramIndex) {
+            combinations[combIndex].selected[paramIndex] = !combinations[combIndex].selected[paramIndex];
+            generateOutput();
+        }
+        
+        function updateStrength(combIndex, value) {
+            combinations[combIndex].strength = parseInt(value);
+            generateOutput();
+        }
+        
+        function addCombination() {
+            const strength = parseInt(document.getElementById('strength').value);
+            const vInputs = document.querySelectorAll('.v-input');
+            let paramCount = 0;
+            vInputs.forEach(input => {
+                paramCount += parseInt(input.value);
+            });
+            
+            combinations.push({
+                strength: strength,
+                selected: Array(paramCount).fill(false)
+            });
+            generateOutput();
+        }
+        
+        function removeCombination(combIndex) {
+            combinations.splice(combIndex, 1);
+            generateOutput();
+        }
+
+        window.onload = function() {
+            generateOutput();
+            updateInputSummary();
+        };
+    </script>
+</body>
+</html>
