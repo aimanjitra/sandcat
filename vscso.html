@@ -269,7 +269,7 @@
     <!-- Left Video Background -->
     <div class="video-side" id="video-left">
         <video autoplay muted loop class="video-bg" preload="auto">
-            <source src="c:/Users/DELL/Downloads/43789570-4db8-4b86-9f88-e712dc295b56_seed1733885775.mp4" type="video/mp4">
+            <source src="43789570-4db8-4b86-9f88-e712dc295b56_seed1733885775.mp4" type="video/mp4">
         </video>
     </div>
     <div class="video-overlay" id="overlay-left"></div>
@@ -277,7 +277,7 @@
     <!-- Right Video Background -->
     <div class="video-side" id="video-right">
         <video autoplay muted loop class="video-bg" preload="auto">
-            <source src="c:/Users/DELL/Downloads/43789570-4db8-4b86-9f88-e712dc295b56_seed1733885775.mp4" type="video/mp4">
+            <source src="43789570-4db8-4b86-9f88-e712dc295b56_seed1733885775.mp4" type="video/mp4">
         </video>
     </div>
     <div class="video-overlay" id="overlay-right"></div>
@@ -290,6 +290,8 @@
         <!-- Rest of your existing HTML content remains unchanged -->
         <div class="input-section">
             <h2 style="color: #8c5e24; border-bottom: 1px dashed #d4b483; padding-bottom: 5px;">Input Parameters</h2>
+
+            <div id="input-summary" class="math-notation" style="margin-top: 10px; font-size: 2.1em; text-align: center;"></div>
             
             <div class="input-group">
                 <h3 style="color: #8c5e24;">Strength (t):</h3>
@@ -308,9 +310,6 @@
                     <button class="remove-pair" onclick="removeVPPair(1)">Remove</button>
                 </div>
             </div>
-
-            <div id="input-summary" class="math-notation" style="margin-top: 10px; font-size: 1.1em; text-align: center;"></div>
-            
             <hr>
             
             <div class="action-buttons">
@@ -346,7 +345,7 @@
             }
 
             document.getElementById('input-summary').innerHTML =
-                `Input: (${strength}, ${summaryParts.join(', ')})`;
+                `Input: (${strength},${summaryParts.join('')})`;
         }
 
         function addVPPair() {
