@@ -6,11 +6,11 @@
     <title>FlexiSolar Test Suite Generator | UniMAP - Thursinar</title>
     <style>
         :root {
-            --primary-dark: #214d80;    /* Navy blue */
-            --primary-medium: #172a45;  /* Dark slate blue */
-            --primary-light: #303f60;   /* Medium slate blue */
+            --primary-dark: #3c8bcc;    /* Navy blue */
+            --primary-medium: #3ed6b7;  /* Dark slate blue */
+            --primary-light: #6685c9;   /* Medium slate blue */
             --accent-blue: #64ffda;     /* Teal accent */
-            --light-grey: #ccd6f6;      /* Light grey text */
+            --light-grey: #0d0d0e;      /* Light grey text */
             --medium-grey: #8892b0;     /* Medium grey */
             --dark-grey: #495670;       /* Dark grey */
             --bg-grey: #1f314d;        /* Background grey */
@@ -300,20 +300,20 @@
     <div class="main-container">
         <div class="card">
             <h2>Test Suite Generator</h2>
-            
-            <div class="form-group">
-                <label for="strength">Strength (t)</label>
-                <input type="number" id="strength" min="1" value="2" required oninput="updateFormula()">
-            </div>
-            
+
             <div class="form-group">
                 <label for="numInputs">Number of Inputs</label>
                 <input type="number" id="numInputs" min="1" value="2" required oninput="updateFormula()">
             </div>
-            
+
             <div class="form-group">
                 <label for="paramValue">Value of Parameter</label>
                 <input type="number" id="paramValue" min="1" value="2" required oninput="updateFormula()">
+            </div>
+            
+            <div class="form-group">
+                <label for="strength">Strength (t)</label>
+                <input type="number" id="strength" min="1" value="2" required oninput="updateFormula()">
             </div>
             
             <div class="formula-display" id="formulaDisplay">
