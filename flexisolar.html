@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexiSolar Test Suite Generator | UniMAP - Thursinar</title>
+    <style>
+        :root {
+            --primary-dark: #214d80;    /* Navy blue */
+            --primary-medium: #172a45;  /* Dark slate blue */
+            --primary-light: #303f60;   /* Medium slate blue */
+            --accent-blue: #64ffda;     /* Teal accent */
+            --light-grey: #ccd6f6;      /* Light grey text */
+            --medium-grey: #8892b0;     /* Medium grey */
+            --dark-grey: #495670;       /* Dark grey */
+            --bg-grey: #1f314d;        /* Background grey */
+            --card-grey: #e6f1ff8a;     /* Card background */
+        }
+        
+        body {
+            font-family: 'Calibri', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-grey);
+            margin: 0;
+            padding: 0;
+            color: var(--medium-grey);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: var(--light-grey);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(10, 25, 47, 0.2);
+            position: relative;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .university-branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            padding: 0 80px; /* Space for logos */
+        }
+        
+        .university-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        
+        .department-name {
+            font-size: 1.1rem;
+            margin: 0.5rem 0 0;
+            font-weight: 400;
+            color: var(--accent-blue);
+            letter-spacing: 1px;
+        }
+        
+        .main-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.1);
+            padding: 2.5rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-blue);
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid var(--dark-grey);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: rgba(234, 240, 253, 0.3);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+            background-color: white;
+        }
+        
+        .formula-display {
+            background-color: var(--primary-medium);
+            color: var(--light-grey);
+            padding: 1.2rem;
+            border-radius: 4px;
+            text-align: center;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            border-left: 4px solid var(--accent-blue);
+            letter-spacing: 0.5px;
+        }
+        
+        .btn {
+            background-color: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(10, 25, 47, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .result-container {
+            margin-top: 2.5rem;
+            padding: 1.8rem;
+            background-color: var(--card-grey);
+            border-radius: 4px;
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        .result-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .result-title:before {
+            content: '↳';
+            color: var(--accent-blue);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        #result {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-dark);
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--medium-grey);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo {
+            height: 40px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 0 1rem;
+                margin: 2rem auto;
+            }
+            
+            .card {
+                padding: 1.8rem;
+            }
+            
+            .university-name {
+                font-size: 1.5rem;
+            }
+            
+            .department-name {
+                font-size: 1rem;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .university-branding {
+                padding: 0;
+                order: -1;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .footer-logos {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <!-- University Logo - Left Side -->
+                 <img src="c:/Users/DELL/Downloads/thursinar-removebg-preview.png" alt="Thursinar Corporation Logo" class="logo">
+                
+                <div class="university-branding">
+                    <h1 class="university-name">FLEXISOLAR</h1>
+                    <p class="department-name">A Testing Tool for Solar Harvesting Application</p>
+                </div>
+                
+                <!-- Company Logo - Right Side -->
+                <img src="c:/Users/DELL/Downloads/unimap logo.png" alt="Universiti Malaysia Perlis Logo" class="logo">
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="card">
+            <h2>Test Suite Generator</h2>
+            
+            <div class="form-group">
+                <label for="strength">Strength (t)</label>
+                <input type="number" id="strength" min="1" value="2" required oninput="updateFormula()">
+            </div>
+            
+            <div class="form-group">
+                <label for="numInputs">Number of Inputs</label>
+                <input type="number" id="numInputs" min="1" value="2" required oninput="updateFormula()">
+            </div>
+            
+            <div class="form-group">
+                <label for="paramValue">Value of Parameter</label>
+                <input type="number" id="paramValue" min="1" value="2" required oninput="updateFormula()">
+            </div>
+            
+            <div class="formula-display" id="formulaDisplay">
+                → 1, 2²
+            </div>
+            
+            <button class="btn" onclick="submitForm()">Generate Test Suite</button>
+            
+            <div class="result-container">
+                <div class="result-title">Test Suite Results</div>
+                <div id="result">Awaiting input...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Universiti Malaysia Perlis - Thursinar Corporation Sdn. Bhd. All rights reserved.</p>
+    </div>
+
+    <script>
+        function updateFormula() {
+            const strength = document.getElementById("strength").value || 2;
+            const numInputs = document.getElementById("numInputs").value || 2;
+            const paramValue = document.getElementById("paramValue").value || 2;
+            
+            document.getElementById("formulaDisplay").innerHTML = 
+                `→ ${strength}, ${numInputs}<sup>${paramValue}</sup>`;
+        }
+
+        async function submitForm() {
+            const btn = document.querySelector('.btn');
+            const originalBtnText = btn.textContent;
+            
+            let strength = document.getElementById("strength").value;
+            let numInputs = document.getElementById("numInputs").value;
+            let paramValue = document.getElementById("paramValue").value;
+
+            if (!strength || !numInputs || !paramValue) {
+                document.getElementById("result").innerText = "Please fill in all fields.";
+                return;
+            }
+
+            // Show loading state
+            btn.textContent = "Generating...";
+            btn.disabled = true;
+
+            updateFormula();
+
+            let baseUrl = "https://congenial-broccoli-4jvgxxjqjw6h55rw-8080.app.github.dev/generate";
+            let params = `?strength=${encodeURIComponent(strength)}&numInputs=${encodeURIComponent(numInputs)}&paramValue=${encodeURIComponent(paramValue)}`;
+            let requestUrl = baseUrl + params;
+
+            try {
+                const response = await fetch(requestUrl, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'text/plain' }
+                });
+
+                if (!response.ok) {
+                    let errorText = await response.text();
+                    throw new Error(`Server Error: ${response.status} - ${errorText}`);
+                }
+
+                const result = await response.text();
+                document.getElementById("result").innerText = result;
+            } catch (error) {
+                document.getElementById("result").innerText = "Error generating test suite: " + error.message;
+            } finally {
+                btn.textContent = originalBtnText;
+                btn.disabled = false;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateFormula);
+    </script>
+</body>
+</html>
