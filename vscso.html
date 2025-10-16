@@ -525,14 +525,23 @@ combinations.forEach(comb => {
 
 let fullEquation = `(${strength}, ${paramNotation}, {${configsDisplay.join('}, {')}})`;
 
-// Display current configuration
 outputHTML += `
     <div class="config-display">
         <p class="math-notation">Current configuration: (${combinations[combinations.length - 1].strength}, ${configsDisplay[configsDisplay.length - 1] ? configsDisplay[configsDisplay.length - 1].replace('CA(', '').replace(')', '') : ''})</p>
         <p class="math-notation">Full equation: ${fullEquation}</p>
     </div>
-    <p style="color: #8c5e24; font-style: italic;">- Click checkboxes to select parameters. Selected parameters appear in the configuration.</p>
+
+    <div style="text-align: center; margin-top: 10px;">
+        <p style="color: #8c5e24; font-style: italic;">
+            - Click checkboxes to select parameters. Selected parameters appear in the configuration.
+        </p>
+        <button onclick="checkpointInstruction()" 
+            style="background-color: #8c5e24; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+            Checkpoint Instruction
+        </button>
+    </div>
 `;
+
 
             
             document.getElementById('output-content').innerHTML = outputHTML;
@@ -548,6 +557,12 @@ outputHTML += `
             combinations[combIndex].strength = parseInt(value);
             generateOutput();
         }
+
+        function checkpointInstruction() {
+    alert("Checkpoint instruction completed! Now generating output...");
+    generateOutput();
+}
+
         
         function addCombination() {
             const strength = parseInt(document.getElementById('strength').value);
