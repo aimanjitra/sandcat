@@ -502,26 +502,38 @@
             outputHTML += `</tbody></table>`;
             
             // Generate current configuration display with power notation
-            let paramGroups = {};
-            parameters.forEach((param, index) => {
-                if (combinations[0].selected[index]) {
-                    const value = param.value;
-                    paramGroups[value] = (paramGroups[value] || 0) + 1;
-                }
-            });
-            
-            let currentConfig = [];
-            for (const [value, count] of Object.entries(paramGroups)) {
-                currentConfig.push(`${value}${count > 1 ? `<sup>${count}</sup>` : ''}`);
-            }
-            
-            outputHTML += `
-                <div class="config-display">
-                    <p class="math-notation">Current configuration: (${combinations[0].strength}, ${currentConfig.join('')})</p>
-                    <p class="math-notation">Full equation: (${strength}, ${paramNotation}, {${combinations[0].strength}, ${currentConfig.join('')}})</p>
-                </div>
-                <p style="color: #8c5e24; font-style: italic;">- Click checkboxes to select parameters. Selected parameters appear in the configuration.</p>
-            `;
+let configsDisplay = []; // store all CA() configurations
+
+combinations.forEach(comb => {
+    let paramGroups = {};
+    parameters.forEach((param, index) => {
+        if (comb.selected[index]) {
+            const value = param.value;
+            paramGroups[value] = (paramGroups[value] || 0) + 1;
+        }
+    });
+
+    let currentConfig = [];
+    for (const [value, count] of Object.entries(paramGroups)) {
+        currentConfig.push(`${value}${count > 1 ? `<sup>${count}</sup>` : ''}`);
+    }
+
+    if (currentConfig.length > 0) {
+        configsDisplay.push(`CA(${comb.strength}, ${currentConfig.join('')})`);
+    }
+});
+
+let fullEquation = `(${strength}, ${paramNotation}, {${configsDisplay.join('}, {')}})`;
+
+// Display current configuration
+outputHTML += `
+    <div class="config-display">
+        <p class="math-notation">Current configuration: (${combinations[combinations.length - 1].strength}, ${configsDisplay[configsDisplay.length - 1] ? configsDisplay[configsDisplay.length - 1].replace('CA(', '').replace(')', '') : ''})</p>
+        <p class="math-notation">Full equation: ${fullEquation}</p>
+    </div>
+    <p style="color: #8c5e24; font-style: italic;">- Click checkboxes to select parameters. Selected parameters appear in the configuration.</p>
+`;
+
             
             document.getElementById('output-content').innerHTML = outputHTML;
             document.getElementById('output-section').style.display = 'block';
