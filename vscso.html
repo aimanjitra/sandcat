@@ -558,12 +558,54 @@ outputHTML += `
             generateOutput();
         }
 
-        function checkpointInstruction() {
-    alert("Checkpoint instruction completed! Now generating output...");
-    generateOutput();
+        async function checkpointInstruction() {
+    // Gather all combinations from the table
+    let configs = [];
+    
+    combinations.forEach((comb) => {
+        let pInvolve = comb.selected.map(s => s ? "true" : "false");
+        configs.push({
+            strength: comb.strength,
+            pInvolve: pInvolve
+        });
+    });
+
+    // Gather all V-P values
+    const vInputs = document.querySelectorAll('.v-input');
+    let valueArray = [];
+    vInputs.forEach(input => {
+        const val = parseInt(input.value);
+        for (let i = 0; i < val; i++) {
+            valueArray.push(val);
+        }
+    });
+
+    // Build payload
+    const payload = {
+        values: valueArray,
+        configs: configs
+    };
+
+    console.log("🚀 Sending payload to Codespace:", payload);
+
+    try {
+        const response = await fetch("https://improved-yodel-g444qg59w5vxfw4pq-8080.app.github.dev/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error("Server returned an error");
+        const resultText = await response.text();
+
+        alert("✅ Codespace processed successfully!");
+        console.log(resultText);
+    } catch (err) {
+        alert("❌ Failed to connect to Codespace: " + err.message);
+        console.error(err);
+    }
 }
 
-        
         function addCombination() {
             const strength = parseInt(document.getElementById('strength').value);
             const vInputs = document.querySelectorAll('.v-input');
