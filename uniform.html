@@ -20,25 +20,44 @@
             padding: 20px;
             color: #5C4D3D;
         }
+
         .container {
-            width: 500px; /* FIXED WIDTH to prevent stretching */
+            width: 500px;
             margin: 40px auto;
             padding: 25px;
             background-color: rgba(237, 201, 175, 0.9);
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(92, 77, 61, 0.3);
             border: 2px solid #A38B6A;
+            position: relative; /* Needed for logo positioning */
         }
+
+        /* Sand Cat Logo */
+        .sandcat-logo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 80px;
+            height: 80px;
+        }
+
         h2 {
             color: #8B5A2B;
-            margin-bottom: 25px;
+            margin-bottom: 5px;
         }
+
+        h3 {
+            color: #6B4F3C;
+            margin-top: 0;
+        }
+
         label {
             font-weight: bold;
             display: block;
             margin-top: 20px;
             color: #6B4F3C;
         }
+
         input {
             width: 80%;
             padding: 12px;
@@ -50,7 +69,6 @@
             background-color: rgba(255, 253, 245, 0.8);
         }
 
-        /* FIXED & MATCHED WIDTH FOR THESE BOXES */
         .formula-container, .result-container {
             width: 80%;
             margin: 10px auto;
@@ -69,7 +87,7 @@
         .result-container {
             background-color: rgba(255, 248, 220, 0.85);
             font-weight: bold;
-            min-height: 50px;
+            min-height: 60px;
         }
 
         button {
@@ -83,12 +101,32 @@
             font-size: 18px;
             cursor: pointer;
         }
+
         .print-controls {
             margin-top: 20px;
         }
+
         .print-controls button {
             width: 40%;
             margin: 10px;
+        }
+
+        /* Footer with logos */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #5C4D3D;
+        }
+
+        .footer img {
+            height: 45px;
+            margin: 0 10px;
+        }
+
+        .copyright {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6B4F3C;
         }
     </style>
 </head>
@@ -96,10 +134,15 @@
 <body>
 
     <div class="container" id="captureBox">
+
+        <!-- Sand cat logo -->
+        <img src="sandcat.png" class="sandcat-logo" alt="Sand Cat Logo">
+
         <h2>SandCatTest</h2>
+        <h3>Online Testing Tool Based on Sand Cat Swarm Optimization</h3>
 
         <div class="formula-container" id="formulaDisplay">
-            → 1, 2²
+            → 2, 2²
         </div>
 
         <label for="strength">Strength (t):</label>
@@ -123,6 +166,24 @@
         </div>
     </div>
 
+    <!-- Footer section with UniMAP + Faculty logos -->
+    <div class="footer">
+        <img src="unimap.png" alt="UniMAP Logo">
+        <img src="faculty.png" alt="Faculty Logo">
+
+        <div class="copyright">
+            <strong>© 2025 Universiti Malaysia Perlis (UniMAP) — Faculty of Engineering Technology</strong>
+        </div>
+
+        <div class="developers">
+      Develop by:<br>
+      Muhammad Aiman bin Mohd Asyraf, Assoc. Prof. Dr. Rozmie Razif B. Othman,<br>
+      Ts. Dr. Mohd Zamri B. Zahir Ahmad, Ts. Dr. Ahmad Ashraf Abdul Halim,<br>
+      Murad Muhammad Hasan Salih Al-Walidi
+    </div>
+
+    </div>
+
 <script>
     function updateFormula() {
         const strength = document.getElementById("strength").value;
@@ -138,7 +199,7 @@
         let numInputs = document.getElementById("numInputs").value;
         let paramValue = document.getElementById("paramValue").value;
 
-        let baseUrl = "https://turbo-space-sniffle-r444gjr9vr772p9r9-8080.app.github.dev/generate";
+        let baseUrl = "https://snowy-boat-693a.aimanjitra01.workers.dev";
         let params = `?strength=${strength}&numInputs=${numInputs}&paramValue=${paramValue}`;
 
         const response = await fetch(baseUrl + params);
@@ -150,49 +211,42 @@
         document.getElementById("downloadBtn").style.display = "inline-block";
     }
 
-    // SAVE AS PNG
     async function savePNG() {
         const box = document.getElementById("captureBox");
-
         const canvas = await html2canvas(box, { scale: 2 });
         const imgData = canvas.toDataURL("image/png");
-
         const link = document.createElement("a");
         link.href = imgData;
         link.download = "SandCatTest.png";
         link.click();
     }
 
-    // SAVE AS TEXT FILE
     function downloadText() {
-    let strength = document.getElementById("strength").value;
-    let numInputs = document.getElementById("numInputs").value;
-    let paramValue = document.getElementById("paramValue").value;
+        let strength = document.getElementById("strength").value;
+        let numInputs = document.getElementById("numInputs").value;
+        let paramValue = document.getElementById("paramValue").value;
 
-    let raw = document.getElementById("result").innerText;
+        let raw = document.getElementById("result").innerText;
 
-    // Remove the "Result Set 1:" and the auto summary
-    let cleaned = raw
-        .replace(/Result Set.*?\n/g, "")            // remove "Result Set 1:"
-        .replace(/Result Set.*cases\./g, "")        // remove the summary line
-        .trim();
+        let cleaned = raw
+            .replace(/Result Set.*?\n/g, "")
+            .replace(/Result Set.*cases\./g, "")
+            .trim();
 
-    // Count number of test cases (how many lines start with '1)' '2)' ...)
-    let count = cleaned.split("\n").filter(line => /^\d+\)/.test(line)).length;
+        let count = cleaned.split("\n").filter(line => /^\d+\)/.test(line)).length;
 
-    // Build final output
-    let header = `Result for configuration, t(strength)-${strength} , ${numInputs}^${paramValue} is\n`;
-    let footer = `\nCompleted with ${count} test cases.`;
+        let header = `Result for configuration, t(strength)-${strength} , ${numInputs}^${paramValue} is\n`;
+        let footer = `\nCompleted with ${count} test cases.`;
 
-    let finalText = header + cleaned + footer;
+        let finalText = header + cleaned + footer;
 
-    // Save as .txt
-    let blob = new Blob([finalText], { type: "text/plain" });
-    let link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "test_suite.txt";
-    link.click();
-}
+        let blob = new Blob([finalText], { type: "text/plain" });
+        let link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "test_suite.txt";
+        link.click();
+    }
 </script>
+
 </body>
 </html>
